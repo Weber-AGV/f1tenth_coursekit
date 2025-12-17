@@ -46,10 +46,6 @@ is_i18n = tags.has('i18n')
 
 exclude_patterns = ['_build']
 
-# GDScript syntax highlighting
-from gdscript import GDScriptLexer
-from sphinx.highlighting import lexers
-lexers['gdscript'] = GDScriptLexer()
 
 # Pygments (syntax highlighting) style to use
 pygments_style = 'sphinx'
