@@ -11,7 +11,7 @@ needs_sphinx = '1.3'
 
 # Sphinx extension module names and templates location
 sys.path.append(os.path.abspath('extensions'))
-extensions = ['gdscript', 'sphinx_tabs.tabs', 'sphinx.ext.imgmath', 'sphinx.ext.todo']
+extensions = ['sphinx_tabs.tabs', 'sphinx.ext.imgmath', 'sphinx.ext.todo']
 
 templates_path = ['_templates']
 
@@ -49,7 +49,6 @@ exclude_patterns = ['_build']
 
 # Pygments (syntax highlighting) style to use
 pygments_style = 'sphinx'
-highlight_language = 'gdscript'
 
 # -- Options for HTML output ----------------------------------------------
 
