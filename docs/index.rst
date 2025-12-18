@@ -41,6 +41,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    introduction/overview
    introduction/syllabus
    introduction/software
+   introduction/calibrate
 
 .. toctree::
    :maxdepth: 2
