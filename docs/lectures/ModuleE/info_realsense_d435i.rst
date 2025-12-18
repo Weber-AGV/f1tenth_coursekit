@@ -55,7 +55,29 @@ Install dependencies
        git clone https://github.com/jetsonhacks/jetson-orin-kernel-builder.git
        cd jetson-orin-kernel-builder
 
-   Follow the repository README for the exact instructions for your Jetson device.
+   Getting kernel and module sources
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Run the following from the repository root to fetch the kernel and module sources (adjust per README and your device):
+
+   .. code-block:: bash
+
+       ./scripts/get_kernel_sources.sh
+
+   Edit the kernel-builder configuration using the provided GUI script (adjust options for your device):
+
+   .. code-block:: bash
+
+       ./scripts/edit_config_gui.sh
+
+   You can use the GUI to set device and kernel options — a sample screenshot is shown below:
+
+   .. image:: media/kernel_config_gui.png
+      :alt: Kernel configuration GUI
+      :align: center
+      :width: 600px
+
+   Follow the repository README for any device-specific options and the recommended order for subsequent scripts.
 
 
 6. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
