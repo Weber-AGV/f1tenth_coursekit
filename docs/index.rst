@@ -35,13 +35,20 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 .. toctree::
    :maxdepth: 1
    :caption: Overview
-   :name: sec-introduction
+   :name: sec-overview
    :hidden:
 
-   introduction/overview
-   introduction/syllabus
-   introduction/software
-   introduction/calibrate
+   overview/introduction
+   overview/syllabus
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Software
+   :name: sec-software
+   :hidden:
+
+   software/f110_stack
+   software/calibrate
 
 .. toctree::
    :maxdepth: 1
