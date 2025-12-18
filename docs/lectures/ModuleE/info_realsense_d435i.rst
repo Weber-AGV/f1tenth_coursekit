@@ -54,6 +54,12 @@ Clone/Download the latest stable version of librealsense2 in one of the followin
 
   `RealSense.zip <https://github.com/realsenseai/librealsense/archive/master.zip>`_
 
+Install the video for Linux (v4l2) driver
+
+.. code-block:: bash
+
+    sudo apt install v4l-utils
+
 Run the RealSense permissions script from the librealsense root directory:
 
 .. code-block:: bash
