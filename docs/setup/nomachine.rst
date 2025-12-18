@@ -1,7 +1,7 @@
 .. _doc_nomachine:
 
 ========================
-WSU RoboRacer: NoMachine
+NoMachine
 ========================
 
 

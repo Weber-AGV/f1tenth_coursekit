@@ -40,22 +40,15 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
    overview/introduction
    overview/syllabus
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Software
-   :name: sec-software
-   :hidden:
-
-   software/f110_stack
-   software/calibrate
-
+   
 .. toctree::
    :maxdepth: 1
    :caption: Setup
    :name: sec-setup
    :hidden:
 
+   setup/f110_stack
+   setup/calibrate
    setup/nomachine
 
 .. toctree::
