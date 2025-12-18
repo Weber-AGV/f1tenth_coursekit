@@ -11,7 +11,7 @@ needs_sphinx = '1.3'
 
 # Sphinx extension module names and templates location
 sys.path.append(os.path.abspath('extensions'))
-extensions = [ 'sphinx.ext.imgmath', 'sphinx.ext.todo']
+extensions = [ 'sphinx.ext.imgmath', 'sphinx.ext.todo', 'sphinx_copybutton']
 
 templates_path = ['_templates']
 
@@ -99,6 +99,10 @@ html_css_files = [
 html_js_files = [
     'js/custom.js',
 ]
+
+# Copybutton settings: strip common shell prompts when copying
+copybutton_prompt_text = r'>>> |\$ '
+copybutton_prompt_is_regexp = True
 
 # Hide copyright in footer
 html_show_copyright = True
