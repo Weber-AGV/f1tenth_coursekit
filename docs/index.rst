@@ -44,6 +44,14 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    introduction/calibrate
 
 .. toctree::
+   :maxdepth: 1
+   :caption: Setup
+   :name: sec-setup
+   :hidden:
+
+   setup/nomachine
+
+.. toctree::
    :maxdepth: 2
    :caption: Modules
    :name: sec-course-modules
