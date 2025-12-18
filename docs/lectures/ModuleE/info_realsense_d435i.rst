@@ -73,23 +73,25 @@ Run the RealSense permissions script from the librealsense root directory:
 
     ./scripts/setup_udev_rules.sh --uninstall
 
-Build and apply patched kernel modules for:
+Build librealsense using the RSUSB backend (Jetson-friendly)
 
-- Ubuntu 20/22/24 (focal/jammy/noble) with LTS kernel 5.15, 5.19, 6.5
+On Jetson systems, the RealSense kernel patch script targets Ubuntu generic kernels and will fail on the NVIDIA tegra kernel. Instead of modifying the kernel, librealsense can be built using its RSUSB backend, which communicates with the camera directly over USB from user space.
 
-  .. code-block:: bash
+From the librealsense root directory:
 
-      ./scripts/patch-realsense-ubuntu-lts-hwe.sh
+.. code-block:: bash
 
-- Ubuntu 20 with LTS kernel (< 5.13)
+    cd ~/librealsense
+    mkdir -p build
+    cd build
 
-  .. code-block:: bash
+    cmake .. \
+     -DFORCE_RSUSB_BACKEND=true \
+     -DBUILD_EXAMPLES=true
 
-      ./scripts/patch-realsense-ubuntu-lts.sh
-
-.. note::
-
-   The script(s) above will download, patch and build realsense-affected kernel modules (drivers), then attempt to insert the patched module instead of the active one. If insertion fails the original uvc modules will be restored.
+    make -j$(nproc)
+    sudo make install
+    sudo ldconfig
 
 Check the patched modules installation by examining the generated log and inspecting the latest entries in the kernel log:
 
