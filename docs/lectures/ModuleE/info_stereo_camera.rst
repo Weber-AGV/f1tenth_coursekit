@@ -1,5 +1,5 @@
 ==============
-Stereo Cameras
+INFO - Stereo Cameras
 ==============
 
 Introduction
