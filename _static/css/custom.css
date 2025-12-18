@@ -649,3 +649,20 @@ code,
     font-weight: inherit;
     padding: 0;
 }
+
+/* Responsive embed for YouTube/video iframes */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+    margin-bottom: 1.25rem;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

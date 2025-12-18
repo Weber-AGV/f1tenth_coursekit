@@ -104,6 +104,14 @@ The log should indicate that a new _uvcvideo_ driver has been registered. Refer 
 Other Resources
 -------------------- 
 
+Installing Intel RealSense SDK 2.0: `Jetson Hacks install Intel RealSense <https://jetsonhacks.com/2025/03/20/jetson-orin-realsense-in-5-minutes/>`_
+
 Product page: `Intel RealSense D435i <https://www.realsenseai.com/products/depth-camera-d435i/>`_
 
 Getting started: `RealSense developer docs <https://dev.realsenseai.com/docs/docs-get-started>`_
+
+.. raw:: html
+
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/FpMCJsg_KmE?si=qhhzguxsaBv_YG6D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div> 
