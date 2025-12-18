@@ -1,13 +1,6 @@
-.. _doc_info_stereo_camera:
-
-
-INFO - Stereo Cameras
-==================================
-
 ==============
 Stereo Cameras
 ==============
-
 
 Introduction
 ============
@@ -18,24 +11,22 @@ vehicles. Unlike single-lens cameras, stereo cameras capture two or more
 to form a 3D representation, providing depth perception, which is crucial
 for applications such as obstacle detection, lane tracking, and mapping.
 
-
 Why 3 Lenses?
 =============
 
 You may encounter stereo cameras with three lenses. These are called
 *trinocular* setups and offer several advantages:
 
-1. **Depth Accuracy**  
+1. **Depth Accuracy**
    An additional lens allows the system to compare more than one pair of
    images for depth estimation, improving accuracy.
 
-2. **Field of View**  
+2. **Field of View**
    Each lens can be optimized for a different field of view (FoV),
    providing a more complete representation of the environment.
 
-3. **Redundancy**  
+3. **Redundancy**
    If one lens is obstructed or fails, the third lens can provide backup.
-
 
 Trifocal Lenses
 ---------------
@@ -43,17 +34,16 @@ Trifocal Lenses
 A trifocal setup typically includes three lenses aligned horizontally.
 Trifocal lenses enable:
 
-1. **More Matched Points**  
+1. **More Matched Points**
    The trifocal tensor allows simultaneous matching of points across
    three views, providing richer depth information.
 
-2. **Improved Confidence**  
+2. **Improved Confidence**
    Additional viewpoints help disambiguate complex scenes, increasing
    confidence in depth estimates.
 
-3. **Enhanced Redundancy**  
+3. **Enhanced Redundancy**
    Redundancy is further improved if one lens becomes unavailable.
-
 
 Strengths and Weaknesses
 ========================
@@ -61,28 +51,26 @@ Strengths and Weaknesses
 Strengths
 ---------
 
-1. **Cost-Effective**  
+1. **Cost-Effective**
    Generally less expensive than LiDAR systems.
 
-2. **High Resolution**  
+2. **High Resolution**
    Capable of capturing high-detail 2D images.
 
-3. **Versatility**  
+3. **Versatility**
    Can operate in a wide range of lighting conditions.
-
 
 Weaknesses
 ----------
 
-1. **Computational Overhead**  
+1. **Computational Overhead**
    Depth estimation requires significant processing power.
 
-2. **Limited Range**  
+2. **Limited Range**
    Typically shorter effective range compared to LiDAR.
 
-3. **Sensitivity to Lighting**  
+3. **Sensitivity to Lighting**
    Sudden lighting changes can degrade performance.
-
 
 Comparison to LiDAR
 ===================
@@ -105,7 +93,6 @@ Comparison to LiDAR
    - Stereo cameras are more cost-effective.
    - LiDAR systems are more expensive but typically more robust.
 
-
 Tesla's Forward-Facing Camera
 =============================
 
@@ -124,32 +111,30 @@ reliable sources.
    :align: center
    :width: 70%
 
-Model Y Cameras – Tesla Owners Manual  
+Model Y Cameras – Tesla Owners Manual
 `https://www.tesla.com/ownersmanual/modely/en_us/GUID-682FF4A7-D083-4C95-925A-5EE3752F4865.html <https://www.tesla.com/ownersmanual/modely/en_us/GUID-682FF4A7-D083-4C95-925A-5EE3752F4865.html>`_
 
 Key advantages of Tesla’s approach include:
 
-1. **Diverse Fields of View**  
+1. **Diverse Fields of View**
    Multiple lenses provide wide, medium, and narrow perspectives.
 
-2. **Redundancy**  
+2. **Redundancy**
    Multiple cameras provide resilience against sensor failure.
 
-3. **Software-Driven Perception**  
+3. **Software-Driven Perception**
    Advanced machine learning fuses camera data to infer depth and scene
    understanding.
-
 
 Other Pertinent Information
 ===========================
 
-1. **Calibration**  
+1. **Calibration**
    Stereo cameras must be carefully calibrated for accurate depth
    estimation.
 
-2. **Sensor Fusion**  
+2. **Sensor Fusion**
    Often combined with LiDAR and radar to improve robustness.
-
 
 OAK-D Camera
 ============
@@ -157,7 +142,7 @@ OAK-D Camera
 OAK-D cameras are part of the DepthAI ecosystem and are capable of
 performing computer vision and machine learning directly on-device.
 
-OAK-D Documentation:  
+OAK-D Documentation:
 `https://docs.luxonis.com/projects/hardware/en/latest/pages/DM9098pro/ <https://docs.luxonis.com/projects/hardware/en/latest/pages/DM9098pro/>`_
 
 .. image:: media/oakd.png
@@ -165,14 +150,12 @@ OAK-D Documentation:
    :align: center
    :width: 80%
 
-
 DepthAI Platform Overview
 =========================
 
 The DepthAI platform supports OAK (OpenCV AI Kit) cameras, enabling
 real-time vision processing on-device. It is commonly used in robotics,
 drones, IoT systems, and interactive installations.
-
 
 Installation Steps
 ==================
@@ -183,13 +166,11 @@ Install DepthAI on Linux systems by running:
 
    sudo wget -qO- https://docs.luxonis.com/install_depthai.sh | bash
 
-
 Plug the OAK-D Pro camera into the host computer and run:
 
 .. code-block:: bash
 
    depthai-viewer
-
 
 Select the camera from the menu in the top-right corner.
 
@@ -197,11 +178,10 @@ Select the camera from the menu in the top-right corner.
    :alt: DepthAI Viewer
    :align: center
 
+DepthAI Installation Manual
+===========================
 
-DepthAI Installation (Manual)
-=============================
-
-Full installation instructions are available here:  
+Full installation instructions are available here:
 `https://docs.luxonis.com/en/latest/pages/tutorials/first_steps/#first-steps-with-depthai <https://docs.luxonis.com/en/latest/pages/tutorials/first_steps/#first-steps-with-depthai>`_
 
 .. warning::
@@ -215,9 +195,8 @@ Full installation instructions are available here:
    :align: center
    :width: 40%
 
-
-Install DepthAI Repository
-=========================
+Install the DepthAI Repository
+==============================
 
 .. code-block:: bash
 
@@ -230,13 +209,11 @@ Install related submodules:
    cd depthai
    git pull --recurse-submodules
 
-
 Install DepthAI dependencies:
 
 .. code-block:: bash
 
    sudo wget -qO- https://docs.luxonis.com/install_depthai.sh | bash
-
 
 Install Python dependencies:
 
@@ -244,9 +221,8 @@ Install Python dependencies:
 
    python3 install_requirements.py
 
-
-Run DepthAI Demo
-================
+Run the DepthAI Demo
+====================
 
 .. code-block:: bash
 
@@ -257,7 +233,6 @@ Run DepthAI Demo
    :align: center
    :width: 60%
 
-
 Select a CNN Model
 ==================
 
@@ -266,12 +241,11 @@ Select a CNN Model
    :align: center
    :width: 60%
 
-Deep dive on DeepLabV3:  
+Deep dive on DeepLabV3:
 `https://learnopencv.com/deeplabv3-ultimate-guide/ <https://learnopencv.com/deeplabv3-ultimate-guide/>`_
-
 
 Additional DepthAI Resources
 ============================
 
-DepthAI Demo Documentation:  
+DepthAI Demo Documentation:
 `https://docs.luxonis.com/en/latest/pages/tutorials/depthai_demo/#depthai-demo <https://docs.luxonis.com/en/latest/pages/tutorials/depthai_demo/#depthai-demo>`_
