@@ -12,5 +12,6 @@ This module goes vision and perception methods and ends with an overview of the 
 
    setup_opencv
    info_stereo_camera
+   info_realsense_d435i
    lecture12
    lecture13
