@@ -4,8 +4,6 @@
 INFO - Realsense D435i
 ==================================
 
-
-
 Install dependencies
 --------------------
 
@@ -39,67 +37,102 @@ Install dependencies
 
        sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
-Install librealsense2
---------------------
 
-Clone/Download the latest stable version of librealsense2 in one of the following ways:
+5. Jetson Orin kernel builder: `jetson-orin-kernel-builder <https://github.com/jetsonhacks/jetson-orin-kernel-builder>`_
 
-- Clone the librealsense repo
+   Tools to build the Linux kernel and modules on board the Jetson AGX Orin, Orin Nano, or Orin NX. This tool is designed for beginning to intermediate users — please read the entire document in the repository before proceeding.
 
-  .. code-block:: bash
+   This is for JetPack 6. Supporting video on YouTube:
 
-      git clone https://github.com/realsenseai/librealsense.git
+   .. raw:: html
 
-- Download and unzip the latest stable librealsense2 version from the master branch:
+       <div class="video-container">
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/7P6I2jeJNYo" title="Jetson Orin Kernel Builder — YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+       </div>
 
-  `RealSense.zip <https://github.com/realsenseai/librealsense/archive/master.zip>`_
+   .. code-block:: bash
 
-Install the video for Linux (v4l2) driver
+       git clone https://github.com/jetsonhacks/jetson-orin-kernel-builder.git
+       cd jetson-orin-kernel-builder
 
-.. code-block:: bash
+   Follow the repository README for the exact instructions for your Jetson device.
 
-    sudo apt install v4l-utils
 
-Run the RealSense permissions script from the librealsense root directory:
+6. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
 
-.. code-block:: bash
+   Clone the JetsonHacks helper repository and follow its README for Jetson-specific build and install instructions:
 
-    cd librealsense
-    ./scripts/setup_udev_rules.sh
+   .. code-block:: bash
 
-.. note::
+       git clone https://github.com/jetsonhacks/jetson-orin-librealsense.git
+       cd jetson-orin-librealsense/build
 
-    You can remove the permissions by running:
+   
 
-    ./scripts/setup_udev_rules.sh --uninstall
 
-Build librealsense using the RSUSB backend (Jetson-friendly)
 
-On Jetson systems, the RealSense kernel patch script targets Ubuntu generic kernels and will fail on the NVIDIA tegra kernel. Instead of modifying the kernel, librealsense can be built using its RSUSB backend, which communicates with the camera directly over USB from user space.
 
-From the librealsense root directory:
+.. Install librealsense2
+.. --------------------
 
-.. code-block:: bash
+.. Clone/Download the latest stable version of librealsense2 in one of the following ways:
 
-    cd ~/librealsense
-    mkdir -p build
-    cd build
+.. - Clone the librealsense repo
 
-    cmake .. \
-     -DFORCE_RSUSB_BACKEND=true \
-     -DBUILD_EXAMPLES=true
+..   .. code-block:: bash
 
-    make -j$(nproc)
-    sudo make install
-    sudo ldconfig
+..       git clone https://github.com/realsenseai/librealsense.git
 
-Check the patched modules installation by examining the generated log and inspecting the latest entries in the kernel log:
+.. - Download and unzip the latest stable librealsense2 version from the master branch:
 
-.. code-block:: bash
+..   `RealSense.zip <https://github.com/realsenseai/librealsense/archive/master.zip>`_
 
-    sudo dmesg | tail -n 50
+.. Install the video for Linux (v4l2) driver
 
-The log should indicate that a new _uvcvideo_ driver has been registered. Refer to `Troubleshooting <#troubleshooting-installation-and-patch-related-issues>`_ in case of errors/warning reports.
+.. .. code-block:: bash
+
+..     sudo apt install v4l-utils
+
+.. Run the RealSense permissions script from the librealsense root directory:
+
+.. .. code-block:: bash
+
+..     cd librealsense
+..     ./scripts/setup_udev_rules.sh
+
+.. .. note::
+
+..     You can remove the permissions by running:
+
+..     ./scripts/setup_udev_rules.sh --uninstall
+
+.. Build librealsense using the RSUSB backend (Jetson-friendly)
+
+.. On Jetson systems, the RealSense kernel patch script targets Ubuntu generic kernels and will fail on the NVIDIA tegra kernel. Instead of modifying the kernel, librealsense can be built using its RSUSB backend, which communicates with the camera directly over USB from user space.
+
+.. From the librealsense root directory:
+
+.. .. code-block:: bash
+
+..     cd ~/librealsense
+..     mkdir -p build
+..     cd build
+
+..     cmake .. \
+..      -DFORCE_RSUSB_BACKEND=true \
+..      -DBUILD_EXAMPLES=true
+
+..     make -j$(nproc)
+..     sudo make install
+..     sudo ldconfig
+
+.. Check the patched modules installation by examining the generated log and inspecting the latest entries in the kernel log:
+
+.. .. code-block:: bash
+
+..     sudo dmesg | tail -n 50
+
+.. The log should indicate that a new _uvcvideo_ driver has been registered. Refer to `Troubleshooting <#troubleshooting-installation-and-patch-related-issues>`_ in case of errors/warning reports.
 
 Other Resources
 -------------------- 
