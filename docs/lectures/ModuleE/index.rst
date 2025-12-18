@@ -7,7 +7,7 @@ This module goes vision and perception methods and ends with an overview of the 
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :name: sec-modulee
 
    setup_opencv
