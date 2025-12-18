@@ -1,4 +1,4 @@
-.. _doc_software:
+.. _doc_roboracer_stack:
 
 =====================
 F1 Tenth Driver Stack

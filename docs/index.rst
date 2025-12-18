@@ -47,7 +47,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    :name: sec-setup
    :hidden:
 
-   setup/f110_stack
+   setup/roboracer_stack
    setup/calibrate
    setup/nomachine
 
