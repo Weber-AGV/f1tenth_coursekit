@@ -1,7 +1,7 @@
 .. _doc_roboracer_stack:
 
 =====================
-F1 Tenth Driver Stack
+RoboRacer Driver Stack
 =====================
 
 Create a workspace
