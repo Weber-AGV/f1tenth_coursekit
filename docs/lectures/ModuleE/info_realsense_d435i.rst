@@ -77,6 +77,20 @@ Install dependencies
       :align: center
       :width: 600px
 
+    Ctrl+F to search for CH341
+
+    .. image:: media/search_ch341.png
+       :alt: Search for CH341
+       :align: center
+       :width: 480px
+
+    Next, click the letter 'N' to change it to 'M' for the CH341 Single Port Driver (build as a module):
+
+    .. image:: media/ch341_to_module.png
+       :alt: Set CH341 to Module (M)
+       :align: center
+       :width: 480px
+
    Follow the repository README for any device-specific options and the recommended order for subsequent scripts.
 
 
