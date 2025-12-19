@@ -181,7 +181,43 @@ More detailed information about the module by running:
    :align: center
    :width: 600px
 
+Copy the ch341 module to the current directory: (Make sure to use the correct path you found when you located the module earlier)
 
+.. code-block:: bash
+
+    cp /usr/src/kernel/kernel-jammy-src/drivers/usb/serial/ch341.ko .
+
+Create an install module script:
+
+.. code-block:: bash
+
+    ./scripts/install_module_author.sh ch341 drivers/usb/serial
+
+Use the script to install the module (type 'y' when prompted):
+
+.. code-block:: bash
+
+    ./install_module_ch341.sh
+
+Output should be something like this:
+
+.. image:: media/install_output.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+verify the module is installed:
+
+.. code-block:: bash
+
+    lsmod | grep ch341
+
+Output should be something like this:
+
+.. image:: media/verify_install.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
 
 JetPack 6 Video Walkthrough
 ---------------------------
