@@ -260,12 +260,28 @@ Post-Edit
    :align: center
    :width: 600px
 
-Copy line 10 and replace line 29 like the image below:
+Copy line 10 and replace line 29 like the image below :
 
 .. image:: media/config_append_change.png
    :alt: Kernel build output path
    :align: center
    :width: 600px
+
+When complete Save and close the file
+
+Go back to jetson-orin-kernel-builder directory:
+
+.. code-block:: bash
+
+    cd jetson-orin-kernel-builder
+
+Copy the kernel image:
+
+.. code-block:: bash
+
+    sudo cp /usr/src/kernel/kernel-jammy-src/arch/arm64/boot/Image /boot/Image
+
+Reboot your Jetson:
 
 
 JetPack 6 Video Walkthrough
