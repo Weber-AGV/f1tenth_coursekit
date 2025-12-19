@@ -37,18 +37,12 @@ Install dependencies
 
        sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
+Jetson-specific instructions
+--------------------------
 
-5. Jetson Orin kernel builder: `jetson-orin-kernel-builder <https://github.com/jetsonhacks/jetson-orin-kernel-builder>`_
+1. Jetson Orin kernel builder: `jetson-orin-kernel-builder <https://github.com/jetsonhacks/jetson-orin-kernel-builder>`_
 
    Tools to build the Linux kernel and modules on board the Jetson AGX Orin, Orin Nano, or Orin NX. This tool is designed for beginning to intermediate users — please read the entire document in the repository before proceeding.
-
-   This is for JetPack 6. Supporting video on YouTube:
-
-   .. raw:: html
-
-       <div class="video-container">
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/7P6I2jeJNYo" title="Jetson Orin Kernel Builder — YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-       </div>
 
    .. code-block:: bash
 
@@ -93,19 +87,25 @@ Install dependencies
 
     When finished, save and quit the configuration editor to apply the change.
 
-Build kernel image
-~~~~~~~~~~~~~~~~~~
+    Build kernel image
+    ~~~~~~~~~~~~~~~~~~
 
-Run the kernel build and module installation scripts from the repository (This step may take as much as 30 minutes):
+    Run the kernel build and module installation scripts from the repository (This step may take as much as 30 minutes):
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    # Build the kernel image and modules
-    ./scripts/make_kernel.sh
-  
+        # Build the kernel image and modules
+        ./scripts/make_kernel.sh
+    
+    This is for JetPack 6. Supporting video on YouTube:
 
+   .. raw:: html
 
-6. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
+       <div class="video-container">
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/7P6I2jeJNYo" title="Jetson Orin Kernel Builder — YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+       </div>
+
+2. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
 
    Clone the JetsonHacks helper repository and follow its README for Jetson-specific build and install instructions:
 
