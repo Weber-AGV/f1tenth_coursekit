@@ -378,12 +378,60 @@ Set the value of the GYRO_3D to **M** by clicking on the letter **N** and changi
 
 Save and exit the configuration editor to apply the change.
 
+Run the script to install the modules:
+
+.. code-block:: bash
+
+   ./scripts/make_kernel_modules.sh
+
+When prompted Do you want to install the modules? Type **N** and press Enter.
 
 
 
+Install jetson-orin-librealsense
+--------------------
 
-.. Install librealsense2
-.. --------------------
+Move back into home directory:
+
+.. code-block:: bash
+
+   cd ~
+
+Clone the jetson hacks librealsense repository:
+
+.. code-block:: bash
+
+   git clone https://github.com/jetsonhacks/jetson-orin-librealsense.git
+   cd jetson-orin-librealsense/build
+
+Complete a checksum:
+
+.. code-block:: bash
+
+   sha256sum -c install-modules.tar.gz.sha256
+
+The checksum should look something like this:
+
+.. image:: media/checksum.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Expand and install modules directory:
+
+.. code-block:: bash
+
+   tar -xzf install-modules.tar.gz
+   cd install-modules
+
+Run the install script :
+
+..code-block:: bash
+
+   sudo ./install-realsense-modules.sh
+
+Install librealsense
+--------------------
 
 .. Clone/Download the latest stable version of librealsense2 in one of the following ways:
 
