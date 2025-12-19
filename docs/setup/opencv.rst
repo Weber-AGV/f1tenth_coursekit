@@ -7,21 +7,25 @@ SETUP - OpenCV
 Install pip
 
 .. code-block:: bash
+
     sudo apt install python3-pip
 
 Install Jetson Stats Package
 
 .. code-block:: bash
+
     sudo pip install -U jetson-stats  
 
 Reboot the Jetson Nano
 
 .. code-block:: bash
+
     sudo reboot
 
 Edit the .bashrc file to add the jeson-ai-lab file to the pip index
 
 .. code-block:: bash
+
     gedit ~/.bashrc
 
 Add the following line to the end of the file:
@@ -34,7 +38,6 @@ Add the following line to the end of the file:
    :alt: bashrc file edit
    :align: center
    :width: 600px
-
 
 Install OpenCV Wheel Files
 
