@@ -129,6 +129,59 @@ Edit the document to include the path to the kernel image you copied earlier.
    :align: center
    :width: 600px
 
+Building the Kernel Modules
+-------------------------
+
+Build the kernel modules using the provided script.
+
+.. code-block:: bash
+
+   ./scripts/make_kernel_modules.sh
+
+
+When prompted Do you want to install the modules? Type **N** and press Enter.
+
+Installing a New Modules
+-------------------------
+
+Run this script to get Module information.
+
+.. code-block:: bash
+
+   ./scripts/module_info.sh -s CH34
+
+Look for the module name **ch341** and see if it is in the right location:
+
+.. image:: media/ch341_module_info.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Using the module location make sure it is in there:
+
+..code-block:: bash
+
+    ls /usr/src/kernel/kernel-jammy-src/drivers/usb/serial/ch341.ko
+
+Output should be something like this:
+
+.. image:: media/ch34_module_ko.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+More detailed information about the module by running:
+
+.. code-block:: bash
+
+   ./scripts/module_info.sh CONFIG_USB_SERIAL_CH341
+
+.. image:: media/module_deep.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+
 
 JetPack 6 Video Walkthrough
 ---------------------------
