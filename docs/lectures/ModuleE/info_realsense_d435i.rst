@@ -91,7 +91,18 @@ Install dependencies
        :align: center
        :width: 480px
 
-   Follow the repository README for any device-specific options and the recommended order for subsequent scripts.
+    When finished, save and quit the configuration editor to apply the change.
+
+Build kernel image
+~~~~~~~~~~~~~~~~~~
+
+Run the kernel build and module installation scripts from the repository (This step may take as much as 30 minutes):
+
+.. code-block:: bash
+
+    # Build the kernel image and modules
+    ./scripts/make_kernel.sh
+  
 
 
 6. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
