@@ -152,7 +152,7 @@ Run this script to get Module information.
 
 Look for the module name **ch341** and see if it is in the right location:
 
-.. image:: media/ch341_module_name.png
+.. image:: media/CH341_module_name.png
    :alt: Kernel build output path
    :align: center
    :width: 600px
