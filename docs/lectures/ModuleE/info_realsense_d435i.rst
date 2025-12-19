@@ -81,7 +81,6 @@ You can use the GUI to set device and kernel options:
 
 
 Searching for the CH341 Driver
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use **Ctrl+F** to search for **CH341**.
 
@@ -109,6 +108,20 @@ This step may take up to **30 minutes**.
 .. code-block:: bash
 
    ./scripts/make_kernel.sh
+
+Copy the path to the generated kernel image. You will need it later
+
+.. image:: media/path_to_image.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Next, you will edit the build_info.txt file 
+
+.. code-block:: bash
+    
+    gedit build_info.txt
+
 
 
 JetPack 6 Video Walkthrough
