@@ -122,6 +122,12 @@ Next, you will edit the build_info.txt file
     
     gedit build_info.txt
 
+Edit the document to include the path to the kernel image you copied earlier.
+
+.. image:: media/gedit_build_info.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
 
 
 JetPack 6 Video Walkthrough
