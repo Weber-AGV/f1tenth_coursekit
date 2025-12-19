@@ -433,64 +433,39 @@ Run the install script :
 Install librealsense
 --------------------
 
-.. Clone/Download the latest stable version of librealsense2 in one of the following ways:
+Register the Intel RealSense public key:
 
-.. - Clone the librealsense repo
+.. code-block:: bash
 
-..   .. code-block:: bash
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 
-..       git clone https://github.com/realsenseai/librealsense.git
 
-.. - Download and unzip the latest stable librealsense2 version from the master branch:
+Add the server to the list of repositories:
 
-..   `RealSense.zip <https://github.com/realsenseai/librealsense/archive/master.zip>`_
+.. code-block:: bash
 
-.. Install the video for Linux (v4l2) driver
+    sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 
-.. .. code-block:: bash
+Install the RealSense SDK 2.0:
 
-..     sudo apt install v4l-utils
+.. code-block:: bash
 
-.. Run the RealSense permissions script from the librealsense root directory:
+    sudo apt-get install librealsense2-utils
+    sudo apt-get install librealsense2-dev
 
-.. .. code-block:: bash
+With the installation complete, reconnect the RealSense device and:
+.. code-block:: bash
 
-..     cd librealsense
-..     ./scripts/setup_udev_rules.sh
+    realsense-viewer
 
-.. .. note::
+Update the camera firmware to the latest version:
 
-..     You can remove the permissions by running:
+.. image:: media/update_firmware.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
 
-..     ./scripts/setup_udev_rules.sh --uninstall
 
-.. Build librealsense using the RSUSB backend (Jetson-friendly)
-
-.. On Jetson systems, the RealSense kernel patch script targets Ubuntu generic kernels and will fail on the NVIDIA tegra kernel. Instead of modifying the kernel, librealsense can be built using its RSUSB backend, which communicates with the camera directly over USB from user space.
-
-.. From the librealsense root directory:
-
-.. .. code-block:: bash
-
-..     cd ~/librealsense
-..     mkdir -p build
-..     cd build
-
-..     cmake .. \
-..      -DFORCE_RSUSB_BACKEND=true \
-..      -DBUILD_EXAMPLES=true
-
-..     make -j$(nproc)
-..     sudo make install
-..     sudo ldconfig
-
-.. Check the patched modules installation by examining the generated log and inspecting the latest entries in the kernel log:
-
-.. .. code-block:: bash
-
-..     sudo dmesg | tail -n 50
-
-.. The log should indicate that a new _uvcvideo_ driver has been registered. Refer to `Troubleshooting <#troubleshooting-installation-and-patch-related-issues>`_ in case of errors/warning reports.
 
 Other Resources
 -------------------- 
