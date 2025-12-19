@@ -219,6 +219,55 @@ Output should be something like this:
    :align: center
    :width: 600px
 
+Installing the Kernel Image
+-------------------------
+
+Run the following script to install the kernel image:
+
+Make a backup of your current kernel image:
+
+.. code-block:: bash
+
+    cd /boot/extlinux/
+    sudo cp extlinux.conf extlinux.conf.original
+
+Edit the file:
+
+.. code-block:: bash
+
+    sudo gedit extlinux.conf
+
+Make a backup copy of the Image (use a new terminal window):
+
+.. code-block:: bash
+
+    cd /boot
+    sudo cp Image Image.backup
+
+Go back to the extlinux.conf file and unccomment the Label Backup lines:
+
+Pre-Edit
+
+.. image:: media/config_pre_edit.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Post-Edit
+
+.. image:: media/config_post_edit.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Copy line 10 and replace line 29 like the image below:
+
+.. image:: media/config_append_change.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+
 JetPack 6 Video Walkthrough
 ---------------------------
 
