@@ -64,7 +64,7 @@ Jetson-specific instructions
 
        ./scripts/edit_config_gui.sh
 
-   You can use the GUI to set device and kernel options — a sample screenshot is shown below:
+   You can use the GUI to set device and kernel options:
 
    .. image:: media/kernel_config_gui.png
       :alt: Kernel configuration GUI
