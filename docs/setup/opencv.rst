@@ -32,19 +32,25 @@ Add the following line to the end of the file:
 
 .. code-block:: c
 
-    export PIP_INDEX_URL=https://pypi.jetson-ai-lab.dev/jp6/cu126
+    export PIP_INDEX_URL=https://pypi.jetson-ai-lab.io/jp6/cu126
 
 .. image:: media/bashrc_pip_index.png
    :alt: bashrc file edit
    :align: center
    :width: 600px
 
-Install OpenCV Wheel Files
+Source the .bashrc file
 
 .. code-block:: bash
-    
-    pip install opencv_contrib_python-4.10.0.86-cp310-cp310-linux_aarch64.whl
-    pip install opencv_python-4.10.0-py3-none-any.whl
+
+    source ~/.bashrc
+
+Install opencv python
+
+.. code-block:: bash
+
+    pip install opencv-python
+
 
 Install dependencies
 
