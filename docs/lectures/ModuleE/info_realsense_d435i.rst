@@ -284,7 +284,7 @@ Copy the kernel image:
 Reboot your Jetson:
 
 
-JetPack 6 Video Walkthrough
+JetPack 6 Orin Kernel Builder Video Walkthrough
 ---------------------------
 
 This process applies to **JetPack 6**. A supporting walkthrough video is available on YouTube.
@@ -311,8 +311,56 @@ This process applies to **JetPack 6**. A supporting walkthrough video is availab
        git clone https://github.com/jetsonhacks/jetson-orin-librealsense.git
        cd jetson-orin-librealsense/build
 
-   
+Run this patch
 
+.. code-block:: bash
+
+   ./patch-for-realsense.sh
+
+
+Build the Modules:
+-----------------
+
+Switch over to the kernel building directory:
+
+.. code-block:: bash
+
+   cd ~/jetson-orin-kernel-builder/
+
+
+Run the config gui:
+
+.. code-block:: bash
+    
+    ./scripts/edit_config_gui.sh
+
+Use **Ctrl+F** to search for **HID_SENSOR_HUB**.
+
+.. image:: media/search_hid_sensor_hub.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Set the value of the HID_SENSOR_HUB to **M** by clicking on the letter **N** and changing it to **M**.
+
+.. image:: media/hid_sensor_hub_to_m.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Search for **ACCEL_3D**.
+
+.. image:: media/search_accel_3d.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Set the value of the ACCEL_3D to **M** by clicking on the letter **N** and changing it to **M**.
+
+.. image:: media/accel_3d_to_m.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
 
 
 
