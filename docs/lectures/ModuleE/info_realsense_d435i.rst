@@ -426,7 +426,7 @@ Expand and install modules directory:
 
 Run the install script :
 
-..code-block:: bash
+.. ode-block:: bash
 
    sudo ./install-realsense-modules.sh
 
