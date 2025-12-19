@@ -362,6 +362,24 @@ Set the value of the ACCEL_3D to **M** by clicking on the letter **N** and chang
    :align: center
    :width: 600px
 
+Search for **GYRO_3D**.
+
+.. image:: media/search_gyro_3d.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Set the value of the GYRO_3D to **M** by clicking on the letter **N** and changing it to **M**.
+
+.. image:: media/gyro_3d_to_m.png
+   :alt: Kernel build output path
+   :align: center
+   :width: 600px
+
+Save and exit the configuration editor to apply the change.
+
+
+
 
 
 .. Install librealsense2
