@@ -40,70 +40,94 @@ Install dependencies
 Jetson-specific instructions
 --------------------------
 
-1. Jetson Orin kernel builder: `jetson-orin-kernel-builder <https://github.com/jetsonhacks/jetson-orin-kernel-builder>`_
+1. Jetson Orin Kernel Builder
+============================
 
-   Tools to build the Linux kernel and modules on board the Jetson AGX Orin, Orin Nano, or Orin NX. This tool is designed for beginning to intermediate users — please read the entire document in the repository before proceeding.
+`jetson-orin-kernel-builder <https://github.com/jetsonhacks/jetson-orin-kernel-builder>`_
 
-   .. code-block:: bash
+Tools to build the Linux kernel and modules on board the Jetson AGX Orin, Orin Nano, or Orin NX. This tool is designed for beginning to intermediate users. Be sure to read the entire document in the repository before proceeding.
 
-       git clone https://github.com/jetsonhacks/jetson-orin-kernel-builder.git
-       cd jetson-orin-kernel-builder
+.. code-block:: bash
 
-   Getting kernel and module sources
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   git clone https://github.com/jetsonhacks/jetson-orin-kernel-builder.git
+   cd jetson-orin-kernel-builder
 
-   Run the following from the repository root to fetch the kernel and module sources (adjust per README and your device):
 
-   .. code-block:: bash
+Getting Kernel and Module Sources
+---------------------------------
 
-       ./scripts/get_kernel_sources.sh
+Run the following from the repository root to fetch the kernel and module sources:
 
-   Edit the kernel-builder configuration using the provided GUI script (adjust options for your device):
+.. code-block:: bash
 
-   .. code-block:: bash
+   ./scripts/get_kernel_sources.sh
 
-       ./scripts/edit_config_gui.sh
 
-   You can use the GUI to set device and kernel options:
+Editing the Kernel Configuration
+--------------------------------
 
-   .. image:: media/kernel_config_gui.png
-      :alt: Kernel configuration GUI
-      :align: center
-      :width: 600px
+Edit the kernel-builder configuration using the provided GUI script:
 
-    Ctrl+F to search for CH341
+.. code-block:: bash
 
-    .. image:: media/search_ch341.png
-       :alt: Search for CH341
-       :align: center
-       :width: 480px
+   ./scripts/edit_config_gui.sh
 
-    Next, click the letter 'N' to change it to 'M' for the CH341 Single Port Driver (build as a module):
+You can use the GUI to set device and kernel options:
 
-    .. image:: media/ch341_to_module.png
-       :alt: Set CH341 to Module (M)
-       :align: center
-       :width: 480px
+.. image:: media/kernel_config_gui.png
+   :alt: Kernel configuration GUI
+   :align: center
+   :width: 600px
 
-    When finished, save and quit the configuration editor to apply the change.
 
-    Build kernel image
-    ~~~~~~~~~~~~~~~~~~
+Searching for the CH341 Driver
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Run the kernel build and module installation scripts from the repository (This step may take as much as 30 minutes):
+Use **Ctrl+F** to search for **CH341**.
 
-    .. code-block:: bash
+.. image:: media/search_ch341.png
+   :alt: Search for CH341
+   :align: center
+   :width: 480px
 
-        # Build the kernel image and modules
-        ./scripts/make_kernel.sh
-    
-    This is for JetPack 6. Supporting video on YouTube:
+Next, click the letter **N** to change it to **M** for the *CH341 Single Port Driver* so it is built as a module.
 
-   .. raw:: html
+.. image:: media/ch341_to_module.png
+   :alt: Set CH341 to Module (M)
+   :align: center
+   :width: 480px
 
-       <div class="video-container">
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/7P6I2jeJNYo" title="Jetson Orin Kernel Builder — YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-       </div>
+When finished, save and quit the configuration editor to apply the change.
+
+
+Building the Kernel Image
+-------------------------
+
+Run the kernel build and module installation scripts from the repository.  
+This step may take up to **30 minutes**.
+
+.. code-block:: bash
+
+   ./scripts/make_kernel.sh
+
+
+JetPack 6 Video Walkthrough
+---------------------------
+
+This process applies to **JetPack 6**. A supporting walkthrough video is available on YouTube.
+
+.. raw:: html
+
+   <div class="video-container">
+       <iframe width="560" height="315"
+               src="https://www.youtube.com/embed/7P6I2jeJNYo"
+               title="Jetson Orin Kernel Builder — YouTube"
+               frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+               referrerpolicy="strict-origin-when-cross-origin"
+               allowfullscreen>
+       </iframe>
+   </div>
 
 2. Jetson Orin helper: JetsonHacks `jetson-orin-librealsense <https://github.com/jetsonhacks/jetson-orin-librealsense>`_
 
