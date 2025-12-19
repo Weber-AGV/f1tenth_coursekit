@@ -42,7 +42,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    overview/syllabus
    
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Setup
    :name: sec-setup
    :hidden:
