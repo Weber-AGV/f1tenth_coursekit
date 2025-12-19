@@ -51,6 +51,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    setup/calibrate
    setup/nomachine
    setup/info_realsense_d435i
+   setup/opencv
 
 .. toctree::
    :maxdepth: 2

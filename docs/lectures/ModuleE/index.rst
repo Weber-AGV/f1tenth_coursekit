@@ -10,8 +10,5 @@ This module goes vision and perception methods and ends with an overview of the 
    :maxdepth: 3
    :name: sec-modulee
 
-   setup_opencv
-   info_stereo_camera
-   
    lecture12
    lecture13
