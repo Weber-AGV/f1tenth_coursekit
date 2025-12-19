@@ -152,7 +152,7 @@ Run this script to get Module information.
 
 Look for the module name **ch341** and see if it is in the right location:
 
-.. image:: media/ch341_module_info.png
+.. image:: media/ch341_module_name.png
    :alt: Kernel build output path
    :align: center
    :width: 600px
@@ -165,7 +165,7 @@ Using the module location make sure it is in there:
 
 Output should be something like this:
 
-.. image:: media/ch34_module_ko.png
+.. image:: media/ch341_module_ko_found.png
    :alt: Kernel build output path
    :align: center
    :width: 600px
@@ -176,7 +176,7 @@ More detailed information about the module by running:
 
    ./scripts/module_info.sh CONFIG_USB_SERIAL_CH341
 
-.. image:: media/module_deep.png
+.. image:: media/ch341_module_deep.png
    :alt: Kernel build output path
    :align: center
    :width: 600px
