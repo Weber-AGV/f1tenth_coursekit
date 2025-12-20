@@ -72,3 +72,39 @@ Point Of View:
 - References: REP-0103, REP-0105
 - All data published in our wrapper topics is optical data taken directly from our camera sensors.
 - static and dynamic TF topics publish optical CS and ROS CS to give the user the ability to move from one CS to other CS.
+
+
+Update the bringup_launch.py file
+
+① Add these imports at the top:
+
+.. code-block:: python
+
+    from launch.launch_description_sources import PythonLaunchDescriptionSource
+    from launch.conditions import IfCondition
+
+② Add these launch arguments (so you can toggle it on/off):
+
+.. code-block:: python
+
+    realsense_enable_la = DeclareLaunchArgument(
+        'realsense_enable',
+        default_value='true',
+        description='Launch RealSense D435i driver')
+
+    realsense_depth_profile_la = DeclareLaunchArgument(
+        'realsense_depth_profile',
+        default_value='1280x720x30',
+        description='RealSense depth profile (widthxheightxfps)')
+
+    realsense_pointcloud_la = DeclareLaunchArgument(
+        'realsense_pointcloud',
+        default_value='true',
+        description='Enable RealSense pointcloud')
+
+③ Add these lines in the LaunchDescription() function:    
+
+.. code-block:: python
+
+    ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, realsense_enable_la, realsense_depth_profile_la, realsense_pointcloud_la])
+
