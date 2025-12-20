@@ -62,7 +62,7 @@ Point Of View:
 - Imagine we are standing behind of the camera, and looking forward.
 - Always use this point of view when talking about coordinates, left vs right IRs, position of sensor, etc..
 
-.. image:: media/coordinate_camera.png
+.. image:: media/coordinates_camera.png
    :alt: realsense ros coordinate system
    :align: center
    :width: 400px
