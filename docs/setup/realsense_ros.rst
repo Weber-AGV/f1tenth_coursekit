@@ -76,14 +76,14 @@ Point Of View:
 
 Update the bringup_launch.py file
 
-① Add these imports at the top:
+1️⃣ Add these imports at the top:
 
 .. code-block:: python
 
     from launch.launch_description_sources import PythonLaunchDescriptionSource
     from launch.conditions import IfCondition
 
-② Add these launch arguments (so you can toggle it on/off):
+2️⃣ Add these launch arguments (so you can toggle it on/off):
 
 .. code-block:: python
 
@@ -102,9 +102,37 @@ Update the bringup_launch.py file
         default_value='true',
         description='Enable RealSense pointcloud')
 
-③ Add these lines in the LaunchDescription() function:    
+3️⃣ Add these lines in the LaunchDescription() function:    
 
 .. code-block:: python
 
     ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, realsense_enable_la, realsense_depth_profile_la, realsense_pointcloud_la])
 
+4️⃣ Add the RealSense include action
+
+.. code-block:: python
+
+    realsense_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('realsense2_camera'),
+                'launch',
+                'rs_launch.py'
+            )
+        ),
+        launch_arguments={
+            'depth_module.depth_profile': LaunchConfiguration('realsense_depth_profile'),
+            'pointcloud.enable': LaunchConfiguration('realsense_pointcloud'),
+        }.items()
+    )
+    realsense_launch.condition = IfCondition(LaunchConfiguration('realsense_enable'))
+
+5️⃣ Add it to the launch description (finalize section)
+
+.. code-block:: python
+
+    ld.add_action(realsense_launch)
+
+Save and close the file.
+
+Run the bringup launch file
