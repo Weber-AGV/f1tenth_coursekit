@@ -73,66 +73,30 @@ Point Of View:
 - All data published in our wrapper topics is optical data taken directly from our camera sensors.
 - static and dynamic TF topics publish optical CS and ROS CS to give the user the ability to move from one CS to other CS.
 
+Add there Aliases to the bashrc file for easier launching of the realsense node.
 
-Update the bringup_launch.py file
+.. code-block:: bash
 
-1️⃣ Add these imports at the top:
+    code ~/.bashrc
 
-.. code-block:: python
+Add the following lines at the end of the file:
 
-    from launch.launch_description_sources import PythonLaunchDescriptionSource
-    from launch.conditions import IfCondition
+.. code-block:: bash
 
-2️⃣ Add these launch arguments (so you can toggle it on/off):
+    #These are for the realsense camera
+    alias cam='ros2 launch realsense2_camera rs_launch.py camera_name:=rs'
 
-.. code-block:: python
+    #This is an example of the pointcloud
+    alias point_cloud='ros2 launch realsense2_camera rs_pointcloud_launch.py'
 
-    realsense_enable_la = DeclareLaunchArgument(
-        'realsense_enable',
-        default_value='true',
-        description='Launch RealSense D435i driver')
 
-    realsense_depth_profile_la = DeclareLaunchArgument(
-        'realsense_depth_profile',
-        default_value='1280x720x30',
-        description='RealSense depth profile (widthxheightxfps)')
-
-    realsense_pointcloud_la = DeclareLaunchArgument(
-        'realsense_pointcloud',
-        default_value='true',
-        description='Enable RealSense pointcloud')
-
-3️⃣ Add these lines in the LaunchDescription() function:    
-
-.. code-block:: python
-
-    ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, realsense_enable_la, realsense_depth_profile_la, realsense_pointcloud_la])
-
-4️⃣ Add the RealSense include action
-
-.. code-block:: python
-
-    realsense_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory('realsense2_camera'),
-                'launch',
-                'rs_launch.py'
-            )
-        ),
-        launch_arguments={
-            'depth_module.depth_profile': LaunchConfiguration('realsense_depth_profile'),
-            'pointcloud.enable': LaunchConfiguration('realsense_pointcloud'),
-        }.items()
-    )
-    realsense_launch.condition = IfCondition(LaunchConfiguration('realsense_enable'))
-
-5️⃣ Add it to the launch description (finalize section)
-
-.. code-block:: python
-
-    ld.add_action(realsense_launch)
 
 Save and close the file.
 
 Run the bringup launch file
+
+More resources
+--------------
+
+- `RealSense ROS2 — Starting Camera Node <https://dev.realsenseai.com/docs/ros2-starting-camera-node>`_
+- `realsense-ros GitHub repository <https://github.com/realsenseai/realsense-ros>`_
