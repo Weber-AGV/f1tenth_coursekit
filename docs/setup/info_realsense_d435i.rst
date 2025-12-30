@@ -154,7 +154,7 @@ Look for the module name **ch341** and see if it is in the right location:
 
 Using the module location make sure it is in there:
 
-..code-block:: bash
+.. code-block:: bash
 
     ls /usr/src/kernel/kernel-jammy-src/drivers/usb/serial/ch341.ko
 
@@ -268,7 +268,7 @@ Go back to jetson-orin-kernel-builder directory:
 
 .. code-block:: bash
 
-    cd jetson-orin-kernel-builder
+    cd ~/jetson-orin-kernel-builder
 
 Copy the kernel image:
 
@@ -323,56 +323,6 @@ Switch over to the kernel building directory:
    cd ~/jetson-orin-kernel-builder/
 
 
-Run the config gui:
-
-.. code-block:: bash
-    
-    ./scripts/edit_config_gui.sh
-
-Use **Ctrl+F** to search for **HID_SENSOR_HUB**.
-
-.. image:: media/search_hid_sensor_hub.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Set the value of the HID_SENSOR_HUB to **M** by clicking on the letter **N** and changing it to **M**.
-
-.. image:: media/hid_sensor_hub_to_m.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Search for **ACCEL_3D**.
-
-.. image:: media/search_accel_3d.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Set the value of the ACCEL_3D to **M** by clicking on the letter **N** and changing it to **M**.
-
-.. image:: media/accel_3d_to_m.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Search for **GYRO_3D**.
-
-.. image:: media/search_gyro_3d.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Set the value of the GYRO_3D to **M** by clicking on the letter **N** and changing it to **M**.
-
-.. image:: media/gyro_3d_to_m.png
-   :alt: Kernel build output path
-   :align: center
-   :width: 600px
-
-Save and exit the configuration editor to apply the change.
-
 Run the script to install the modules:
 
 .. code-block:: bash
@@ -403,6 +353,7 @@ Complete a checksum:
 
 .. code-block:: bash
 
+   cd ..
    sha256sum -c install-modules.tar.gz.sha256
 
 The checksum should look something like this:
@@ -421,7 +372,7 @@ Expand and install modules directory:
 
 Run the install script :
 
-.. ode-block:: bash
+.. code-block:: bash
 
    sudo ./install-realsense-modules.sh
 
