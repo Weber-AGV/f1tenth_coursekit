@@ -61,7 +61,37 @@ Next, click the letter **N** to change it to **M** for the *CH341 Single Port Dr
    :align: center
    :width: 480px
 
+Use **Ctrl+F** to search for **HID_SENSOR_HUB**.
+
+.. image:: media/hid_sensor_hub_to_m.png
+   :alt: Search for HID_SENSOR_HUB
+   :align: center
+   :width: 600px
+
+Next, click the letter **N** to change it to **M** for the *HID Sensors framework support* so it is built as a module.
+
+Use **Ctrl+F** to search for **ACCEL_3D**.
+
+.. image:: media/accel_3d_to_m.png
+   :alt: Search for HID_SENSOR_HUB
+   :align: center
+   :width: 600px
+
+Next, click the letter **N** to change it to **M** for the *HID Accelerometers 3D* so it is built as a module.
+
+Use **Ctrl+F** to search for **GYRO_3D**.
+
+.. image:: media/gyro_3d_to_m.png
+   :alt: Search for HID_SENSOR_HUB
+   :align: center
+   :width: 600px
+
+Next, click the letter **N** to change it to **M** for the *HID Gyroscope 3D* so it is built as a module.
+
+
 When finished, save and quit the configuration editor to apply the change.
+
+
 
 
 Building the Kernel Image
