@@ -75,10 +75,11 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    :name: sec-course-tutorials
    :hidden:
 
-   tutorials/intro
+   tutorials/ModuleA/intro
    tutorials/ModuleA/ROS2
    tutorials/ModuleA/wall_following
    tutorials/ModuleA/follow_the_gap
+   tutorials/index
 
 
 .. toctree::
