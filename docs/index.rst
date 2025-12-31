@@ -70,6 +70,18 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    lectures/index
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Tutorials
+   :name: sec-course-tutorials
+   :hidden:
+
+   tutorials/ModuleA/intro
+   tutorials/ModuleA/ROS2
+   tutorials/ModuleA/wall_following
+   tutorials/ModuleA/follow_the_gap
+
+
+.. toctree::
    :maxdepth: 1
    :caption: Assignments
    :name: sec-assignments
