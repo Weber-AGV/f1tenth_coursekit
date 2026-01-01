@@ -331,24 +331,6 @@ Run the script to install the modules:
 
 When prompted Do you want to install the modules? Type **N** and press Enter.
 
-
-
-Install jetson-orin-librealsense
---------------------
-
-Move back into home directory:
-
-.. code-block:: bash
-
-   cd ~
-
-Clone the jetson hacks librealsense repository:
-
-.. code-block:: bash
-
-   git clone https://github.com/jetsonhacks/jetson-orin-librealsense.git
-   cd jetson-orin-librealsense/build
-
 Complete a checksum:
 
 .. code-block:: bash
