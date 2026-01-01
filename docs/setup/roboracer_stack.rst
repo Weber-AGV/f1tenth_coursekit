@@ -28,7 +28,7 @@ Clone the repo
 .. code-block:: bash
 
    cd src
-   git clone https://github.com/f1tenth/f1tenth_system.git
+   git clone https://github.com/Weber-AGV/f1tenth_system
 
 
 Update submodule
