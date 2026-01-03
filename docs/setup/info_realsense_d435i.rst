@@ -381,7 +381,8 @@ Install the RealSense SDK 2.0:
     sudo apt-get install librealsense2-utils
     sudo apt-get install librealsense2-dev
 
-With the installation complete, reconnect the RealSense device and:
+With the installation complete, reconnect the RealSense device:
+
 .. code-block:: bash
 
     realsense-viewer
