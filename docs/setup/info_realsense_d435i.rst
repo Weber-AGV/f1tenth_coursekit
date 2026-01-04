@@ -335,7 +335,7 @@ Complete a checksum:
 
 .. code-block:: bash
 
-   cd ..
+   cd ~/jetson-orin-librealsense/
    sha256sum -c install-modules.tar.gz.sha256
 
 The checksum should look something like this:
