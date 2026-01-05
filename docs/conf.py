@@ -67,10 +67,10 @@ html_theme_options = {
     # 'analytics_id': '',
     # 'sticky_navigation': True  # Set to False to disable the sticky nav while scrolling.
     'logo_only': False,  # if we have a html_logo below, this shows /only/ the logo with no title text
-    'collapse_navigation': False,  # Collapse navigation (False makes it tree-like)
+    'collapse_navigation': True,  # Collapse navigation (True hides sections until expanded)
     'prev_next_buttons_location': 'bottom',
     # 'display_version': True,  # Display the docs version
-    # 'navigation_depth': 4,  # Depth of the headers shown in the navigation bar
+    'navigation_depth': 2,  # Depth of the headers shown in the navigation bar
 }
 
 # VCS options: https://docs.readthedocs.io/en/latest/vcs.html#github
