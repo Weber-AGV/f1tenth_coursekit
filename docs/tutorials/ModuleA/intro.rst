@@ -69,7 +69,7 @@ This installs the turtlesim package system-wide on your machine.
 
    No change to the structure of the ``turtlesim_ws`` workspace
 
-.. image:: img/turtlesim%20installation.png
+.. image:: img/turtlesim_installation.png
    :alt: turtlesim_ws
 
 
