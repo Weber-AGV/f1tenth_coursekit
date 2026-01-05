@@ -162,10 +162,11 @@ Key Features of ``colcon build``
 Common Command Options
 ^^^^^^^^^^^^^^^^^^^^^^
 
-- **``--packages-select <package_name>``**: Build only specified packages.
-- **``--packages-ignore <package_name>``**: Skip specific packages during the build.
-- **``--parallel-workers <N>``**: Control the number of parallel build jobs.
-- **``--event-handlers console_cohesion+``**: Improve the console output format for better readability.
+ 
+- ``--packages-select <package_name>``: Build only specified packages.
+- ``--packages-ignore <package_name>``: Skip specific packages during the build.
+- ``--parallel-workers <N>``: Control the number of parallel build jobs.
+- ``--event-handlers console_cohesion+``: Improve the console output format for better readability.
 
 ---
 
