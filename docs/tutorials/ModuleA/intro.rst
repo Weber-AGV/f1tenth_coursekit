@@ -124,11 +124,12 @@ The ``colcon build`` command is used to build all the packages in a ROS 2 worksp
 4. Generate Build Artifacts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- **``build/`` Directory**: Contains intermediate build files such as compiled binaries, object files, and configuration data.
-- **``install/`` Directory**: Stores the final build outputs (e.g., executables, shared libraries, Python modules, and ROS message/service definitions).
-- **``log/`` Directory**: Captures logs for each step of the build process, useful for debugging build issues.
+- ``build/`` directory: Contains intermediate build files such as compiled binaries, object files, and configuration data.
+- ``install/`` directory: Stores the final build outputs (e.g., executables, shared libraries, Python modules, and ROS message/service definitions).
+- ``log/`` directory: Captures logs for each step of the build process, useful for debugging build issues.
 
 ---
+
 
 5. Environment Setup
 ^^^^^^^^^^^^^^^^^^^^
