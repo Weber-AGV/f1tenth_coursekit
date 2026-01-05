@@ -69,7 +69,7 @@ This installs the turtlesim package system-wide on your machine.
 
    No change to the structure of the ``turtlesim_ws`` workspace
 
-.. image:: media/turtlesim%20installation.png
+.. image:: img/turtlesim%20installation.png
    :alt: turtlesim_ws
 
 
@@ -83,7 +83,7 @@ Navigate to the workspace root directory and build the packages:
    cd ~/turtlesim_ws
    colcon build
 
-.. image:: media/colcon_build.png
+.. image:: img/colcon_build.png
    :alt: colcon build
 
 What Does ``colcon build`` Do?
