@@ -1,11 +1,11 @@
 .. _doc_tutorials_aeb:
 
-Automatic Emergency Braking (AEB)
-=================================
+Tutorial 2 - Automatic Emergency Braking
+========================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :name: sec-aeb
 
-   lab
-   notes
+   theory
+   aeb_package

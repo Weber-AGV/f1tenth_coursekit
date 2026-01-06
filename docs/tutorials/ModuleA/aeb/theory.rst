@@ -1,6 +1,6 @@
-.. _doc_tutorials_aeb_lab:
+.. _doc_tutorials_aeb_theory:
 
-Tutorial 2 - Automatic Emergency Braking (AEB)
+AEB Theory of Operation
 =============================
 
 1️⃣ Learning Goals

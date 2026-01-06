@@ -70,7 +70,7 @@ html_theme_options = {
     'collapse_navigation': True,  # Collapse navigation (True hides sections until expanded)
     'prev_next_buttons_location': 'bottom',
     # 'display_version': True,  # Display the docs version
-    'navigation_depth': 2,  # Depth of the headers shown in the navigation bar
+    'navigation_depth': 3,  # Depth of the headers shown in the navigation bar
     # 'titles_only': True,  # Show only document titles in the sidebar (hide section headings)
 }
 

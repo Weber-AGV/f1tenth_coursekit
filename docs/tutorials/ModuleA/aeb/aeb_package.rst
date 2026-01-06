@@ -1,7 +1,7 @@
-.. _doc_tutorials_aeb_notes:
+.. _doc_tutorials_aeb_package:
 
-AEB Notes
-=========
+AEB Package Creation
+===========
 
 To set up your safety package within the driver stack container and prevent the roboracer from colliding with objects in front of it, follow these steps.
 
