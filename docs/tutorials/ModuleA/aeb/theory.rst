@@ -34,17 +34,21 @@ You've already used `AckermannDriveStamped <http://docs.ros.org/en/jade/api/acke
 
 
 3️⃣ The TTC Calculation
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Time to Collision (TTC) is the time it would take for the car to collide with an obstacle if it maintained its current heading and velocity. We approximate the time to collision using Instantaneous Time to Collision (iTTC), which is the ratio of instantaneous range to range rate calculated from current range measurements and velocity measurements of the vehicle.
+Time to Collision (TTC) is the time it would take for the car to collide with an obstacle
+if it maintained its current heading and velocity.
 
-As discussed in the lecture, we can calculate the iTTC as:
+We approximate the time to collision using **Instantaneous Time to Collision (iTTC)**,
+which is the ratio of instantaneous range to range rate.
 
 .. math::
 
-   iTTC = \frac{r}{\{-\dot{r}\}_{+}}
+   iTTC = \frac{r}{\max(-\dot{r}, 0)}
 
-where :math:`r` is the instantaneous range measurements, and :math:`\dot{r}` is the current range rate for that measurement.
+where :math:`r` is the instantaneous range measurement and :math:`\dot{r}` is the
+corresponding range rate.
+
 And the operator :math:`\{x\}_{+} = \max(x, 0)`.
 
 The instantaneous range :math:`r` to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
