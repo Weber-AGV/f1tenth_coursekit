@@ -1,11 +1,5 @@
 .. _doc_tutorials_intro:
 
-
-
-
-
-
-
 Tutorial 1 - ROS 2
 =============================
 
