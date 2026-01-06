@@ -100,7 +100,7 @@ Navigate to the workspace root directory and build the packages:
 
 .. note::
 
-   **What Does ``colcon build`` Do?**
+   **What Does colcon build Do?**
 
    The ``colcon build`` command is used to build all the packages in a ROS 2 workspace. It automates the build process by managing dependencies, generating build artifacts, and installing outputs.
 
