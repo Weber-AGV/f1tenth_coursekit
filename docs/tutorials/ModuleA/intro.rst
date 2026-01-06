@@ -19,15 +19,25 @@ Tutorial 1 - ROS 2
      </div>
    </div>
 
-**Video:** `Watch on YouTube <https://youtu.be/EU-QaO6xTv4>`_
+You can ignore the docker section in this video
 
 .. raw:: html
 
    <div style="max-width:100%; text-align:center; margin-top:1em;">
      <div style="position:relative; width:100%; padding-top:56.25%;">
-       <iframe src="https://www.youtube.com/embed/EU-QaO6xTv4" title="YouTube video player" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       <iframe 
+         src="https://www.youtube.com/embed/EU-QaO6xTv4?start=1300"
+         title="YouTube video player"
+         style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+         frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+         allowfullscreen>
+       </iframe>
      </div>
    </div>
+
+
+
 
 
 Create ``turtlesim_ws`` Workspace ROS 2
