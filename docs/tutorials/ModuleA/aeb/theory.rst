@@ -44,16 +44,16 @@ As discussed in the lecture, we can calculate the iTTC as:
 
    iTTC = \frac{r}{\{-\dot{r}\}_{+}}
 
-where $r$ is the instantaneous range measurements, and $\dot{r}$ is the current range rate for that measurement.
-And the operator $\{x\}_{+} = \max(x, 0)$.
+where :math:`r` is the instantaneous range measurements, and :math:`\dot{r}` is the current range rate for that measurement.
+And the operator :math:`\{x\}_{+} = \max(x, 0)`.
 
-The instantaneous range $r$ to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
+The instantaneous range :math:`r` to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
 
-The range rate $\dot{r}$ is the expected rate of change along each scan beam. A positive range rate means the range measurement is expanding, and a negative one means the range measurement is shrinking.
+The range rate :math:`\dot{r}` is the expected rate of change along each scan beam. A positive range rate means the range measurement is expanding, and a negative one means the range measurement is shrinking.
 
 Thus, it can be calculated in two different ways:
 
-1. **Using Velocity Projection**: Calculate by mapping the vehicle's current longitudinal velocity onto each scan beam's angle by using $v_x \cos{\theta_{i}}$. Be careful with assigning the range rate a positive or a negative value. The angles could also be determined by the information in ``LaserScan`` messages.
+1. **Using Velocity Projection**: Calculate by mapping the vehicle's current longitudinal velocity onto each scan beam's angle by using :math:`v_x \cos\theta_{i}`. Be careful with assigning the range rate a positive or a negative value. The angles could also be determined by the information in ``LaserScan`` messages.
 
 2. **Using Range Difference**: Take the difference between the previous range measurement and the current one, divide it by how much time has passed in between (timestamps are available in message headers), and calculate the range rate that way.
 
@@ -74,23 +74,3 @@ After you've calculated the array of iTTCs, you should decide how to proceed wit
 - ``LaserScan``: ``/scan``
 - ``Odometry``: ``/odom`` (specifically, the longitudinal velocity can be found in ``twist.twist.linear.x``)
 - ``AckermannDriveStamped``: ``/drive``
-
-
-5️⃣ Deliverables and Submission
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can implement this node in either C++ or Python. A skeleton package is available on the AEB Notes Page. Put your package in ``/src`` folder.
-
-**Deliverable 1**: After you're finished, update the entire skeleton package directory with your ``safety_node``. Upload your code to canvas.
-
-**Deliverable 2**: Make a screen cast of running your safety node. Drive the car showing it doesn't brake when traveling straight in the hallway. You need to show that your safe node doesn't generate false positives (i.e., the car doesn't suddenly stop while traveling down the hallway). Then show the car driving towards an object and braking correctly. Upload your video to canvas.
-
-
-6️⃣ Grading Rubric
-~~~~~~~~~~~~~~~~~
-
-- **Compilation**: 30 points
-- **Provided Video**: 20 points
-- **Correctly stops before collision**: 30 points
-- **Correctly calculates TTC**: 10 points
-- **Able to navigate through the hallway**: 10 points
