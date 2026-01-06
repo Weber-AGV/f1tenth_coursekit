@@ -40,7 +40,9 @@ Time to Collision (TTC) is the time it would take for the car to collide with an
 
 As discussed in the lecture, we can calculate the iTTC as:
 
-$$iTTC = \frac{r}{\{-\dot{r}\}_{+}}$$
+.. math::
+
+   iTTC = \frac{r}{\{-\dot{r}\}_{+}}
 
 where $r$ is the instantaneous range measurements, and $\dot{r}$ is the current range rate for that measurement.
 And the operator $\{x\}_{+} = \max(x, 0)$.
