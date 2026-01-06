@@ -40,8 +40,10 @@ You can ignore the docker section in this video
 
 
 
-Create ``turtlesim_ws`` Workspace ROS 2
-------------------------------------------
+.. raw:: html
+
+   <h2 style="text-align: center; font-size: 2em; margin-top: 3em; margin-bottom: 1.5em;">Create <code>turtlesim_ws</code> Workspace ROS 2</h2>
+
 
 The following steps guide you to create a ROS 2 workspace named ``turtlesim_ws`` and include the ``turtlesim`` package for running a simple simulation.
 
