@@ -98,91 +98,34 @@ Navigate to the workspace root directory and build the packages:
 .. image:: img/colcon_build.png
    :alt: colcon build
 
-What Does ``colcon build`` Do?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. note::
 
-The ``colcon build`` command is used to build all the packages in a ROS 2 workspace. It automates the build process by managing dependencies, generating build artifacts, and installing outputs. Here's a breakdown of what happens during the ``colcon build`` process:
+   **What Does ``colcon build`` Do?**
 
----
+   The ``colcon build`` command is used to build all the packages in a ROS 2 workspace. It automates the build process by managing dependencies, generating build artifacts, and installing outputs.
 
-1. Initialize the Build Process
-``````````````````````````````
+   **Initialize the Build Process**: Colcon identifies the workspace by finding the ``src/`` directory containing ROS 2 packages, then scans the directory to locate all ROS 2 packages (defined by ``package.xml`` files).
 
-- **Workspace Detection**: Colcon identifies the workspace by finding the ``src/`` directory containing ROS 2 packages.
-- **Package Discovery**: Colcon scans the ``src/`` directory to locate all ROS 2 packages (defined by ``package.xml`` files).
+   **Dependency Analysis**: Colcon examines the dependencies of each package based on its ``package.xml`` file and builds a dependency graph. Packages are built in an order that satisfies their dependencies.
 
----
+   **Invoke Build Systems**: Colcon identifies the build system used by each package (e.g., CMake for C++, setuptools for Python) and builds packages in parallel when there are no dependency conflicts.
 
-2. Dependency Analysis
-````````````````````
+   **Generate Build Artifacts**: The ``build/`` directory contains intermediate build files; the ``install/`` directory stores final outputs (executables, libraries, modules); and the ``log/`` directory captures build logs.
 
-- **Dependency Graph**: Colcon examines the dependencies of each package based on its ``package.xml`` file and builds a dependency graph.
-- **Build Order**: Packages are built in an order that satisfies their dependencies. For example, if Package A depends on Package B, Package B will be built first.
+   **Environment Setup**: Colcon generates setup files (``setup.bash``, ``setup.zsh``, ``local_setup.bash``) in the ``install/`` directory to allow workspace packages to be sourced and used.
 
----
+   **Post-Build Steps**: Colcon validates the build process and provides logs if packages fail to build, skipping dependent packages to prevent cascading failures.
 
-3. Invoke Build Systems
-```````````````````````
+   **Key Features**: Modular builds (each package built independently), incremental builds (only modified packages rebuilt), and build profiles (Debug, Release).
 
-- **Build Tool Selection**: Colcon identifies the build system used by each package (e.g., CMake, Python setuptools).
+   **Common Command Options**:
+   
+   - ``--packages-select <package_name>``: Build only specified packages.
+   - ``--packages-ignore <package_name>``: Skip specific packages during the build.
+   - ``--parallel-workers <N>``: Control the number of parallel build jobs.
+   - ``--event-handlers console_cohesion+``: Improve the console output format for better readability.
 
-  - **CMake Packages**: Runs ``cmake`` to configure the package, followed by ``make`` or equivalent to compile it.
-  - **Python Packages**: Uses ``setuptools`` to build Python packages.
-
-- **Parallel Builds**: By default, Colcon builds packages in parallel when there are no dependency conflicts.
-
----
-
-4. Generate Build Artifacts
-```````````````````````````
-
-- ``build/`` directory: Contains intermediate build files such as compiled binaries, object files, and configuration data.
-- ``install/`` directory: Stores the final build outputs (e.g., executables, shared libraries, Python modules, and ROS message/service definitions).
-- ``log/`` directory: Captures logs for each step of the build process, useful for debugging build issues.
-
----
-
-
-5. Environment Setup
-```````````````````
-
-Colcon generates the necessary setup files (``setup.bash``, ``setup.zsh``, ``local_setup.bash``) in the ``install/`` directory.
-
-These files allow your workspace's packages to be sourced and used in the ROS 2 environment.
-
----
-
-6. Post-Build Steps
-``````````````````
-
-- Colcon validates the build process to ensure all steps completed successfully.
-- If a package fails to build, Colcon provides logs and skips dependent packages (to prevent cascading failures).
-
----
-
-Key Features of ``colcon build``
-````````````````````````````````
-
-1. **Modular Build**: Each package is built independently, reducing the impact of build failures.
-
-2. **Incremental Builds**: Only packages that have been modified or whose dependencies have changed are rebuilt.
-
-3. **Build Profiles**: Supports different profiles (e.g., ``Debug``, ``Release``) for optimized or debug builds.
-
----
-
-Common Command Options
-````````````````````
-
- 
-- ``--packages-select <package_name>``: Build only specified packages.
-- ``--packages-ignore <package_name>``: Skip specific packages during the build.
-- ``--parallel-workers <N>``: Control the number of parallel build jobs.
-- ``--event-handlers console_cohesion+``: Improve the console output format for better readability.
-
----
-
-By using ``colcon build``, you automate the process of compiling and installing your ROS 2 packages, ensuring that all dependencies are correctly resolved and that the workspace is ready for use.
+   By using ``colcon build``, you automate the process of compiling and installing your ROS 2 packages, ensuring that all dependencies are correctly resolved and that the workspace is ready for use.
 
 
 4. Source the Workspace
