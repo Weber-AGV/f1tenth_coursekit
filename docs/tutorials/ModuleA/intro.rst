@@ -211,10 +211,8 @@ A ROS 2 workspace is a directory structure used to organize and manage ROS 2 pac
 
 
 
-Create and Setup a Package
----------------------------
+.. centered:: Create and Setup a Package
 
-:sort: 3
 
 What Is a ROS 2 Package?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -317,7 +315,7 @@ The command creates the following structure::
    ├── setup.py                # Python build script
    └── my_turtlesim_controller/ # Directory for Python scripts
 
-Open up the src in Visual Studio Code to view::
+Open up the src in Visual Studio Code to view:
 
 .. code-block:: bash
 
@@ -332,7 +330,7 @@ Open up the src in Visual Studio Code to view::
 4. Add Dependencies
 -------------------
 
-Edit ``package.xml`` to declare the package dependencies. For controlling turtlesim, include ``rclpy`` and ``turtlesim``::
+Edit ``package.xml`` to declare the package dependencies. For controlling turtlesim, include ``rclpy`` and ``turtlesim``:
 
 .. code-block:: xml
 
@@ -342,7 +340,7 @@ Edit ``package.xml`` to declare the package dependencies. For controlling turtle
 .. image:: img/depend.png
    :alt: package.xml dependency
 
-Add your email to the maintainer email line in ``package.xml``::
+Add your email to the maintainer email line in ``package.xml``:
 
 .. image:: img/email.png
    :alt: maintainer email
@@ -351,7 +349,7 @@ Add your email to the maintainer email line in ``package.xml``::
 5. Colcon build
 ---------------
 
-Navigate back to the turtlesim_ws directory::
+Navigate back to the turtlesim_ws directory:
 
 .. code-block:: bash
 
@@ -371,7 +369,7 @@ Use colcon build to build the new package. Note and explanation:
 
    colcon build
 
-If you get the setup tools error, follow the instructions below::
+If you get the setup tools error, follow the instructions below:
 
 .. image:: img/error_setup_tools.png
    :alt: setup tools error
@@ -384,32 +382,32 @@ If you get the setup tools error, follow the instructions below::
 6. Write the Python Code
 ------------------------
 
-Create a Python script to control the turtle. In the terminal navigate to the package's python directory::
+Create a Python script to control the turtle. In the terminal navigate to the package's python directory:
 
 .. code-block:: bash
 
    cd ~/turtlesim_ws/src/my_turtlesim_controller/my_turtlesim_controller
 
-Create a file called ``node_turtle_controller.py``::
+Create a file called ``node_turtle_controller.py``:
 
 .. code-block:: bash
 
    touch node_turtle_controller.py
 
-Make the file executable::
+Make the file executable:
 
 .. code-block:: bash
 
    chmod +x node_turtle_controller.py
 
-Go back to src and open it in vscode::
+Go back to src and open it in vscode:
 
 .. code-block:: bash
 
    cd ../..
    code .
 
-Install the ROS extension in vscode::
+Install the ROS extension in vscode:
 
 .. image:: img/ros_extension.png
    :alt: ros extension
@@ -470,7 +468,7 @@ This is an example Python node (save as ``node_turtle_controller.py``):
 7. Update ``setup.py``
 ----------------------
 
-Update the ``setup.py`` file to add an entry point so the script is runnable as a console script::
+Update the ``setup.py`` file to add an entry point so the script is runnable as a console script:
 
 .. code-block:: python
 
@@ -484,7 +482,7 @@ Update the ``setup.py`` file to add an entry point so the script is runnable as 
 8. Build the Package
 --------------------
 
-Navigate back to the root of the workspace and build your package::
+Navigate back to the root of the workspace and build your package:
 
 .. code-block:: bash
 
@@ -515,19 +513,19 @@ Navigate back to the root of the workspace and build your package::
 
    ros2 run turtlesim turtlesim_node
 
-In another terminal::
+In another terminal:
 
 .. code-block:: bash
 
    ros2 run my_turtlesim_controller turtle_controller
 
-In another terminal::
+In another terminal:
 
 .. code-block:: bash
 
    ros2 topic echo /turtle1/cmd_vel
 
-In another terminal::
+In another terminal:
 
 .. code-block:: bash
 
