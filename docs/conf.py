@@ -79,6 +79,9 @@ html_theme_options = {
     # 'titles_only': True,  # Show only document titles in the sidebar (hide section headings)
 }
 
+# Use a modern MathJax build from CDN for HTML output (ensures :math: and .. math:: render)
+mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+
 # VCS options: https://docs.readthedocs.io/en/latest/vcs.html#github
 html_context = {
     "display_github": not is_i18n, # Integrate GitHub
