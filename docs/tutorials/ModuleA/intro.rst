@@ -211,7 +211,9 @@ A ROS 2 workspace is a directory structure used to organize and manage ROS 2 pac
 
 
 
-.. centered:: Create and Setup a Package
+.. raw:: html
+
+   <h2 style="text-align: center; font-size: 2em; margin-top: 1.5em; margin-bottom: 1.5em;">Create and Setup a Package</h2>
 
 
 What Is a ROS 2 Package?
