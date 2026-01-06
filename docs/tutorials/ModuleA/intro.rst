@@ -48,7 +48,7 @@ The following steps guide you to create a ROS 2 workspace named ``turtlesim_ws``
 ---
 
 1. Set Up the Workspace Directory
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open a terminal and create the workspace directory structure:
 
@@ -59,12 +59,12 @@ Open a terminal and create the workspace directory structure:
 
 
 2. Add the ``turtlesim`` Package
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``turtlesim`` package is part of the ROS 2 distribution and can be cloned or installed directly.
 
 Option 1: Install Using ``apt``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For most ROS 2 distributions, you can install ``turtlesim``:
 
@@ -84,7 +84,7 @@ This installs the turtlesim package system-wide on your machine.
 
 
 3. Build the Workspace
-----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 Navigate to the workspace root directory and build the packages:
 
@@ -97,14 +97,14 @@ Navigate to the workspace root directory and build the packages:
    :alt: colcon build
 
 What Does ``colcon build`` Do?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``colcon build`` command is used to build all the packages in a ROS 2 workspace. It automates the build process by managing dependencies, generating build artifacts, and installing outputs. Here's a breakdown of what happens during the ``colcon build`` process:
 
 ---
 
 1. Initialize the Build Process
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``````````````````````````````
 
 - **Workspace Detection**: Colcon identifies the workspace by finding the ``src/`` directory containing ROS 2 packages.
 - **Package Discovery**: Colcon scans the ``src/`` directory to locate all ROS 2 packages (defined by ``package.xml`` files).
@@ -112,7 +112,7 @@ The ``colcon build`` command is used to build all the packages in a ROS 2 worksp
 ---
 
 2. Dependency Analysis
-^^^^^^^^^^^^^^^^^^^^^^
+````````````````````
 
 - **Dependency Graph**: Colcon examines the dependencies of each package based on its ``package.xml`` file and builds a dependency graph.
 - **Build Order**: Packages are built in an order that satisfies their dependencies. For example, if Package A depends on Package B, Package B will be built first.
@@ -120,7 +120,7 @@ The ``colcon build`` command is used to build all the packages in a ROS 2 worksp
 ---
 
 3. Invoke Build Systems
-^^^^^^^^^^^^^^^^^^^^^^^
+```````````````````````
 
 - **Build Tool Selection**: Colcon identifies the build system used by each package (e.g., CMake, Python setuptools).
 
@@ -132,7 +132,7 @@ The ``colcon build`` command is used to build all the packages in a ROS 2 worksp
 ---
 
 4. Generate Build Artifacts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```````````````````````````
 
 - ``build/`` directory: Contains intermediate build files such as compiled binaries, object files, and configuration data.
 - ``install/`` directory: Stores the final build outputs (e.g., executables, shared libraries, Python modules, and ROS message/service definitions).
@@ -142,7 +142,7 @@ The ``colcon build`` command is used to build all the packages in a ROS 2 worksp
 
 
 5. Environment Setup
-^^^^^^^^^^^^^^^^^^^^
+```````````````````
 
 Colcon generates the necessary setup files (``setup.bash``, ``setup.zsh``, ``local_setup.bash``) in the ``install/`` directory.
 
@@ -151,7 +151,7 @@ These files allow your workspace's packages to be sourced and used in the ROS 2 
 ---
 
 6. Post-Build Steps
-^^^^^^^^^^^^^^^^^^^
+``````````````````
 
 - Colcon validates the build process to ensure all steps completed successfully.
 - If a package fails to build, Colcon provides logs and skips dependent packages (to prevent cascading failures).
@@ -159,7 +159,7 @@ These files allow your workspace's packages to be sourced and used in the ROS 2 
 ---
 
 Key Features of ``colcon build``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+````````````````````````````````
 
 1. **Modular Build**: Each package is built independently, reducing the impact of build failures.
 
@@ -170,7 +170,7 @@ Key Features of ``colcon build``
 ---
 
 Common Command Options
-^^^^^^^^^^^^^^^^^^^^^^
+````````````````````
 
  
 - ``--packages-select <package_name>``: Build only specified packages.
@@ -184,7 +184,7 @@ By using ``colcon build``, you automate the process of compiling and installing 
 
 
 4. Source the Workspace
------------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 After the build is complete, source the workspace to use the installed packages:
 
@@ -220,7 +220,7 @@ What Is a ROS 2 Package?
 A **ROS 2 package** is a modular unit of functionality in ROS 2 that contains everything needed to perform a specific task or provide a feature. Packages are the fundamental building blocks of ROS 2 applications and can include nodes, libraries, configuration files, launch files, and other resources.
 
 Key Components of a ROS 2 Package
-=================================
+---------------------------------
 
 1. ``package.xml``:
    - Metadata file that describes the package (name, version, description, dependencies).
@@ -241,7 +241,7 @@ Key Components of a ROS 2 Package
    - Configuration files, message/service/action definitions, launch files, etc., necessary for the package's operation.
 
 What Makes a Package Special in ROS 2?
-======================================
+--------------------------------------
 
 1. **Reusability**:
    - Packages are self-contained, making it easy to share and reuse them across different projects.
@@ -256,14 +256,14 @@ What Makes a Package Special in ROS 2?
    - Complex applications can be developed by combining multiple smaller, focused packages.
 
 How a Package Fits Into a Workspace
-===================================
+-----------------------------------
 
 - A package resides in the ``src/`` directory of a ROS 2 workspace.
 - It is built and installed into the workspace's ``build/`` and ``install/`` directories.
 - After sourcing the workspace, the package's nodes, launch files, and resources become available for use.
 
 Example Use Case
-================
+----------------
 
 If you are controlling a robot, you might have:
 - A **sensor package** to process sensor data.
@@ -275,7 +275,7 @@ Each package would handle one aspect of the overall application.
 In essence, a ROS 2 package is a self-contained module that organizes code, dependencies, and resources for a specific purpose, allowing you to build scalable and modular robotic applications.
 
 1. Navigate to Your Workspace
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ensure you are in the workspace where you want to create the package:
 
@@ -285,7 +285,7 @@ Ensure you are in the workspace where you want to create the package:
 
 
 2. Create the Package
----------------------
+~~~~~~~~~~~~~~~~~~~
 
 Use the ``ros2 pkg create`` command to create the ``my_turtlesim_controller`` package:
 
@@ -303,7 +303,7 @@ Use the ``ros2 pkg create`` command to create the ``my_turtlesim_controller`` pa
 
 
 3. Understand the Generated Files
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The command creates the following structure::
 
@@ -328,7 +328,7 @@ Open up the src in Visual Studio Code to view:
 
 
 4. Add Dependencies
--------------------
+~~~~~~~~~~~~~~~~~
 
 Edit ``package.xml`` to declare the package dependencies. For controlling turtlesim, include ``rclpy`` and ``turtlesim``:
 
@@ -347,7 +347,7 @@ Add your email to the maintainer email line in ``package.xml``:
 
 
 5. Colcon build
----------------
+~~~~~~~~~~~~~~
 
 Navigate back to the turtlesim_ws directory:
 
@@ -380,7 +380,7 @@ If you get the setup tools error, follow the instructions below:
 
 
 6. Write the Python Code
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Create a Python script to control the turtle. In the terminal navigate to the package's python directory:
 
@@ -466,7 +466,7 @@ This is an example Python node (save as ``node_turtle_controller.py``):
 
 
 7. Update ``setup.py``
-----------------------
+~~~~~~~~~~~~~~~~~~~
 
 Update the ``setup.py`` file to add an entry point so the script is runnable as a console script:
 
@@ -480,7 +480,7 @@ Update the ``setup.py`` file to add an entry point so the script is runnable as 
 
 
 8. Build the Package
---------------------
+~~~~~~~~~~~~~~~~~~~
 
 Navigate back to the root of the workspace and build your package:
 
@@ -495,7 +495,7 @@ Navigate back to the root of the workspace and build your package:
 
 
 9. Source the Workspace
------------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -507,7 +507,7 @@ Navigate back to the root of the workspace and build your package:
 
 
 10. Test the `my_turtlesim_controller` Node
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
