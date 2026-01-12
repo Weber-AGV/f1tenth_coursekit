@@ -8,4 +8,5 @@ Tutorial 2 - Automatic Emergency Braking
    :name: sec-aeb
 
    theory
+   aeb_scan
    aeb_package
