@@ -78,6 +78,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
    tutorials/ModuleA/intro
    tutorials/ModuleA/aeb/index
+   tutorials/ModuleA/turtlesim/index
    tutorials/ModuleA/ROS2
    tutorials/ModuleA/wall_following
    tutorials/ModuleA/follow_the_gap
