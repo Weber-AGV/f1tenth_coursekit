@@ -11,4 +11,5 @@ The first module goes over the some of the basics required to understand and con
    :name: sec-modulea
 
    intro
+   turtlesim/index
    aeb/index
