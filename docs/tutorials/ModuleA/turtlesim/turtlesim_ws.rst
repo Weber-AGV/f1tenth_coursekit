@@ -1,7 +1,7 @@
 .. _doc_tutorials_turtlesim_ws:
 
-Turtlesim Workspace Setup
-==========================
+Create ``turtlesim_ws`` Workspace
+==================================
 
 The following steps guide you to create a ROS 2 workspace named ``turtlesim_ws`` and include the ``turtlesim`` package for running a simple simulation.
 
