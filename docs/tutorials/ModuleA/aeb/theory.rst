@@ -33,10 +33,119 @@ The ``AckermannDriveStamped`` Message
 You've already used `AckermannDriveStamped <http://docs.ros.org/en/jade/api/ackermann_msgs/html/msg/AckermannDriveStamped.html>`_ in the previous lab. It will be the message type that we'll use throughout the course to send driving commands to the simulator and the car. In the simulator, you can stop the car by sending an ``AckermannDriveStamped`` message with the ``speed`` field set to 0.0.
 
 
-3️⃣ Understanding Time to Collision (TTC)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3️⃣ Time-to-Collision (TTC) vs. Distance-Based Braking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Time to Collision (TTC)** is a measure used in traffic safety to estimate the time it will take for two objects (usually vehicles) to collide if they continue on their current paths at their current speeds. It's a useful metric for driver assistance systems and autonomous vehicles to evaluate the safety of a given traffic scenario.
+When designing an autonomous braking system, you have two main approaches:
+
+1. Braking based on **Distance to Object**
+2. Braking based on **Time-to-Collision (TTC)**
+
+Both methods aim to prevent collisions, but TTC is usually the superior choice. Let's break it down.
+
+Distance-Based Braking (Threshold Approach)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This method triggers braking when an obstacle is closer than a set distance.
+
+**How It Works**
+
+- If an object is detected closer than X meters, apply brakes
+- If the object is beyond X meters, continue driving
+
+**Why This Can Be a Problem**
+
+❌ **Speed Ignorance:**
+
+- A slow-moving car at 2 m/s needs far less stopping distance than a car at 10 m/s
+- A fixed threshold (e.g., "brake if object < 2m") doesn't scale with speed
+
+❌ **Late Reactions at High Speed:**
+
+- If a vehicle is moving fast, it may not have enough distance left to safely stop when the threshold is reached
+
+❌ **Unnecessary Braking at Low Speed:**
+
+- If a vehicle is moving very slowly, braking at the same fixed distance may be overly cautious, leading to unnecessary stops
+
+Time-to-Collision (TTC) - A Smarter Alternative
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TTC predicts how long until a collision happens if both objects maintain their current speeds.
+
+**How It Works**
+
+The Time-to-Collision (TTC) is calculated as:
+
+.. image:: img/TTC_Calculation.jpg
+   :alt: TTC Formula
+   :width: 40%
+   :align: center
+
+|
+
+- If TTC drops below a safe threshold (e.g., 0.5s), apply brakes
+- If TTC is above a release threshold (e.g., 1.5s), allow normal driving
+
+**Why TTC is Better**
+
+✅ **Speed Awareness:**
+
+- A vehicle at 2 m/s and a vehicle at 10 m/s will have different stopping distances, and TTC adapts braking accordingly
+
+✅ **Smooth & Early Braking:**
+
+- If an object is far but closing quickly, TTC detects the risk earlier than distance-based braking
+
+✅ **No Unnecessary Stops:**
+
+- If an object is close but not a threat (e.g., a parked car not moving into the path), TTC won't trigger braking unnecessarily
+
+Example: Comparing Both Approaches
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Imagine a car moving at 10 m/s with an object 5 meters ahead.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Method
+     - Stopping Decision
+   * - Distance-based braking (Threshold = 3m)
+     - 🚗💥 Car doesn't brake until too late, leading to collision
+   * - TTC-based braking (Threshold = 0.5s)
+     - 🚗🛑 Car detects high closing speed and brakes early to avoid impact
+
+Now, imagine the same scenario at 2 m/s:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Method
+     - Stopping Decision
+   * - Distance-based braking (Threshold = 3m)
+     - 🚗🛑 Unnecessary stop, because 3m is plenty of room at low speed
+   * - TTC-based braking (Threshold = 0.5s)
+     - 🚗✅ Car recognizes the slow approach and continues safely
+
+Key Takeaways
+^^^^^^^^^^^^^
+
+- **Distance-based braking ignores speed** 🚗⚠️, which can cause late stops at high speeds or unnecessary stops at low speeds
+- **TTC accounts for speed & closing rate** ⏳, making braking decisions more adaptive
+- **TTC allows smoother driving** 🚀 because it avoids the jerky "brake-go-brake" behavior of fixed-distance thresholds
+
+.. note::
+
+   If you're designing an autonomous emergency braking system, TTC is the way to go! 🚀
+
+
+4️⃣ Understanding Time to Collision (TTC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Time to Collision (TTC)** is a measure used in traffic safety to estimate the time it will take for two objects (usually vehicles) to collide if they continue on their current paths at their current speeds.
 
 Basic TTC Concept
 ^^^^^^^^^^^^^^^^^
@@ -75,10 +184,11 @@ This means that if Car B continues at its current speed without slowing down or 
 
 .. note::
 
-   The above calculation assumes constant speeds and straight-line paths. In real-world scenarios where speeds and directions can change, the calculation becomes more complex. Advanced driver assistance systems and autonomous vehicles use sophisticated algorithms and sensors to estimate TTC in dynamic environments.
+   The above calculation assumes constant speeds and straight-line paths. In real-world scenarios where speeds and directions can change, the calculation becomes more complex.
 
-Time to Collision Using Laser Scan Data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+5️⃣ Time to Collision Using Laser Scan Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When using LiDAR data, we need to account for the angle of approach. Let's break it down:
 
@@ -161,7 +271,7 @@ The negation in the iTTC formula (**-ṙ**) correctly interprets whether the ran
 The operator **{x}₊ = max(x, 0)** ensures iTTC calculations are meaningful:
 
 - When **-ṙ > 0** (approaching): iTTC is calculated normally
-- When **-ṘR ≤ 0** (moving away or parallel): iTTC goes to infinity (no collision)
+- When **-ṙ ≤ 0** (moving away or parallel): iTTC goes to infinity (no collision)
 
 Implementing iTTC for AEB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -177,7 +287,7 @@ After calculating iTTC for all scan beams, you'll have an array of iTTC values c
    - Division by zero occurs
 
 
-4️⃣ Automatic Emergency Braking with iTTC
+6️⃣ Automatic Emergency Braking with iTTC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For this lab, you will make a Safety Node that should halt the car before it collides with obstacles. To do this, you will make a ROS 2 node that subscribes to the ``LaserScan`` and ``Odometry`` messages. It should analyze the ``LaserScan`` data and, if necessary, publish an ``AckermannDriveStamped`` with the ``speed`` field set to 0.0 m/s to brake.
