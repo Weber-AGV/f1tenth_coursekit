@@ -211,6 +211,7 @@ The exact thresholds vary by system, but the *decision logic* is the same.
    TTC does not try to model driver intent or future steering—it exists to answer *“Do we need to act now?”*
 
 ---
+
 5️⃣ Time to Collision Using Laser Scan Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
