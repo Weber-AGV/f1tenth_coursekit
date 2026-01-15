@@ -1,6 +1,6 @@
 .. _doc_tutorials_turtlesim:
 
-Tutorial 1 - Turtlesim
+Tutorial 1 - ROS 2 Intro and Turtlesim
 ==================================
 
 .. toctree::
