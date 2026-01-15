@@ -9,3 +9,4 @@ Tutorial 1 - ROS 2 Intro and Turtlesim
 
    turtlesim_install
    turtlesim_ws
+   turtlesim_pkg
