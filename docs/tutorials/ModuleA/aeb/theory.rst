@@ -210,28 +210,6 @@ The component of V that is directly along the line-of-sight is given by **V·cos
    :width: 40%
    :align: center
 
-|
-
-Instantaneous Time to Collision (iTTC)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For this lab, we approximate the time to collision using **Instantaneous Time to Collision (iTTC)**, which is the ratio of instantaneous range to range rate.
-
-.. image:: img/ittc_formula.PNG
-   :alt: iTTC Formula
-   :width: 40%
-   :align: center
-
-|
-
-Where:
-
-- **r**: The instantaneous range measurement from the LiDAR
-- **ṙ (r-dot)**: The range rate (rate of change of distance)
-- **{-ṙ}₊**: The operator that takes max(-ṙ, 0)
-
-The instantaneous range **r** is easily obtained from the ``LaserScan`` message, as the LiDAR directly measures the distance to obstacles.
-
 Calculating Range Rate
 ^^^^^^^^^^^^^^^^^^^^^^
 

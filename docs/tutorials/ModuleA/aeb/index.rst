@@ -10,3 +10,4 @@ Tutorial 2 - Automatic Emergency Braking
    theory
    scan
    aeb_package
+   scan_example
