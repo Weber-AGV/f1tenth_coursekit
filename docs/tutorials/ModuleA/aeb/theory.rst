@@ -133,9 +133,9 @@ Now, imagine the same scenario at 2 m/s:
 Key Takeaways
 ^^^^^^^^^^^^^
 
-- **Distance-based braking ignores speed** 🚗⚠️, which can cause late stops at high speeds or unnecessary stops at low speeds
-- **TTC accounts for speed & closing rate** ⏳, making braking decisions more adaptive
-- **TTC allows smoother driving** 🚀 because it avoids the jerky "brake-go-brake" behavior of fixed-distance thresholds
+- **Distance-based braking ignores speed** , which can cause late stops at high speeds or unnecessary stops at low speeds
+- **TTC accounts for speed & closing rate** , making braking decisions more adaptive
+- **TTC allows smoother driving**  because it avoids the jerky "brake-go-brake" behavior of fixed-distance thresholds
 
 .. note::
 
@@ -143,14 +143,26 @@ Key Takeaways
 
 
 4️⃣ Understanding Time to Collision (TTC)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Time to Collision (TTC)** is a measure used in traffic safety to estimate the time it will take for two objects (usually vehicles) to collide if they continue on their current paths at their current speeds.
+
+**Time to Collision (TTC)** answers a very practical question:
+
+> *If nothing changes, how long until we hit something?*
+
+In Automatic Emergency Braking (AEB), TTC is used to decide **when braking must begin** to avoid or reduce a collision.
+
+Rather than predicting the future perfectly, TTC assumes:
+- Constant speed  
+- Straight-line motion  
+
+That assumption is intentional—it allows the system to react **quickly and conservatively**.
+
+---
 
 Basic TTC Concept
 ^^^^^^^^^^^^^^^^^
 
-The fundamental TTC formula calculates how long until two objects collide based on their relative velocity:
+At its core, TTC is calculated as:
 
 .. image:: img/TTC_Calculation.jpg
    :alt: TTC Formula
@@ -159,19 +171,24 @@ The fundamental TTC formula calculates how long until two objects collide based 
 
 |
 
-- **Distance**: The current separation between the two objects
-- **Relative Velocity (Δv)**: The rate at which the distance is changing
+Where:
+- **Distance** is how far away the obstacle is *right now*
+- **Relative Velocity (Δv)** is how quickly that distance is shrinking
 
-If the two objects are moving directly towards each other, Δv is simply the sum of their velocities. If they are moving in the same direction, Δv is the difference in their velocities.
+In practice:
+- If the distance is getting smaller → TTC decreases
+- If TTC reaches a critical threshold → **brake**
 
-Example Calculation
-^^^^^^^^^^^^^^^^^^^
+---
 
-Consider two cars:
+Example: Why TTC Matters
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-- **Car A** is stationary
-- **Car B** is moving towards Car A at a speed of 20 m/s
-- The **distance** between them is 100 meters
+Consider this real-world scenario:
+
+- Your vehicle is moving at **20 m/s**
+- An obstacle is **100 meters ahead**
+- The obstacle is stationary
 
 .. image:: img/ttc_example.jpg
    :alt: TTC Example Calculation
@@ -180,90 +197,141 @@ Consider two cars:
 
 |
 
-This means that if Car B continues at its current speed without slowing down or changing its path, it will collide with Car A in **5 seconds**.
+This produces a TTC of **5 seconds**.
+
+From an AEB standpoint, this means:
+- At **5 s** → no action
+- At **2 s** → warning
+- At **1 s** → **automatic braking**
+
+The exact thresholds vary by system, but the *decision logic* is the same.
 
 .. note::
 
-   The above calculation assumes constant speeds and straight-line paths. In real-world scenarios where speeds and directions can change, the calculation becomes more complex.
+   TTC does not try to model driver intent or future steering—it exists to answer *“Do we need to act now?”*
 
+---
 
-5️⃣ Time to Collision Using Laser Scan Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When working with LiDAR, we don’t evaluate just one distance. Instead, we evaluate **many possible collision paths at once**, one for each scan beam.
 
-When using LiDAR data, we need to account for the angle of approach. Let's break it down:
+Each beam answers the question:
 
-Suppose you have two objects:
+> *If the vehicle continues moving forward, how soon would I collide with an object along this direction?*
 
-- **Object A**: Your vehicle (the RoboRacer)
-- **Object B**: Another vehicle or obstacle
+TTC is computed **per beam**, and the **most dangerous (smallest) TTC** drives the braking decision.
 
-Given:
+---
 
-- **V**: The velocity of Object A
-- **θ**: The angle between the direction of V and the line-of-sight between Object A and Object B
-- **R**: Current distance between Object A and Object B (from LiDAR measurement)
+What Data the Vehicle Uses
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The component of V that is directly along the line-of-sight is given by **V·cos(θ)**. This component is called the **"range-rate"**, and it represents how fast the distance between the two objects is changing.
+For each LiDAR scan beam, the system knows:
+
+- **R** – Distance to the obstacle (from ``LaserScan.ranges[]``)
+- **θ** – Angle of the beam relative to the vehicle’s forward direction
+- **vₓ** – Vehicle forward velocity (from ``Odometry``)
+
+The key problem to solve is:
+
+> *How fast is the distance along this beam shrinking?*
+
+---
+
+Range Rate: Closing Speed Along a Beam
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Only the **forward component** of the vehicle’s velocity reduces the distance to an obstacle.
+
+That component is called the **range rate**.
 
 .. image:: img/range-rate.png
    :alt: TTC Range Rate Formula
    :width: 40%
    :align: center
 
-Calculating Range Rate
+- Obstacles straight ahead → large closing speed
+- Obstacles off to the side → small or zero closing speed
+- Obstacles behind → ignored
+
+This naturally filters out objects that do not pose an immediate collision risk.
+
+---
+
+Calculating Range Rate (Recommended Method)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For AEB, range rate is best computed using velocity projection:
+
+**ṙ = − vₓ · cos(θᵢ)**
+
+Where:
+- **vₓ** is the vehicle’s forward speed
+- **θᵢ** is the LiDAR beam angle
+
+Why this works well:
+- Stable
+- Independent of LiDAR noise
+- Matches real automotive AEB behavior
+
+A **negative ṙ** means the vehicle is approaching the obstacle.
+
+---
+
+Computing TTC Per Beam
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The range rate **ṙ** represents how fast the distance is changing along each scan beam. A **positive** range rate means the distance is expanding (moving away), and a **negative** one means the distance is shrinking (approaching).
+Once range rate is known, TTC is computed as:
 
-There are two methods to calculate range rate:
+**TTC = R / (−ṙ)**
 
-1. **Using Velocity Projection** (Recommended)
+With two important rules:
 
-   Calculate by projecting the vehicle's longitudinal velocity onto each scan beam's angle:
+- If **−ṙ ≤ 0**, the vehicle is not approaching → **ignore**
+- If **R** is invalid (``inf`` or ``nan``) → **ignore**
 
-   **ṙ = vₓ · cos(θᵢ)**
+This ensures TTC is only calculated when a collision is physically possible.
 
-   Where:
+---
 
-   - **vₓ**: Vehicle's longitudinal velocity (from ``Odometry`` message)
-   - **θᵢ**: Angle of the scan beam (determined from ``LaserScan`` angle parameters)
+Why the Sign Matters
+^^^^^^^^^^^^^^^^^^^^
 
-   Be careful with the sign: for a vehicle moving forward toward an obstacle directly ahead, the range rate should be negative since the distance is decreasing.
+- Approaching obstacle → ṙ < 0 → TTC is positive
+- Moving away or parallel → ṙ ≥ 0 → TTC is ignored
 
-2. **Using Range Difference**
+This prevents false braking from:
+- Side walls
+- Objects behind the vehicle
+- Sensor noise
 
-   Take the difference between consecutive range measurements:
+---
 
-   **ṙ = (r_current - r_previous) / Δt**
-
-   Where **Δt** is the time elapsed between measurements (available from message timestamps).
-
-Understanding the Negation and Operator
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The negation in the TTC formula (**-ṙ**) correctly interprets whether the range is decreasing or increasing:
-
-- For a vehicle traveling **toward** an obstacle: range rate is **negative** (distance shrinking) → **-ṙ** becomes **positive**
-- For a vehicle traveling **away** from an obstacle: range rate is **positive** (distance expanding) → **-ṙ** becomes **negative**
-
-The operator **{x}₊ = max(x, 0)** ensures TTC calculations are meaningful:
-
-- When **-ṙ > 0** (approaching): TTC is calculated normally
-- When **-ṙ ≤ 0** (moving away or parallel): TTC goes to infinity (no collision)
-
-Implementing TTC for AEB
+Using TTC for AEB Decisions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After calculating TTC for all scan beams, you'll have an array of TTC values corresponding to each angle. When a time to collision drops below a certain threshold, it means a collision is imminent and the vehicle should brake.
+After TTC is computed for all beams:
+
+1. Discard invalid TTC values
+2. Find the **minimum TTC**
+3. Compare it to system thresholds:
+   - **Warning threshold**
+   - **Braking threshold**
+
+If the minimum TTC drops below the braking threshold, the vehicle **must brake immediately**.
+
+This method allows the system to respond to:
+- Narrow obstacles
+- Partial overlaps
+- Objects not centered in front of the vehicle
 
 .. note::
 
-   Don't forget to handle ``inf`` and ``nan`` values in your arrays, as these commonly appear when:
-
-   - No obstacle is detected (range exceeds max range)
-   - The vehicle is moving away from obstacles
+   Always guard against ``inf`` and ``nan`` values when working with LiDAR data. These commonly occur when:
+   - No object is detected within sensor range
    - Division by zero occurs
+   - The vehicle is moving away from obstacles
 
+---
 
 6️⃣ Automatic Emergency Braking with TTC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
