@@ -10,6 +10,5 @@ The first module goes over the some of the basics required to understand and con
    :maxdepth: 1
    :name: sec-modulea
 
-   intro
    turtlesim/index
    aeb/index

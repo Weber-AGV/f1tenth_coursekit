@@ -1,6 +1,6 @@
 .. _doc_tutorials_turtlesim:
 
-Tutorial - Turtlesim Installation
+Tutorial 1 - Turtlesim
 ==================================
 
 .. toctree::
@@ -8,3 +8,4 @@ Tutorial - Turtlesim Installation
    :name: sec-turtlesim
 
    turtlesim_install
+   turtlesim_ws
