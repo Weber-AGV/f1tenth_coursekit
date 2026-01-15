@@ -143,7 +143,7 @@ Key Takeaways
 
 
 4️⃣ Understanding Time to Collision (TTC)
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Time to Collision (TTC)** answers a very practical question:
 
@@ -211,6 +211,8 @@ The exact thresholds vary by system, but the *decision logic* is the same.
    TTC does not try to model driver intent or future steering—it exists to answer *“Do we need to act now?”*
 
 ---
+5️⃣ Time to Collision Using Laser Scan Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When working with LiDAR, we don’t evaluate just one distance. Instead, we evaluate **many possible collision paths at once**, one for each scan beam.
 
