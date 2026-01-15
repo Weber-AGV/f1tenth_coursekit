@@ -44,12 +44,12 @@ which is the ratio of instantaneous range to range rate.
 
 .. math::
 
-   iTTC = \frac{r}{\{-\dot{r}\}_{+}}
+   iTTC = \frac{r}{\lbrace-\dot{r}\rbrace_{+}}
 
 where :math:`r` is the instantaneous range measurement and :math:`\dot{r}` is the
 corresponding range rate.
 
-And the operator :math:`\{x\}_{+} = \max(x, 0)` represents taking the maximum of :math:`x` and 0.
+And the operator :math:`\lbrace x \rbrace_{+} = \max(x, 0)` represents taking the maximum of :math:`x` and 0.
 
 The instantaneous range :math:`r` to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
 
