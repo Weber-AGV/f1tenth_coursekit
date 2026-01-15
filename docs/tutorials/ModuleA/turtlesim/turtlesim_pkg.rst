@@ -1,14 +1,23 @@
 .. _doc_tutorials_turtlesim_pkg:
 
-Turtlesim Package Creation
-===========================
+Create Turtlesim Controller Package
+====================================
 
-This guide walks you through creating a custom ROS 2 package to control the turtlesim simulator.
+This guide walks you through creating a custom ROS 2 package containing a controller node for the turtlesim simulator.
 
 1️⃣ Overview
 ~~~~~~~~~~~
 
-In this tutorial, you will create a ROS 2 package called ``my_turtlesim_controller`` that publishes velocity commands to control the turtle's movement. This package will demonstrate the basic structure of a ROS 2 Python package and how nodes communicate via topics.
+In this tutorial, you will create a ROS 2 **package** called ``my_turtlesim_controller`` containing a **node** called ``node_turtle_controller.py`` that publishes velocity commands to control the turtle's movement.
+
+.. note::
+
+   **Key Terminology:**
+
+   - **Package** (``my_turtlesim_controller``): The organizational unit that contains all related files, dependencies, and nodes
+   - **Node** (``node_turtle_controller.py``): The executable Python script that performs the actual work (subscribing, publishing, processing data)
+
+This package will demonstrate the basic structure of a ROS 2 Python package and how nodes communicate via topics.
 
 2️⃣ Navigate to Your Workspace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,16 +132,23 @@ If you get the setup tools error, follow the instructions below:
 
    pip3 install setuptools==58.2.0
 
-7️⃣ Write the Python Code
-~~~~~~~~~~~~~~~~~~~~~~~~
+7️⃣ Write the Python Node Code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a Python script to control the turtle. In the terminal navigate to the package's python directory:
+Create a Python script for the turtle controller node. In the terminal navigate to the package's python directory:
 
 .. code-block:: bash
 
    cd ~/turtlesim_ws/src/my_turtlesim_controller/my_turtlesim_controller
 
 Create a file called ``node_turtle_controller.py``:
+
+.. note::
+
+   We prefix the filename with ``node_`` to clearly indicate this is a ROS 2 node (an executable component) rather than a package or library module. This naming convention helps distinguish between:
+
+   - **Package**: ``my_turtlesim_controller`` (the container/directory)
+   - **Node**: ``node_turtle_controller.py`` (the executable script that runs)
 
 .. code-block:: bash
 
@@ -248,8 +264,8 @@ Navigate back to the root of the workspace and build your package:
 
    If you added the source line to your ``.bashrc``, you can instead run ``source ~/.bashrc`` to load the workspace.
 
-1️⃣1️⃣ Test the my_turtlesim_controller Node
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+⏸️ Test the my_turtlesim_controller Node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
