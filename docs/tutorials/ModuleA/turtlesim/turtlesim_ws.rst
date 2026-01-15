@@ -15,34 +15,7 @@ Open a terminal and create the workspace directory structure:
    mkdir -p ~/turtlesim_ws/src
    cd ~/turtlesim_ws
 
-2️⃣ Add the turtlesim Package
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The ``turtlesim`` package is part of the ROS 2 distribution and can be cloned or installed directly.
-
-Install Using apt
-^^^^^^^^^^^^^^^^^
-
-For most ROS 2 distributions, you can install ``turtlesim``:
-
-.. code-block:: bash
-
-   sudo apt update
-   sudo apt install ros-humble-turtlesim
-
-This installs the turtlesim package system-wide on your machine.
-
-.. note::
-
-   No change to the structure of the ``turtlesim_ws`` workspace
-
-.. image:: img/turtlesim_installation.png
-   :alt: turtlesim_ws
-   :align: center
-
-|
-
-3️⃣ Build the Workspace
+2️⃣ Build the Workspace
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Navigate to the workspace root directory and build the packages:
@@ -87,7 +60,7 @@ Navigate to the workspace root directory and build the packages:
 
    By using ``colcon build``, you automate the process of compiling and installing your ROS 2 packages, ensuring that all dependencies are correctly resolved and that the workspace is ready for use.
 
-4️⃣ Source the Workspace
+3️⃣ Source the Workspace
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 After the build is complete, source the workspace to use the installed packages:
@@ -107,7 +80,7 @@ To make this permanent, add it to your ``.bashrc``:
    echo "source ~/turtlesim_ws/install/setup.bash" >> ~/.bashrc
    source ~/.bashrc
 
-5️⃣ Understanding ROS 2 Workspaces
+4️⃣ Understanding ROS 2 Workspaces
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 What is a Workspace?
@@ -115,7 +88,7 @@ What is a Workspace?
 
 A ROS 2 workspace is a directory structure used to organize and manage ROS 2 packages. It serves as the development environment where you store, build, and work with packages that are part of your ROS 2 project. A workspace includes several directories and components, each with a specific purpose.
 
-6️⃣ Understanding ROS 2 Packages
+5️⃣ Understanding ROS 2 Packages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 What Is a ROS 2 Package?
