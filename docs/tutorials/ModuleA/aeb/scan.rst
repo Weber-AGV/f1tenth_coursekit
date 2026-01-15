@@ -1,7 +1,7 @@
 .. _doc_tutorials_aeb_scan:
 
-Exploring ``/scan`` Data for Automatic Emergency Braking
-========================================================
+LaserScan Data
+==============
 
 Before writing any code, it is important to understand what scan data is available and how it is structured. The following ROS 2 commands allow you to discover the ``/scan`` topic, inspect its message type, and explore the data used for Automatic Emergency Braking (AEB).
 
@@ -163,4 +163,99 @@ If you are working with angles or transforming scan data, it is important to kno
    ros2 topic echo /scan --once | grep frame_id
 
 This confirms the frame in which the scan data is reported and how it relates to the rest of the robot.
+
+Hardware: Hokuyo UST-10LX LiDAR
+--------------------------------
+
+The ``/scan`` data you're working with comes from the **Hokuyo UST-10LX 2D LiDAR** sensor mounted on the RoboRacer vehicle. Understanding the hardware specifications helps you interpret the scan data and design effective safety systems.
+
+.. image:: img/10XL.PNG
+   :alt: Hokuyo UST-10LX LiDAR
+   :width: 50%
+   :align: center
+
+|
+
+.. note::
+
+   **Manufacturer Information**
+
+   Full specifications available at: `Hokuyo UST-10LX Product Page <https://hokuyo-usa.com/products/lidar-obstacle-detection/ust-10lx>`_
+
+Key Specifications
+~~~~~~~~~~~~~~~~~~
+
+**Measurement Range**
+
+- **Maximum Range**: 10 meters
+- **Minimum Range**: 0.06 meters (60 mm)
+- Values beyond these limits in ``ranges[]`` should be treated as invalid
+
+**Field of View**
+
+- **270° coverage** (approximately -135° to +135°)
+- This wide field of view allows detection of obstacles to the sides as well as front
+- Corresponds to the ``angle_min`` to ``angle_max`` values you see in the scan message
+
+**Angular Resolution**
+
+- **0.25° per measurement** (0.004363 radians)
+- This is the ``angle_increment`` value
+- Results in approximately **1081 distance measurements** per scan
+
+**Scan Rate**
+
+- **40 Hz** scanning frequency
+- Provides scan updates 40 times per second
+- Critical for real-time obstacle detection and emergency braking
+
+**Accuracy**
+
+- **±30 mm** under standard conditions
+- Important when calculating precise time-to-collision values
+- Range measurements are reliable within this tolerance
+
+.. image:: img/10XL_specs.png
+   :alt: Hokuyo UST-10LX Specifications
+   :width: 70%
+   :align: center
+
+|
+
+Physical Characteristics
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Compact and Lightweight**
+
+- **Dimensions**: 62 × 62 × 87 mm
+- **Weight**: 130 g
+- Minimal impact on vehicle dynamics
+
+**Environmental Protection**
+
+- **IP65-rated** enclosure
+- Dustproof and water-resistant
+- Suitable for indoor robotics environments
+
+**Power and Communication**
+
+- **12V DC** operation (~8W power consumption)
+- **Ethernet interface** for high-speed data transfer to ROS 2
+- Ensures low-latency scan data delivery
+
+Connecting Hardware to Software
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you subscribe to ``/scan``, you're receiving data that reflects these hardware characteristics:
+
+- The ``ranges[]`` array length (~1081 elements) comes from the 270° FoV divided by 0.25° resolution
+- The 40 Hz scan rate determines how quickly your AEB system can react
+- The 10-meter max range defines the maximum detection distance for obstacles
+- The ±30 mm accuracy affects the precision of your iTTC calculations
+
+Understanding these specifications helps you make informed decisions about:
+
+- **Threshold values** for collision detection
+- **Update rates** for your safety node
+- **Valid range filtering** to exclude sensor noise or invalid readings
 
