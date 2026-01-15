@@ -53,7 +53,7 @@ To start the turtlesim simulator, run:
 
 The simulator window should appear, with a random turtle in the center.
 
-.. image:: media/turtlesim.png
+.. image:: img/turtlesim.png
    :alt: TurtleSim Window
    :width: 70%
    :align: center
