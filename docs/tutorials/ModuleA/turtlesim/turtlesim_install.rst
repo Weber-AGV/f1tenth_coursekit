@@ -133,7 +133,7 @@ When running rqt for the first time, the window will be blank. No worries; just 
 
    It may take some time for rqt to locate all the plugins. If you click on Plugins but don't see Services or any other options, you should close rqt and enter the command ``rqt --force-discover`` in your terminal.
 
-.. image:: media/rqt.png
+.. image:: img/rqt.png
    :alt: rqt window
    :width: 70%
    :align: center
@@ -153,7 +153,7 @@ Give the new turtle a unique name, like ``turtle2``, by double-clicking between 
 
 Next enter some valid coordinates at which to spawn the new turtle, like ``x = 1.0`` and ``y = 1.0``.
 
-.. image:: media/spawn.png
+.. image:: img/spawn.png
    :alt: spawn window
    :width: 70%
    :align: center
@@ -177,7 +177,7 @@ Try the set_pen service
 
 Now let's give ``turtle1`` a unique pen using the ``/set_pen`` service:
 
-.. image:: media/set_pen.png
+.. image:: img/set_pen.png
    :alt: set pen window
    :width: 70%
    :align: center
@@ -190,7 +190,7 @@ To have ``turtle1`` draw with a distinct red line, change the value of **r** to 
 
 If you return to the terminal where ``turtle_teleop_key`` is running and press the arrow keys, you will see ``turtle1``'s pen has changed.
 
-.. image:: media/new_pen.png
+.. image:: img/new_pen.png
    :alt: new pen window
    :width: 70%
    :align: center
@@ -212,7 +212,7 @@ In a new terminal, source ROS 2, and run:
 
 Now, you can move ``turtle2`` when this terminal is active, and ``turtle1`` when the other terminal running ``turtle_teleop_key`` is active.
 
-.. image:: media/remap.png
+.. image:: img/remap.png
    :alt: remap window
    :width: 70%
    :align: center

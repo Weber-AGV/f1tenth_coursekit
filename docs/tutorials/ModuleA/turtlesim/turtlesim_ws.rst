@@ -1,43 +1,5 @@
 .. _doc_tutorials_intro:
 
-Tutorial 1 - ROS 2
-=============================
-
-**Slide:** `Open in Google Slides <https://docs.google.com/presentation/d/1nzzvHQuBJAqdjlPDUl0l2_rU-MAu8jctu1Gt66vlHHM/edit?slide=id.g10838dd9226_0_0>`_
-
-.. raw:: html
-
-   <div style="max-width:100%; text-align:center; margin:0 auto;">
-     <div style="position:relative; width:100%; padding-top:56.25%;">
-       <iframe src="https://docs.google.com/presentation/d/1nzzvHQuBJAqdjlPDUl0l2_rU-MAu8jctu1Gt66vlHHM/embed?start=false&loop=false&delayms=3000&slide=id.g10838dd9226_0_0" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-     </div>
-   </div>
-
-You can ignore the docker section in this video
-
-.. raw:: html
-
-   <div style="max-width:100%; text-align:center; margin-top:1em;">
-     <div style="position:relative; width:100%; padding-top:56.25%;">
-       <iframe 
-         src="https://www.youtube.com/embed/EU-QaO6xTv4?start=1300"
-         title="YouTube video player"
-         style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-         frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-         allowfullscreen>
-       </iframe>
-     </div>
-   </div>
-
-
-
-
-
-.. raw:: html
-
-   <h2 style="text-align: center; font-size: 2em; margin-top: 3em; margin-bottom: 1.5em;">Create <code>turtlesim_ws</code> Workspace ROS 2</h2>
-
 
 The following steps guide you to create a ROS 2 workspace named ``turtlesim_ws`` and include the ``turtlesim`` package for running a simple simulation.
 
