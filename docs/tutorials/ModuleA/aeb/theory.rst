@@ -44,12 +44,12 @@ which is the ratio of instantaneous range to range rate.
 
 .. math::
 
-   iTTC = \frac{r}{\max(-\dot{r}, 0)}
+   iTTC = \frac{r}{\{-\dot{r}\}_{+}}
 
 where :math:`r` is the instantaneous range measurement and :math:`\dot{r}` is the
 corresponding range rate.
 
-And the operator :math:`\{x\}_{+} = \max(x, 0)`.
+And the operator :math:`\{x\}_{+} = \max(x, 0)` represents taking the maximum of :math:`x` and 0.
 
 The instantaneous range :math:`r` to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
 
@@ -57,7 +57,7 @@ The range rate :math:`\dot{r}` is the expected rate of change along each scan be
 
 Thus, it can be calculated in two different ways:
 
-1. **Using Velocity Projection**: Calculate by mapping the vehicle's current longitudinal velocity onto each scan beam's angle by using :math:`v_x \cos\theta_{i}`. Be careful with assigning the range rate a positive or a negative value. The angles could also be determined by the information in ``LaserScan`` messages.
+1. **Using Velocity Projection**: Calculate by mapping the vehicle's current longitudinal velocity onto each scan beam's angle by using :math:`v_x \cos{\theta_{i}}`. Be careful with assigning the range rate a positive or a negative value. The angles could also be determined by the information in ``LaserScan`` messages.
 
 2. **Using Range Difference**: Take the difference between the previous range measurement and the current one, divide it by how much time has passed in between (timestamps are available in message headers), and calculate the range rate that way.
 
