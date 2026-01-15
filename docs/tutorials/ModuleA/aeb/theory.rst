@@ -7,20 +7,20 @@ AEB Theory of Operation
 ~~~~~~~~~~~~~~~~~
 
 - Using the ``LaserScan`` message in ROS 2
-- Instantaneous Time to Collision (iTTC)
+- Time to Collision (TTC)
 - Safety critical systems
 
 2️⃣ Overview
 ~~~~~~~~~~~
 
-The goal of this lab is to develop a safety node for the race cars that will stop the car from collision when travelling at higher velocities. We will implement Instantaneous Time to Collision (iTTC) using the ``LaserScan`` message in the simulator.
+The goal of this lab is to develop a safety node for the race cars that will stop the car from collision when travelling at higher velocities. We will implement Time to Collision (TTC) using the ``LaserScan`` message in the simulator.
 
 For different commonly used ROS 2 messages you can use ``ros2 interface show <msg_name>`` to see the definition of messages. Note for messages that are not installed by default by the distro, you'll have to first install it for this to work.
 
 The ``LaserScan`` Message
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `LaserScan <http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/LaserScan.html>`_ message contains several fields that will be useful to us. You can see detailed descriptions of what each field contains in the API. The one we'll be using the most is the ``ranges`` field. This is an array that contains all range measurements from the LiDAR radially ordered. You'll need to subscribe to the ``/scan`` topic and calculate iTTC with the LaserScan messages.
+The `LaserScan <http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/LaserScan.html>`_ message contains several fields that will be useful to us. You can see detailed descriptions of what each field contains in the API. The one we'll be using the most is the ``ranges`` field. This is an array that contains all range measurements from the LiDAR radially ordered. You'll need to subscribe to the ``/scan`` topic and calculate TTC with the LaserScan messages.
 
 The ``Odometry`` Message
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -79,7 +79,7 @@ The Time-to-Collision (TTC) is calculated as:
 
 .. image:: img/TTC_Calculation.jpg
    :alt: TTC Formula
-   :width: 40%
+   :width: 60%
    :align: center
 
 |
@@ -154,7 +154,7 @@ The fundamental TTC formula calculates how long until two objects collide based 
 
 .. image:: img/TTC_Calculation.jpg
    :alt: TTC Formula
-   :width: 40%
+   :width: 60%
    :align: center
 
 |
@@ -241,20 +241,20 @@ There are two methods to calculate range rate:
 Understanding the Negation and Operator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The negation in the iTTC formula (**-ṙ**) correctly interprets whether the range is decreasing or increasing:
+The negation in the TTC formula (**-ṙ**) correctly interprets whether the range is decreasing or increasing:
 
 - For a vehicle traveling **toward** an obstacle: range rate is **negative** (distance shrinking) → **-ṙ** becomes **positive**
 - For a vehicle traveling **away** from an obstacle: range rate is **positive** (distance expanding) → **-ṙ** becomes **negative**
 
-The operator **{x}₊ = max(x, 0)** ensures iTTC calculations are meaningful:
+The operator **{x}₊ = max(x, 0)** ensures TTC calculations are meaningful:
 
-- When **-ṙ > 0** (approaching): iTTC is calculated normally
-- When **-ṙ ≤ 0** (moving away or parallel): iTTC goes to infinity (no collision)
+- When **-ṙ > 0** (approaching): TTC is calculated normally
+- When **-ṙ ≤ 0** (moving away or parallel): TTC goes to infinity (no collision)
 
-Implementing iTTC for AEB
+Implementing TTC for AEB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After calculating iTTC for all scan beams, you'll have an array of iTTC values corresponding to each angle. When a time to collision drops below a certain threshold, it means a collision is imminent and the vehicle should brake.
+After calculating TTC for all scan beams, you'll have an array of TTC values corresponding to each angle. When a time to collision drops below a certain threshold, it means a collision is imminent and the vehicle should brake.
 
 .. note::
 
@@ -265,12 +265,12 @@ After calculating iTTC for all scan beams, you'll have an array of iTTC values c
    - Division by zero occurs
 
 
-6️⃣ Automatic Emergency Braking with iTTC
+6️⃣ Automatic Emergency Braking with TTC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For this lab, you will make a Safety Node that should halt the car before it collides with obstacles. To do this, you will make a ROS 2 node that subscribes to the ``LaserScan`` and ``Odometry`` messages. It should analyze the ``LaserScan`` data and, if necessary, publish an ``AckermannDriveStamped`` with the ``speed`` field set to 0.0 m/s to brake.
 
-After you've calculated the array of iTTCs, you should decide how to proceed with this information. You'll have to decide how to threshold, and how to best remove false positives (braking when collision isn't imminent). Don't forget to deal with ``inf``s or ``nan``s in your arrays.
+After you've calculated the array of TTCs, you should decide how to proceed with this information. You'll have to decide how to threshold, and how to best remove false positives (braking when collision isn't imminent). Don't forget to deal with ``inf``s or ``nan``s in your arrays.
 
 **Topic Names**:
 

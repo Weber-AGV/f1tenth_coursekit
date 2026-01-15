@@ -251,7 +251,7 @@ When you subscribe to ``/scan``, you're receiving data that reflects these hardw
 - The ``ranges[]`` array length (~1081 elements) comes from the 270° FoV divided by 0.25° resolution
 - The 40 Hz scan rate determines how quickly your AEB system can react
 - The 10-meter max range defines the maximum detection distance for obstacles
-- The ±30 mm accuracy affects the precision of your iTTC calculations
+- The ±30 mm accuracy affects the precision of your TTC calculations
 
 Understanding these specifications helps you make informed decisions about:
 
