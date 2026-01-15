@@ -33,37 +33,148 @@ The ``AckermannDriveStamped`` Message
 You've already used `AckermannDriveStamped <http://docs.ros.org/en/jade/api/ackermann_msgs/html/msg/AckermannDriveStamped.html>`_ in the previous lab. It will be the message type that we'll use throughout the course to send driving commands to the simulator and the car. In the simulator, you can stop the car by sending an ``AckermannDriveStamped`` message with the ``speed`` field set to 0.0.
 
 
-3️⃣ The TTC Calculation
+3️⃣ Understanding Time to Collision (TTC)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Time to Collision (TTC) is the time it would take for the car to collide with an obstacle
-if it maintained its current heading and velocity.
+**Time to Collision (TTC)** is a measure used in traffic safety to estimate the time it will take for two objects (usually vehicles) to collide if they continue on their current paths at their current speeds. It's a useful metric for driver assistance systems and autonomous vehicles to evaluate the safety of a given traffic scenario.
 
-We approximate the time to collision using **Instantaneous Time to Collision (iTTC)**,
-which is the ratio of instantaneous range to range rate.
+Basic TTC Concept
+^^^^^^^^^^^^^^^^^
 
-.. math::
+The fundamental TTC formula calculates how long until two objects collide based on their relative velocity:
 
-   iTTC = \frac{r}{\lbrace-\dot{r}\rbrace_{+}}
+.. image:: img/TTC_Calculation.jpg
+   :alt: TTC Formula
+   :width: 40%
+   :align: center
 
-where :math:`r` is the instantaneous range measurement and :math:`\dot{r}` is the
-corresponding range rate.
+|
 
-And the operator :math:`\lbrace x \rbrace_{+} = \max(x, 0)` represents taking the maximum of :math:`x` and 0.
+- **Distance**: The current separation between the two objects
+- **Relative Velocity (Δv)**: The rate at which the distance is changing
 
-The instantaneous range :math:`r` to an obstacle is easily obtained by using the current measurements from the ``LaserScan`` message. Since the LiDAR effectively measures the distance from the sensor to some obstacle.
+If the two objects are moving directly towards each other, Δv is simply the sum of their velocities. If they are moving in the same direction, Δv is the difference in their velocities.
 
-The range rate :math:`\dot{r}` is the expected rate of change along each scan beam. A positive range rate means the range measurement is expanding, and a negative one means the range measurement is shrinking.
+Example Calculation
+^^^^^^^^^^^^^^^^^^^
 
-Thus, it can be calculated in two different ways:
+Consider two cars:
 
-1. **Using Velocity Projection**: Calculate by mapping the vehicle's current longitudinal velocity onto each scan beam's angle by using :math:`v_x \cos{\theta_{i}}`. Be careful with assigning the range rate a positive or a negative value. The angles could also be determined by the information in ``LaserScan`` messages.
+- **Car A** is stationary
+- **Car B** is moving towards Car A at a speed of 20 m/s
+- The **distance** between them is 100 meters
 
-2. **Using Range Difference**: Take the difference between the previous range measurement and the current one, divide it by how much time has passed in between (timestamps are available in message headers), and calculate the range rate that way.
+.. image:: img/ttc_example.jpg
+   :alt: TTC Example Calculation
+   :width: 50%
+   :align: center
 
-Note the negation in the calculation — this is to correctly interpret whether the range measurement should be decreasing or increasing. For a vehicle travelling forward towards an obstacle, the corresponding range rate for the beam right in front of the vehicle should be negative since the range measurement should be shrinking. Vice versa, the range rate corresponding to the vehicle travelling away from an obstacle should be positive since the range measurement should be increasing. The operator is in place so the iTTC calculation will be meaningful. When the range rate is positive, the operator will make sure iTTC for that angle goes to infinity.
+|
 
-After your calculations, you should end up with an array of iTTCs that correspond to each angle. When a time to collision drops below a certain threshold, it means a collision is imminent.
+This means that if Car B continues at its current speed without slowing down or changing its path, it will collide with Car A in **5 seconds**.
+
+.. note::
+
+   The above calculation assumes constant speeds and straight-line paths. In real-world scenarios where speeds and directions can change, the calculation becomes more complex. Advanced driver assistance systems and autonomous vehicles use sophisticated algorithms and sensors to estimate TTC in dynamic environments.
+
+Time to Collision Using Laser Scan Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When using LiDAR data, we need to account for the angle of approach. Let's break it down:
+
+Suppose you have two objects:
+
+- **Object A**: Your vehicle (the RoboRacer)
+- **Object B**: Another vehicle or obstacle
+
+Given:
+
+- **V**: The velocity of Object A
+- **θ**: The angle between the direction of V and the line-of-sight between Object A and Object B
+- **R**: Current distance between Object A and Object B (from LiDAR measurement)
+
+The component of V that is directly along the line-of-sight is given by **V·cos(θ)**. This component is called the **"range-rate"**, and it represents how fast the distance between the two objects is changing.
+
+.. image:: img/range-rate.png
+   :alt: TTC Range Rate Formula
+   :width: 40%
+   :align: center
+
+|
+
+Instantaneous Time to Collision (iTTC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this lab, we approximate the time to collision using **Instantaneous Time to Collision (iTTC)**, which is the ratio of instantaneous range to range rate.
+
+.. image:: img/ittc_formula.PNG
+   :alt: iTTC Formula
+   :width: 40%
+   :align: center
+
+|
+
+Where:
+
+- **r**: The instantaneous range measurement from the LiDAR
+- **ṙ (r-dot)**: The range rate (rate of change of distance)
+- **{-ṙ}₊**: The operator that takes max(-ṙ, 0)
+
+The instantaneous range **r** is easily obtained from the ``LaserScan`` message, as the LiDAR directly measures the distance to obstacles.
+
+Calculating Range Rate
+^^^^^^^^^^^^^^^^^^^^^^
+
+The range rate **ṙ** represents how fast the distance is changing along each scan beam. A **positive** range rate means the distance is expanding (moving away), and a **negative** one means the distance is shrinking (approaching).
+
+There are two methods to calculate range rate:
+
+1. **Using Velocity Projection** (Recommended)
+
+   Calculate by projecting the vehicle's longitudinal velocity onto each scan beam's angle:
+
+   **ṙ = vₓ · cos(θᵢ)**
+
+   Where:
+
+   - **vₓ**: Vehicle's longitudinal velocity (from ``Odometry`` message)
+   - **θᵢ**: Angle of the scan beam (determined from ``LaserScan`` angle parameters)
+
+   Be careful with the sign: for a vehicle moving forward toward an obstacle directly ahead, the range rate should be negative since the distance is decreasing.
+
+2. **Using Range Difference**
+
+   Take the difference between consecutive range measurements:
+
+   **ṙ = (r_current - r_previous) / Δt**
+
+   Where **Δt** is the time elapsed between measurements (available from message timestamps).
+
+Understanding the Negation and Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The negation in the iTTC formula (**-ṙ**) correctly interprets whether the range is decreasing or increasing:
+
+- For a vehicle traveling **toward** an obstacle: range rate is **negative** (distance shrinking) → **-ṙ** becomes **positive**
+- For a vehicle traveling **away** from an obstacle: range rate is **positive** (distance expanding) → **-ṙ** becomes **negative**
+
+The operator **{x}₊ = max(x, 0)** ensures iTTC calculations are meaningful:
+
+- When **-ṙ > 0** (approaching): iTTC is calculated normally
+- When **-ṘR ≤ 0** (moving away or parallel): iTTC goes to infinity (no collision)
+
+Implementing iTTC for AEB
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After calculating iTTC for all scan beams, you'll have an array of iTTC values corresponding to each angle. When a time to collision drops below a certain threshold, it means a collision is imminent and the vehicle should brake.
+
+.. note::
+
+   Don't forget to handle ``inf`` and ``nan`` values in your arrays, as these commonly appear when:
+
+   - No obstacle is detected (range exceeds max range)
+   - The vehicle is moving away from obstacles
+   - Division by zero occurs
 
 
 4️⃣ Automatic Emergency Braking with iTTC

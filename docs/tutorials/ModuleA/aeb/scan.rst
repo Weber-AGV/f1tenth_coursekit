@@ -215,7 +215,7 @@ Key Specifications
 - Important when calculating precise time-to-collision values
 - Range measurements are reliable within this tolerance
 
-.. image:: img/10XL_specs.png
+.. image:: img/10XL_specs.PNG
    :alt: Hokuyo UST-10LX Specifications
    :width: 70%
    :align: center
