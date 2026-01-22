@@ -27,7 +27,7 @@ Lab 2 - Automatic Emergency Braking
 
 .. 	<iframe width="700" height="800" src="https://drive.google.com/file/d/1cGN8fXoMFhFFCXBd3cdlYv-UABaRmxog/preview?usp=drive_link" width="640" height="480"></iframe>
 
-| **Repository:** `Github Repository <https://github.com/f1tenth/f1tenth_lab2_template/tree/b49965fb833221c6ba0f83666838c6f9f9971438>`_ 
+| **Repository:** `Github Repository <https://github.com/scotthadzik/f1tenth_lab2_template>`_ 
 
 
 .. raw:: html
