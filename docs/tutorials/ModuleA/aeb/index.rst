@@ -11,3 +11,4 @@ Tutorial 2 - Automatic Emergency Braking
    scan
    aeb_package
    scan_example
+   drive
