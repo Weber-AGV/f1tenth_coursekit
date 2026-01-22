@@ -27,9 +27,9 @@ Lab 2 - Automatic Emergency Braking
 
 .. 	<iframe width="700" height="800" src="https://drive.google.com/file/d/1cGN8fXoMFhFFCXBd3cdlYv-UABaRmxog/preview?usp=drive_link" width="640" height="480"></iframe>
 
-| **Repository:** `Github Repository <https://github.com/scotthadzik/f1tenth_lab2_template>`_ 
+| **Repository:** `Github Repository <https://github.com/Weber-AGV/f1tenth_lab2_template>`_ 
 
 
 .. raw:: html
-	
-	<iframe frameborder="10" scrolling="yes" style="width:100%; height:3019px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Ff1tenth%2Ff1tenth_lab2_template%2Fblob%2Fb49965fb833221c6ba0f83666838c6f9f9971438%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
+
+	<iframe frameborder="10" scrolling="yes" style="width:100%; height:3019px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2FWeber-AGV%2Ff1tenth_lab2_template%2Fblob%2Fb49965fb833221c6ba0f83666838c6f9f9971438%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
