@@ -12,3 +12,5 @@ Tutorial 2 - Automatic Emergency Braking
    aeb_package
    scan_example
    drive
+   qos
+   PID

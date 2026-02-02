@@ -1,0 +1,330 @@
+.. _doc_tutorials_wall_follow_package:
+
+Create Wall Following Package
+==============================
+
+To set up your wall following package within the driver stack container follow these steps:
+
+1️⃣ Create the Wall Follow Package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Inside the driver stack container, navigate to your ROS 2 workspace ``~/f1tenth_ws/src`` and create a new package:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws/src
+   ros2 pkg create wall_follow_package --build-type ament_python --dependencies rclpy sensor_msgs std_msgs
+
+.. note::
+
+   **Dependencies**
+
+   - ``rclpy`` (ROS Client Library for Python)
+   - ``sensor_msgs`` (Standard Messages for Sensors)
+
+2️⃣ Modify package.xml
+~~~~~~~~~~~~~~~~~~~~~~
+
+Ensure ``package.xml`` includes dependencies like ``rclpy``, ``sensor_msgs``, and ``std_msgs``. Open ``package.xml`` and add:
+
+.. code-block:: xml
+
+   <depend>rclpy</depend>
+   <depend>sensor_msgs</depend>
+   <depend>std_msgs</depend>
+
+If you're using C++ instead of Python, also ensure you have:
+
+.. code-block:: xml
+
+   <depend>rclcpp</depend>
+   <depend>tf2_ros</depend>
+   <depend>geometry_msgs</depend>
+
+3️⃣ Modify CMakeLists.txt (If Using C++)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you're using C++, modify ``CMakeLists.txt`` to include:
+
+.. code-block:: cmake
+
+   find_package(rclcpp REQUIRED)
+   find_package(sensor_msgs REQUIRED)
+   find_package(std_msgs REQUIRED)
+
+Ensure the ``add_executable`` or ``ament_target_dependencies`` includes the necessary dependencies.
+
+4️⃣ Install Dependencies Using rosdep
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run the following to install missing dependencies:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   rosdep install --from-paths src --ignore-src -r -y
+
+5️⃣ Implement the Wall Follow Node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You'll create a wall follow node that listens to LiDAR data (``/scan``) and publishes steering commands to stay near a wall.
+
+**Example: Python Wall Follow Node (wall_follow_node.py)**
+
+Create a file inside ``wall_follow_package/wall_follow_node.py``:
+
+.. code-block:: python
+
+   import rclpy
+   from rclpy.node import Node
+
+   import numpy as np
+   from sensor_msgs.msg import LaserScan
+   from ackermann_msgs.msg import AckermannDriveStamped
+
+   class WallFollow(Node):
+       """
+       Implement Wall Following on the car
+       """
+       def __init__(self):
+           super().__init__('wall_follow_node')
+
+           lidarscan_topic = '/scan'
+           drive_topic = '/drive'
+
+           # TODO: create subscribers and publishers
+
+           # TODO: set PID gains
+           # self.kp =
+           # self.kd =
+           # self.ki =
+
+           # TODO: store history
+           # self.integral =
+           # self.prev_error =
+           # self.error =
+
+           # TODO: store any necessary values you think you'll need
+
+       def get_range(self, range_data, angle):
+           """
+           Simple helper to return the corresponding range measurement at a given angle.
+           Make sure you take care of NaNs and infs.
+
+           Args:
+               range_data: single range array from the LiDAR
+               angle: between angle_min and angle_max of the LiDAR
+
+           Returns:
+               range: range measurement in meters at the given angle
+
+           """
+
+           #TODO: implement
+           return 0.0
+
+       def get_error(self, range_data, dist):
+           """
+           Calculates the error to the wall. Follow the wall to the left. You potentially will need to use get_range()
+
+           Args:
+               range_data: single range array from the LiDAR
+               dist: desired distance to the wall
+
+           Returns:
+               error: calculated error
+           """
+
+           #TODO:implement
+           return 0.0
+
+       def pid_control(self, error, velocity):
+           """
+           Based on the calculated error, publish vehicle control
+
+           Args:
+               error: calculated error
+               velocity: desired velocity
+
+           Returns:
+               None
+           """
+           angle = 0.0
+           # TODO: Use kp, ki & kd to implement a PID controller
+           drive_msg = AckermannDriveStamped()
+           # TODO: fill in drive message and publish
+
+       def scan_callback(self, msg):
+           """
+           Callback function for LaserScan messages. Calculate the error and publish
+           the drive message in this function.
+
+           Args:
+               msg: Incoming LaserScan message
+
+           Returns:
+               None
+           """
+           error = 0.0 # TODO: replace with error calculated by get_error()
+           velocity = 0.0 # TODO: calculate desired car velocity based on error
+           self.pid_control(error, velocity) # TODO: actuate the car with PID
+
+
+   def main(args=None):
+       rclpy.init(args=args)
+       print("WallFollow Initialized")
+       wall_follow_node = WallFollow()
+       rclpy.spin(wall_follow_node)
+
+       # Destroy the node explicitly
+       # (optional - otherwise it will be done automatically
+       # when the garbage collector destroys the node object)
+       wall_follow_node.destroy_node()
+       rclpy.shutdown()
+
+
+   if __name__ == '__main__':
+       main()
+
+6️⃣ Make It Executable
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modify ``setup.py`` inside ``wall_follow_package``:
+
+.. code-block:: python
+
+   entry_points={
+       'console_scripts': [
+           'wall_follow_node = wall_follow_package.wall_follow_node:main',
+       ],
+   },
+
+7️⃣ C++ Alternative (Optional)
+~~~~~~~~~~~~~~~
+
+Run the following:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select wall_follow_package
+   source install/setup.bash
+   ros2 run wall_follow_package wall_follow_node
+
+Alternative: C++ Wall Follow Node Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Students who prefer C++ can use this starter code instead. Create a file ``wall_follow_node.cpp``:
+
+.. code-block:: cpp
+
+   #include "rclcpp/rclcpp.hpp"
+   #include <string>
+   #include "sensor_msgs/msg/laser_scan.hpp"
+   #include "nav_msgs/msg/odometry.hpp"
+   #include "ackermann_msgs/msg/ackermann_drive_stamped.hpp"
+
+   class WallFollow : public rclcpp::Node {
+
+   public:
+       WallFollow() : Node("wall_follow_node")
+       {
+           // TODO: create ROS subscribers and publishers
+       }
+
+   private:
+       // PID CONTROL PARAMS
+       // TODO: double kp =
+       // TODO: double kd =
+       // TODO: double ki =
+       double servo_offset = 0.0;
+       double prev_error = 0.0;
+       double error = 0.0;
+       double integral = 0.0;
+
+       // Topics
+       std::string lidarscan_topic = "/scan";
+       std::string drive_topic = "/drive";
+       /// TODO: create ROS subscribers and publishers
+
+       double get_range(float* range_data, double angle)
+       {
+           /*
+           Simple helper to return the corresponding range measurement at a given angle.
+           Make sure you take care of NaNs and infs.
+
+           Args:
+               range_data: single range array from the LiDAR
+               angle: between angle_min and angle_max of the LiDAR
+
+           Returns:
+               range: range measurement in meters at the given angle
+           */
+
+           // TODO: implement
+           return 0.0;
+       }
+
+       double get_error(float* range_data, double dist)
+       {
+           /*
+           Calculates the error to the wall. Follow the wall to the left You potentially will need to use get_range()
+
+           Args:
+               range_data: single range array from the LiDAR
+               dist: desired distance to the wall
+
+           Returns:
+               error: calculated error
+           */
+
+           // TODO:implement
+           return 0.0;
+       }
+
+       void pid_control(double error, double velocity)
+       {
+           /*
+           Based on the calculated error, publish vehicle control
+
+           Args:
+               error: calculated error
+               velocity: desired velocity
+
+           Returns:
+               None
+           */
+           double angle = 0.0;
+           // TODO: Use kp, ki & kd to implement a PID controller
+           auto drive_msg = ackermann_msgs::msg::AckermannDriveStamped();
+           // TODO: fill in drive message and publish
+       }
+
+       void scan_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg)
+       {
+           /*
+           Callback function for LaserScan messages. Calculate the error and publish
+           the drive message in this function.
+
+           Args:
+               msg: Incoming LaserScan message
+
+           Returns:
+               None
+           */
+           double error = 0.0; // TODO: replace with error calculated by get_error()
+           double velocity = 0.0; // TODO: calculate desired car velocity based on error
+           // TODO: actuate the car with PID
+
+       }
+
+   };
+
+   int main(int argc, char ** argv) {
+       rclcpp::init(argc, argv);
+       rclcpp::spin(std::make_shared<WallFollow>());
+       rclcpp::shutdown();
+       return 0;
+   }
+
+
