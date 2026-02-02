@@ -11,3 +11,4 @@ This module covers autonomous navigation techniques including wall following, ga
    :name: sec-moduleb
 
    wall_following/index
+   gap_following/index
