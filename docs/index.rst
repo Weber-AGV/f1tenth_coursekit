@@ -72,15 +72,29 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorials
-   :name: sec-course-tutorials
+   :caption: Module A - Introduction
+   :name: sec-module-a-tutorials
    :hidden:
 
    tutorials/ModuleA/turtlesim/index
    tutorials/ModuleA/aeb/index
+   tutorials/ModuleA/ROS2
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Module B - Autonomous Navigation
+   :name: sec-module-b-tutorials
+   :hidden:
+
    tutorials/ModuleB/wall_following/index
    tutorials/ModuleB/gap_following/index
-   tutorials/ModuleA/ROS2
+
+.. toctree::
+   :maxdepth: 2
+   :caption: All Tutorials
+   :name: sec-course-tutorials
+   :hidden:
+
    tutorials/index
 
 
