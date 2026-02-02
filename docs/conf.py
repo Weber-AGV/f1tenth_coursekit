@@ -13,7 +13,6 @@ needs_sphinx = '1.3'
 sys.path.append(os.path.abspath('extensions'))
 extensions = [
     'sphinx.ext.mathjax',
-    'sphinx.ext.imgmath',
     'sphinx.ext.todo',
     'sphinx_copybutton'
 ]

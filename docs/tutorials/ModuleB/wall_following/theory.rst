@@ -18,7 +18,7 @@ The general equation for a PID controller in the time domain, as discussed in le
 
 .. math::
 
-   u(t) = K_{p}e(t) + K_{i}\int_{0}^{t}e(t')dt' + K_{d}\frac{d}{dt}(e(t))
+   u(t) = K_{p}e(t) + K_{i}\int_{0}^{t}e(t')\,dt' + K_{d}\frac{d}{dt}e(t)
 
 Here, :math:`K_p`, :math:`K_i`, and :math:`K_d` are constants that determine how much weight each of the three components (proportional, integral, derivative) contribute to the control output :math:`u(t)`. :math:`u(t)` in our case is the steering angle we want the car to drive at. The error term :math:`e(t)` is the difference between the set point and the parameter we want to maintain around that set point.
 
@@ -40,7 +40,7 @@ Using the two distances a and b from the laser scan, the angle **Θ** between th
 
 .. math::
 
-   \alpha = \tan^{-1}\left(\frac{a\cos(\theta) - b}{a\sin(\theta)}\right)
+   \alpha = \arctan\left(\frac{a\cos(\theta) - b}{a\sin(\theta)}\right)
 
 We can then express :math:`D_t` as
 
