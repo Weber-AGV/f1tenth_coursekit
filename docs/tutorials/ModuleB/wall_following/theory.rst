@@ -14,6 +14,10 @@ II. Review of PID in the Time Domain
 
 A PID controller is a way to maintain certain parameters of a system around a specified set point. PID controllers are used in a variety of applications requiring closed-loop control, such as in the VESC speed controller on your car.
 
+.. seealso::
+
+   For a detailed explanation of PID steering control implementation, see :ref:`doc_tutorials_wall_follow_pid_steering`.
+
 The general equation for a PID controller in the time domain, as discussed in lecture, is as follows:
 
 .. math::

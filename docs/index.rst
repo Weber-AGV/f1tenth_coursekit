@@ -82,7 +82,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
 .. toctree::
    :maxdepth: 2
-   :caption: Module B - Autonomous Navigation
+   :caption: Module B - Reactive Methods
    :name: sec-module-b-tutorials
    :hidden:
 

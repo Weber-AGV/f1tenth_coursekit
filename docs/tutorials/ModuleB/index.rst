@@ -1,9 +1,9 @@
 .. _doc_moduleB:
 
 
-Module B: Autonomous Navigation
-================================
-This module covers autonomous navigation techniques including wall following, gap following, and advanced control strategies for the RoboRacer vehicle.
+Module B: Reactive Methods
+===========================
+This module covers reactive navigation methods including wall following and gap following algorithms that respond to sensor data in real-time for the RoboRacer vehicle.
 
 
 .. toctree::

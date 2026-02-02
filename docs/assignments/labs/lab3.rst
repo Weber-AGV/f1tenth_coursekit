@@ -19,8 +19,8 @@ Lab 3 - Wall Following
 
 **Allotted Time:** 1 Week
 
-| **Repository:** `Github Repository <https://github.com/f1tenth/f1tenth_lab3_template/tree/62a7a3d687d00ba1dd25cf7025c13a623bafdb5b>`_ 
+| **Repository:** `Github Repository <https://github.com/Weber-AGV/f1tenth_lab3_template>`_ 
 
 .. raw:: html
 	
-	<iframe frameborder="10" scrolling="no" style="width:100%; height:3439px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Ff1tenth%2Ff1tenth_lab3_template%2Fblob%2F62a7a3d687d00ba1dd25cf7025c13a623bafdb5b%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
+	<iframe frameborder="0" scrolling="no" style="width:100%; height:3458px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2FWeber-AGV%2Ff1tenth_lab3_template%2Fblob%2Fmain%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>

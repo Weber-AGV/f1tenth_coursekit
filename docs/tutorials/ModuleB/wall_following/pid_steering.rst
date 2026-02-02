@@ -1,7 +1,7 @@
 .. _doc_tutorials_wall_follow_pid_steering:
 
-Steering Adjustment Using PID Control for Wall Following
-=========================================================
+Steering Adjustment Using PID
+==============================
 
 Overview
 --------
