@@ -96,7 +96,7 @@ Once we have the best point index, we convert it to a steering angle:
 
 .. important::
 
-   **Hokusy Scan Is Flipped!**
+   **Hokuyo Scan Is Flipped!**
 
    The Hokuyo UST-10LX LiDAR scan is **reversed** (index 0 is on the **right** side of the vehicle).
 
