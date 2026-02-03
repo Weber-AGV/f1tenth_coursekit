@@ -18,9 +18,8 @@ Lab 4 - Follow the Gap
 
 **Allotted Time:** 1 week
 
-| **Repository:** `Github Repository <https://github.com/f1tenth/f1tenth_lab4_template/tree/22a1c490759f05d822efae10d353415fbb187b24>`_ 
+| **Repository:** `Github Repository <https://github.com/Weber-AGV/f1tenth_lab4_template>`_ 
 
 .. raw:: html
 
-	<iframe frameborder="10" scrolling="yes" style="width:100%; height:1520px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2Ff1tenth%2Ff1tenth_lab4_template%2Fblob%2F22a1c490759f05d822efae10d353415fbb187b24%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
-
+	<iframe frameborder="0" scrolling="no" style="width:100%; height:1359px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2FWeber-AGV%2Ff1tenth_lab4_template%2Fblob%2Fmain%2FREADME.md&style=default&type=markdown&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
