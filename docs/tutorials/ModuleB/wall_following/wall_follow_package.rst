@@ -216,5 +216,8 @@ Alternative: C++ Wall Follow Node Implementation
 
 Students who prefer C++ can use this starter code instead. Create a file ``wall_follow_node.cpp``:
 
-<iframe frameborder="0" scrolling="no" style="width:100%; height:2283px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2FWeber-AGV%2Ff1tenth_lab3_template%2Fblob%2Fmain%2Fwall_follow%2Fsrc%2Fwall_follow_node.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
+.. raw:: html
+
+   <iframe frameborder="0" scrolling="yes" style="width:100%; height:2283px;" allow="clipboard-write" src="https://emgithub.com/iframe.html?target=https%3A%2F%2Fgithub.com%2FWeber-AGV%2Ff1tenth_lab3_template%2Fblob%2Fmain%2Fwall_follow%2Fsrc%2Fwall_follow_node.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></iframe>
+
 
