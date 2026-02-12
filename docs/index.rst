@@ -93,6 +93,14 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
 .. toctree::
    :maxdepth: 2
+   :caption: Module C - Mapping & Localization
+   :name: sec-module-c-tutorials
+   :hidden:
+
+   tutorials/ModuleC/slam/index
+
+.. toctree::
+   :maxdepth: 2
    :caption: All Tutorials
    :name: sec-course-tutorials
    :hidden:
