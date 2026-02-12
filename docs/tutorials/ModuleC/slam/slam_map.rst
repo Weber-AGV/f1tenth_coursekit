@@ -53,11 +53,13 @@ Open a new terminal on the RoboRacer:
 3️⃣ Run the Map Saver Command  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the Nav2 map saver CLI:
+Use the ROS package called Map Server to save the map:
+
+Save the map
 
 .. code-block:: bash
 
-   ros2 run nav2_map_server map_saver_cli -f my_map
+   ros2 run map_server map_saver -f my_map
 
 This will generate two files:
 
@@ -69,7 +71,7 @@ This will generate two files:
 These files will be saved in your current directory.
 
 
-4️⃣ Move Map to the Maps Folder (Recommended)  
+4️⃣ Move Map to the Maps Folder (Recommended)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is good practice to store maps in your stack's maps folder.
@@ -79,6 +81,24 @@ Example:
 .. code-block:: bash
 
    mv my_map.* ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+
+
+5️⃣ Load the Map
+^^^^^^^^^^^^^^^^^
+
+To load a saved map with the Map Server, run:
+
+.. code-block:: bash
+
+   ros2 run map_server map_server --ros-args -p yaml_filename:=my_map.yaml
+
+.. note::
+
+   Replace ``my_map.yaml`` with the full path to your map file if it is not in the current directory. For example:
+
+   .. code-block:: bash
+
+      ros2 run map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.yaml
 
 
 Verify Files

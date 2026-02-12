@@ -1,6 +1,6 @@
 .. _doc_tutorials_slamtoolbox:
 
-SLAM Toolbox (Online Async)
+SLAM Toolbox
 ===========================
 
 This page shows how to run SLAM Toolbox on the RoboRacer and visualize the map in RViz2.
