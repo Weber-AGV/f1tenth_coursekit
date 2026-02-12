@@ -1,10 +1,1 @@
-/* Center the entire site on wide screens */
-.wy-nav-content-wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Keep content area readable width */
-.wy-nav-content {
-    max-width: 960px;
-}
+/* Custom CSS for RoboRacer documentation */
