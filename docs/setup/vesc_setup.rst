@@ -33,7 +33,9 @@ Fortunately, Linux has a utility named **udev** that allows us to assign each de
 Setting Up the VESC udev Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As root, open ``/etc/udev/rules.d/99-vesc.rules`` in a text editor and copy in the following rule:
+.. code-block:: bash
+
+   sudo nano /etc/udev/rules.d/99-vesc.rules
 
 .. code-block:: text
 
