@@ -1,28 +1,116 @@
 .. _doc_setup_slam:
 
-
 SETUP - SLAM
 ==================================
 
 Install SLAM Toolbox
 --------------------
 
-- 1️⃣ **Install the SLAM Toolbox package**
+1️⃣ **Install the SLAM Toolbox package**
 
-  .. code-block:: console
+.. code-block:: console
 
-     sudo apt install ros-humble-slam-toolbox
-
-- 2️⃣ **Add an alias to your `~/.bashrc` to launch SLAM Toolbox**
-
-  .. note::
-
-     Modify the path below for the specific robot that your are using. This is for f1-wsu-4
-
-  .. code-block:: console
-
-     alias slam='ros2 launch slam_toolbox online_async_launch.py slam_params_file:=/home/f1-wsu-4/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml'
-
-  > **Tip:** After editing `~/.bashrc`, run `source ~/.bashrc` or open a new terminal to use the alias. Adjust the path if your workspace or username differs.
+   sudo apt update
+   sudo apt install ros-humble-slam-toolbox
 
 
+2️⃣ **Add an alias to your `~/.bashrc` to launch SLAM Toolbox**
+
+.. note::
+
+   Modify the path below for the specific robot you are using.
+   This example is for ``f1-wsu-4``.
+
+.. code-block:: console
+
+   alias slam='ros2 launch slam_toolbox online_async_launch.py \
+   slam_params_file:=/home/f1-wsu-4/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml'
+
+After editing ``~/.bashrc``:
+
+.. code-block:: console
+
+   source ~/.bashrc
+
+Open a new terminal to verify the alias works.
+
+
+Install Particle Filter (Localization)
+---------------------------------------
+
+1️⃣ **Clone the particle_filter package**
+
+.. code-block:: console
+
+   cd /home/nvidia/f1tenth_ws/src
+   git clone https://github.com/f1tenth/particle_filter.git
+
+
+2️⃣ **Install workspace dependencies**
+
+.. code-block:: console
+
+   cd ~/f1tenth_ws
+   rosdep install -r --from-paths src --ignore-src --rosdistro humble -y
+
+
+3️⃣ **Rebuild the workspace**
+
+.. code-block:: console
+
+   cd ~/f1tenth_ws
+   colcon build
+   source install/setup.bash
+
+
+Install range_libc
+------------------
+
+1️⃣ **Clone the repository**
+
+.. code-block:: console
+
+   cd
+   git clone https://github.com/f1tenth/range_libc.git
+
+
+2️⃣ **Install Cython (required)**
+
+.. code-block:: console
+
+   sudo apt install python3-cython
+   # or
+   pip3 install cython
+
+
+3️⃣ **Install range_libc with CUDA support**
+
+.. code-block:: console
+
+   cd range_libc/pywrapper
+   sudo WITH_CUDA=ON python3 setup.py install
+
+
+Launch Localization
+-------------------
+
+1️⃣ **Launch teleop (in one terminal)**
+
+.. code-block:: console
+
+   bringup
+
+2️⃣ **Launch particle filter (in another terminal)**
+
+.. code-block:: console
+
+   source ~/f1tenth_ws/install/setup.bash
+   ros2 launch particle_filter localize_launch.py
+
+
+Common Notes
+------------
+
+- Make sure you are using the correct ROS distribution (Humble).
+- Always source your workspace after building.
+- If CUDA errors occur, confirm your Jetson has CUDA installed and accessible.
