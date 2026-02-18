@@ -23,8 +23,7 @@ Install SLAM Toolbox
 
 .. code-block:: console
 
-   alias slam='ros2 launch slam_toolbox online_async_launch.py \
-   slam_params_file:=/home/f1-wsu-4/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml'
+   alias slam='ros2 launch slam_toolbox online_async_launch.py slam_params_file:=/home/f1-wsu-4/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml'
 
 After editing ``~/.bashrc``:
 
@@ -34,6 +33,24 @@ After editing ``~/.bashrc``:
 
 Open a new terminal to verify the alias works.
 
+Install pip (Required for rosdep)
+----------------------------------
+
+Some dependencies require ``pip`` to be installed.
+
+1️⃣ Install pip
+
+.. code-block:: console
+
+   sudo apt update
+   sudo apt install -y python3-pip
+
+2️⃣ Verify pip installation
+
+.. code-block:: console
+
+   pip3 --version
+
 
 Install Particle Filter (Localization)
 ---------------------------------------
@@ -42,7 +59,7 @@ Install Particle Filter (Localization)
 
 .. code-block:: console
 
-   cd /home/nvidia/f1tenth_ws/src
+   cd ~/f1tenth_ws/src
    git clone https://github.com/f1tenth/particle_filter.git
 
 
@@ -70,7 +87,7 @@ Install range_libc
 
 .. code-block:: console
 
-   cd
+   cd ~/f1tenth_ws/src
    git clone https://github.com/f1tenth/range_libc.git
 
 
@@ -78,9 +95,8 @@ Install range_libc
 
 .. code-block:: console
 
-   sudo apt install python3-cython
-   # or
-   pip3 install cython
+   sudo apt install -y python3-cython
+
 
 
 3️⃣ **Install range_libc with CUDA support**
