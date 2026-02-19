@@ -13,6 +13,18 @@ Install SLAM Toolbox
    sudo apt update
    sudo apt install ros-humble-slam-toolbox
 
+.. note::
+
+   If you get an apt lock error mentioning ``packagekitd``, stop it and try again:
+
+   .. code-block:: console
+
+      sudo systemctl stop packagekit
+      sudo systemctl disable packagekit
+      sudo apt update
+      sudo apt install -y ros-humble-slam-toolbox
+
+
 
 2️⃣ **Add an alias to your `~/.bashrc` to launch SLAM Toolbox**
 
