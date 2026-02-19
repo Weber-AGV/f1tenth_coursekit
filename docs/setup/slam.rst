@@ -107,7 +107,8 @@ Install range_libc
 
 .. code-block:: console
 
-   sudo apt install -y python3-cython
+   sudo python3 -m pip install Cython
+
 
 
 
