@@ -120,26 +120,106 @@ Install range_libc
    sudo WITH_CUDA=ON python3 setup.py install
 
 
-Launch Localization
--------------------
+Fix: CUDA / range_libc Build Error
+------------------------------------
 
-1️⃣ **Launch teleop (in one terminal)**
+If you encounter a CUDA compilation error when building ``range_libc`` on a Jetson Orin, use the following fix script.
 
-.. code-block:: console
+1️⃣ Create the Script
+^^^^^^^^^^^^^^^^^^^^^
 
-   bringup
+Create the file ``~/f1tenth_ws/src/range_libc/fix_range_libc.sh``:
 
-2️⃣ **Launch particle filter (in another terminal)**
+.. code-block:: bash
 
-.. code-block:: console
+   nano ~/f1tenth_ws/src/range_libc/fix_range_libc.sh
 
-   source ~/f1tenth_ws/install/setup.bash
-   ros2 launch particle_filter localize_launch.py
+Paste in the following script:
 
+.. code-block:: bash
 
-Common Notes
-------------
+   #!/bin/bash
+   # Fix and build range_libc with CUDA for Jetson Orin (sm_87)
+   # Run from: ~/f1tenth_ws/src/range_libc/pywrapper/
 
-- Make sure you are using the correct ROS distribution (Humble).
-- Always source your workspace after building.
-- If CUDA errors occur, confirm your Jetson has CUDA installed and accessible.
+   set -e
+
+   if [ ! -f "setup.py" ]; then
+       echo "ERROR: Run this script from range_libc/pywrapper/"
+       echo "  cd ~/f1tenth_ws/src/range_libc/pywrapper && bash fix_range_libc.sh"
+       exit 1
+   fi
+
+   echo "Patching setup.py..."
+
+   # 1. Remove -march=native (nvcc doesn't support it)
+   sed -i 's/"-march=native", //' setup.py
+
+   # 2. Remove bogus gcc-8 flags (gcc-8 is not installed on these systems)
+   sed -i '/gcc-8\|g++-8/d' setup.py
+
+   # 3. Update CUDA arch from sm_62 (TX2) to sm_87 (Orin NX / Orin Nano)
+   sed -i 's/-arch=sm_62/-arch=sm_87/' setup.py
+
+   # 4. Fix _compile so non-.cu files are explicitly routed to gcc (not nvcc)
+   python3 - <<'PYEOF'
+   with open('setup.py', 'r') as f:
+       content = f.read()
+
+   old = (
+       "        else:\n"
+       "            postargs = extra_postargs['gcc']\n"
+       "        # postargs = extra_postargs#['gcc']\n"
+       "\n"
+       "        super(obj, src, ext, cc_args, postargs, pp_opts)\n"
+       "        # reset the default compiler_so, which we might have changed for cuda\n"
+       "        self.compiler_so = default_compiler_so"
+   )
+   new = (
+       "        else:\n"
+       "            # explicitly reset to gcc for all non-.cu files\n"
+       "            self.set_executable('compiler_so', default_compiler_so)\n"
+       "            postargs = extra_postargs['gcc']\n"
+       "\n"
+       "        super(obj, src, ext, cc_args, postargs, pp_opts)\n"
+       "        # reset the default compiler_so, which we might have changed for cuda\n"
+       "        self.set_executable('compiler_so', default_compiler_so)"
+   )
+
+   if old in content:
+       content = content.replace(old, new)
+       with open('setup.py', 'w') as f:
+           f.write(content)
+       print("  [OK] Fixed _compile compiler routing")
+   elif "set_executable('compiler_so', default_compiler_so)" in content:
+       print("  [SKIP] _compile routing already fixed")
+   else:
+       print("  [WARN] Could not match _compile pattern - check setup.py manually")
+   PYEOF
+
+   echo "Building with CUDA (this takes a minute)..."
+   sudo rm -rf build/
+   sudo env WITH_CUDA=ON python3 setup.py install
+
+   echo "Done! range_libc installed with CUDA support."
+
+2️⃣ Make It Executable
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   chmod +x ~/f1tenth_ws/src/range_libc/fix_range_libc.sh
+
+3️⃣ Run the Script
+^^^^^^^^^^^^^^^^^^
+
+Navigate to the ``pywrapper`` directory first, then run the script:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws/src/range_libc/pywrapper
+   bash ../fix_range_libc.sh
+
+.. note::
+
+   The script must be run from inside the ``pywrapper/`` directory — it checks for ``setup.py`` in the current folder and will exit with an error if not found.
