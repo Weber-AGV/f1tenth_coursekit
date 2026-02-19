@@ -25,29 +25,6 @@ This page shows how to run SLAM Toolbox on the RoboRacer and visualize the map i
 You must have the **controller powered on and connected** before starting SLAM.  
 If the controller is not connected, the vehicle will not publish drive data and SLAM will not begin building a map.
 
-Command Alias
--------------
-
-.. note::
-
-   The ``slam`` command used below is an alias defined in your ``~/.bashrc`` file.
-   This alias launches SLAM Toolbox using your robot’s configuration file.
-
-Example (for robot ``f1-wsu-4``):
-
-.. code-block:: bash
-
-   alias slam='ros2 launch slam_toolbox online_async_launch.py \
-   slam_params_file:=/home/f1-wsu-4/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml'
-
-Replace ``f1-wsu-4`` with **your robot’s hostname**.
-
-After adding the alias to ``~/.bashrc``, run:
-
-.. code-block:: bash
-
-   source ~/.bashrc
-
 
 .. code-block:: bash
 

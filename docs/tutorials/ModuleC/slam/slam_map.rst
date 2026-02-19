@@ -50,25 +50,42 @@ Open a new terminal on the RoboRacer:
    source install/setup.bash
 
 
-3️⃣ Run the Map Saver Command  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3️⃣ Save the Map
+^^^^^^^^^^^^^^^^^
 
-Use the ROS package called Map Server to save the map:
+In ROS 2 Humble, use the nav2_map_server package to save the map.
 
-Save the map
+First, create a maps directory in your workspace (if it does not already exist):
 
 .. code-block:: bash
 
-   ros2 run map_server map_saver -f my_map
+mkdir -p ~/f1tenth_ws/maps
+
+Then run the map saver command and save directly into that folder:
+
+.. code-block:: bash
+
+cd ~/f1tenth_ws/maps
+ros2 run nav2_map_server map_saver_cli -f lab_map
 
 This will generate two files:
 
 ::
 
-   my_map.pgm
-   my_map.yaml
+lab_map.pgm
+lab_map.yaml
 
-These files will be saved in your current directory.
+These files contain:
+
+.pgm → grayscale occupancy grid image
+
+.yaml → metadata (resolution, origin, thresholds)
+
+Both files will now be stored in:
+
+::
+
+~/f1tenth_ws/maps
 
 
 4️⃣ Move Map to the Maps Folder (Recommended)
