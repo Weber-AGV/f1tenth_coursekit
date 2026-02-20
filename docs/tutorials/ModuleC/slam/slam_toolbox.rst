@@ -175,6 +175,33 @@ Then configure the Map display:
    SlamToolBoxPlugin
 
 
+5️⃣ Drive the Car to Build the Map
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With SLAM Toolbox running and RViz2 open, use the **PlayStation controller** to drive the car around the course. As you drive, you will see the map build in real time in RViz2.
+
+**Tips for a good map:**
+
+- Drive **slowly and smoothly** to give the LiDAR time to capture accurate scans.
+- Cover the **entire course** — drive every section of the track at least once.
+- It is perfectly fine to **drive back over paths you have already mapped** — this helps SLAM close loops and improve accuracy.
+- Try to avoid crashing, as sudden movements can introduce scan errors.
+- You may notice **stray scan lines** that appear to extend outside the track boundaries — this is normal and expected. They will not affect navigation.
+
+.. image:: img/map_made.png
+   :alt: Example map built using SLAM Toolbox while driving the course
+   :width: 80%
+   :align: center
+
+|
+
+*Example map created while driving the RoboRacer around the course. Stray scans outside the boundary are normal.*
+
+.. note::
+
+   When you are satisfied that the map covers the full course, proceed to the next page to save the map.
+
+
 Common Checks
 -------------
 
