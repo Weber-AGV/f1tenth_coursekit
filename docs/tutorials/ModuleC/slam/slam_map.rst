@@ -59,14 +59,14 @@ First, create a maps directory in your workspace (if it does not already exist):
 
 .. code-block:: bash
 
-mkdir -p ~/f1tenth_ws/maps
+   mkdir -p ~/f1tenth_ws/maps
 
 Then run the map saver command and save directly into that folder:
 
 .. code-block:: bash
 
-cd ~/f1tenth_ws/maps
-ros2 run nav2_map_server map_saver_cli -f lab_map
+   cd ~/f1tenth_ws/maps
+   ros2 run nav2_map_server map_saver_cli -f lab_map
 
 This will generate two files:
 
