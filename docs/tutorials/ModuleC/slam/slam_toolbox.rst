@@ -113,12 +113,23 @@ After RViz2 opens:
 
    map
 
+.. image:: img/fixed_frame_map.png
+   :alt: Configure Map display settings in RViz2
+   :width: 80%
+   :align: center
 
 2️⃣ Add Map Display  
 ^^^^^^^^^^^^^^^^^^^^
 
 - Click **Add**
 - Select **Map**
+
+.. image:: img/add_map_display.png
+   :alt: Configure Map display settings in RViz2
+   :width: 80%
+   :align: center
+
+
 
 Then configure the Map display:
 
@@ -132,12 +143,24 @@ Then configure the Map display:
 - **Topic → Durability Policy** → ``Transient Local``
 - **Update Topic → Durability Policy** → ``Transient Local``
 
+.. image:: img/configure_map.png
+   :alt: Configure Map display settings in RViz2
+   :width: 80%
+   :align: center
+
+|
+
 
 3️⃣ Add GraphVisualization  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Click **Add**
 - Select **GraphVisualization**
+
+.. image:: img/add_graph_visualization.png
+   :alt: Configure Map display settings in RViz2
+   :width: 80%
+   :align: center
 
 
 4️⃣ Add SLAM Toolbox Panel  
