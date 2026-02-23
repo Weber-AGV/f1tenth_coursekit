@@ -91,13 +91,12 @@ Both files will now be stored in:
 4️⃣ Move Map to the Maps Folder (Recommended)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is good practice to store maps in your stack's maps folder.
-
-Example:
+It is good practice to store maps in your stack's maps folder. First create the directory, then move the files:
 
 .. code-block:: bash
 
-   mv my_map.* ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+   mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+   mv ~/f1tenth_ws/maps/lab_map.* ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
 
 
 5️⃣ Load the Map

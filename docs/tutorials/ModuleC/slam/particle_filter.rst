@@ -140,7 +140,13 @@ Drive the car using the PlayStation controller. As the car moves, the particle c
 Key Parameters
 --------------
 
-You can tune the following parameters in ``launch/localize.launch``:
+Tune the particle filter by editing:
+
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/particle_filter/config/localize.yaml
+
+The key parameters are:
 
 .. list-table::
    :header-rows: 1
@@ -190,7 +196,7 @@ You can tune the following parameters in ``launch/localize.launch``:
 
 .. note::
 
-   If you built RangeLibc using the ``fix_range_libc.sh`` script on the Jetson Orin, ``rmgpu`` should work. If you see CUDA errors at runtime, fall back to ``cddt`` by editing ``range_method`` in the launch file and setting ``rangelib_variant`` to ``4``.
+   If you built RangeLibc using the ``fix_range_libc.sh`` script on the Jetson Orin, ``rmgpu`` should work. If you see CUDA errors at runtime, fall back to ``cddt`` by editing ``range_method`` in ``~/f1tenth_ws/src/particle_filter/config/localize.yaml`` and setting ``rangelib_variant`` to ``4``.
 
 Troubleshooting
 ---------------
