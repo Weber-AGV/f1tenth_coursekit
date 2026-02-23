@@ -5,6 +5,10 @@ Particle Filter Localization
 
 Once you have a saved map, you can use a **particle filter** (Monte Carlo Localization) to localize the vehicle within that map in real time. This tutorial uses the `f1tenth/particle_filter <https://github.com/f1tenth/particle_filter>`_ package with **RangeLibc** for fast ray casting.
 
+.. note::
+
+   **RangeLibc** is a compiled Python library — it is imported automatically by the particle filter node at startup. You do not need to run it separately. As long as it was built correctly (see :ref:`doc_tutorials_slamtoolbox` for the fix script), it will work transparently in the background.
+
 How It Works
 ------------
 
