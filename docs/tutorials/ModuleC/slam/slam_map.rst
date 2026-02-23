@@ -133,6 +133,24 @@ The map will then be published on the ``/map`` topic.
    The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
+6️⃣ Verify the Map in RViz2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open a new terminal and launch RViz2:
+
+.. code-block:: bash
+
+   source /opt/ros/humble/setup.bash
+   rviz2
+
+In RViz2:
+
+- Set **Fixed Frame** to ``map``
+- Click **Add** → select **Map** → set Topic to ``/map``
+
+You should see your saved map appear. This confirms the map server is running and publishing correctly.
+
+
 Common Mistakes
 ---------------
 
