@@ -147,8 +147,13 @@ In RViz2:
 
 - Set **Fixed Frame** to ``map``
 - Click **Add** → select **Map** → set Topic to ``/map``
+- Under the Map topic, set **Durability Policy** to ``Transient Local``
 
 You should see your saved map appear. This confirms the map server is running and publishing correctly.
+
+.. note::
+
+   The ``Transient Local`` durability policy is required. The map server publishes the map once on activation — without this setting, RViz2 will miss that message and the map will not appear.
 
 
 Common Mistakes
