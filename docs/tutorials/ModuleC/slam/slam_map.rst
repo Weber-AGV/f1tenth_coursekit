@@ -53,65 +53,46 @@ Open a new terminal on the RoboRacer:
 3️⃣ Save the Map
 ^^^^^^^^^^^^^^^^^
 
-In ROS 2 Humble, use the nav2_map_server package to save the map.
+In ROS 2 Humble, use the ``nav2_map_server`` package to save the map. Save it directly into the stack's maps folder to avoid any extra move steps.
 
-First, create a maps directory in your workspace (if it does not already exist):
-
-.. code-block:: bash
-
-   mkdir -p ~/f1tenth_ws/maps
-
-Then run the map saver command and save directly into that folder:
+First, create the maps directory in the stack (if it does not already exist):
 
 .. code-block:: bash
 
-   cd ~/f1tenth_ws/maps
-   ros2 run nav2_map_server map_saver_cli -f lab_map
+   mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps
+
+Then run the map saver command, saving directly into that folder:
+
+.. code-block:: bash
+
+   ros2 run nav2_map_server map_saver_cli -f ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map
 
 This will generate two files:
 
-::
+.. code-block:: text
 
-lab_map.pgm
-lab_map.yaml
+   ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm
+   ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-These files contain:
-
-.pgm → grayscale occupancy grid image
-
-.yaml → metadata (resolution, origin, thresholds)
-
-Both files will now be stored in:
-
-::
-
-~/f1tenth_ws/maps
+- ``.pgm`` — grayscale occupancy grid image
+- ``.yaml`` — metadata (resolution, origin, thresholds)
 
 
-4️⃣ Move Map to the Maps Folder (Recommended)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4️⃣ Verify the Map Was Saved
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is good practice to store maps in your stack's maps folder.
-
-First, verify the map files were created in the current directory:
+Check that both files exist:
 
 .. code-block:: bash
 
-   ls ~/f1tenth_ws/maps/
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
 
-You should see ``lab_map.pgm`` and ``lab_map.yaml`` listed.
+You should see:
 
-Then create the destination folder and move the files:
+.. code-block:: text
 
-.. code-block:: bash
-
-   mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-   mv ~/f1tenth_ws/maps/lab_map.pgm ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-   mv ~/f1tenth_ws/maps/lab_map.yaml ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-
-.. note::
-
-   The ``mv lab_map.*`` wildcard syntax can fail in some shells when the files don't exist or the path isn't expanded correctly. Moving each file explicitly avoids this issue.
+   lab_map.pgm
+   lab_map.yaml
 
 
 5️⃣ Load the Map
@@ -123,7 +104,7 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
 
 .. code-block:: bash
 
-   ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/maps/lab_map.yaml
+   ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
 **Terminal 2** — Configure and activate the lifecycle node:
 
@@ -133,31 +114,6 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
    ros2 lifecycle set /map_server activate
 
 The map will then be published on the ``/map`` topic and available for localization or navigation.
-
-.. note::
-
-   Use the full path to your ``.yaml`` file. For example, if you saved it in the recommended location:
-
-   .. code-block:: bash
-
-      ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
-
-
-Verify Files
-------------
-
-Check that both files exist:
-
-.. code-block:: bash
-
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-
-You should see:
-
-::
-
-   my_map.pgm
-   my_map.yaml
 
 
 Common Mistakes
