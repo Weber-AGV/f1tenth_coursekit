@@ -91,12 +91,27 @@ Both files will now be stored in:
 4️⃣ Move Map to the Maps Folder (Recommended)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is good practice to store maps in your stack's maps folder. First create the directory, then move the files:
+It is good practice to store maps in your stack's maps folder.
+
+First, verify the map files were created in the current directory:
+
+.. code-block:: bash
+
+   ls ~/f1tenth_ws/maps/
+
+You should see ``lab_map.pgm`` and ``lab_map.yaml`` listed.
+
+Then create the destination folder and move the files:
 
 .. code-block:: bash
 
    mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-   mv ~/f1tenth_ws/maps/lab_map.* ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+   mv ~/f1tenth_ws/maps/lab_map.pgm ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+   mv ~/f1tenth_ws/maps/lab_map.yaml ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+
+.. note::
+
+   The ``mv lab_map.*`` wildcard syntax can fail in some shells when the files don't exist or the path isn't expanded correctly. Moving each file explicitly avoids this issue.
 
 
 5️⃣ Load the Map
