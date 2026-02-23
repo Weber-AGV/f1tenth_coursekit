@@ -108,17 +108,23 @@ You should see a line like:
 
 .. warning::
 
-   If the ``image:`` field shows a different filename (e.g. ``my_map.pgm``), the map server will fail to load. Fix it by editing the yaml:
+   The ``image:`` field must be **just the filename** — not a full path, and not a path with ``~``. The map server does **not** expand ``~`` and will fail with a file-not-found error if the field looks like:
+
+   .. code-block:: text
+
+      image: ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm  ← WRONG
+
+   Fix it by editing the yaml:
 
    .. code-block:: bash
 
       nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-   Change the ``image:`` line to match your actual ``.pgm`` filename:
+   The ``image:`` line must be just the filename with no path:
 
    .. code-block:: text
 
-      image: lab_map.pgm
+      image: lab_map.pgm  ← CORRECT
 
 
 5️⃣ Load the Map
