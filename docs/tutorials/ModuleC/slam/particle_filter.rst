@@ -68,17 +68,37 @@ Run Steps
 1️⃣ Point to Your Map
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Edit the map path in the launch file to point to your saved map:
+The particle filter launch file expects map files to live inside the package's own ``maps/`` directory. Copy your saved map there:
 
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/particle_filter/launch/localize.launch
+   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm \
+      ~/f1tenth_ws/src/particle_filter/maps/
 
-Find the ``map_server.launch`` include and update the map argument to your map file:
+   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
+      ~/f1tenth_ws/src/particle_filter/maps/
 
-.. code-block:: xml
+Then update ``localize.yaml`` to use your map name:
 
-   <arg name="map" default="$(find particle_filter)/maps/lab_map.yaml"/>
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/particle_filter/config/localize.yaml
+
+Find the ``map_server`` section and change the map name:
+
+.. code-block:: yaml
+
+   map_server:
+     ros__parameters:
+       map: 'lab_map'
+
+Finally, rebuild the package so the map files are installed to the share directory:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select particle_filter
+   source install/setup.bash
 
 2️⃣ Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -100,7 +120,11 @@ Start the car stack as usual:
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
-   ros2 launch particle_filter localize.launch
+   ros2 launch particle_filter localize_launch.py
+
+.. note::
+
+   ``localize_launch.py`` handles the map server and lifecycle transitions internally — you do not need to run ``nav2_map_server`` separately.
 
 4️⃣ Open RViz2 (Terminal 3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
