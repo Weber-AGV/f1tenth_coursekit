@@ -119,12 +119,6 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
    ros2 run nav2_map_server map_server --ros-args \
      -p yaml_filename:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-Wait until you see the message:
-
-.. code-block:: text
-
-   Waiting on external lifecycle transitions to activate
-
 **Terminal 2** — Configure then activate:
 
 .. code-block:: bash
