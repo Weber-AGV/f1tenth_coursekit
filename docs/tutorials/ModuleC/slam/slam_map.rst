@@ -103,19 +103,30 @@ Example:
 5️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
-To load a saved map with the Map Server, run:
+In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and runs as a **lifecycle node**, so it must be started and then manually configured and activated.
+
+**Terminal 1** — Start the map server:
 
 .. code-block:: bash
 
-   ros2 run map_server map_server --ros-args -p yaml_filename:=my_map.yaml
+   ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/maps/lab_map.yaml
+
+**Terminal 2** — Configure and activate the lifecycle node:
+
+.. code-block:: bash
+
+   ros2 lifecycle set /map_server configure
+   ros2 lifecycle set /map_server activate
+
+The map will then be published on the ``/map`` topic and available for localization or navigation.
 
 .. note::
 
-   Replace ``my_map.yaml`` with the full path to your map file if it is not in the current directory. For example:
+   Use the full path to your ``.yaml`` file. For example, if you saved it in the recommended location:
 
    .. code-block:: bash
 
-      ros2 run map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.yaml
+      ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
 
 Verify Files
