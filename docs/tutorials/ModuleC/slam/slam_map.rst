@@ -94,11 +94,37 @@ You should see:
    lab_map.pgm
    lab_map.yaml
 
+Then open the yaml file and confirm the ``image:`` field matches the ``.pgm`` filename exactly:
+
+.. code-block:: bash
+
+   cat ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
+
+You should see a line like:
+
+.. code-block:: text
+
+   image: lab_map.pgm
+
+.. warning::
+
+   If the ``image:`` field shows a different filename (e.g. ``my_map.pgm``), the map server will fail to load. Fix it by editing the yaml:
+
+   .. code-block:: bash
+
+      nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
+
+   Change the ``image:`` line to match your actual ``.pgm`` filename:
+
+   .. code-block:: text
+
+      image: lab_map.pgm
+
 
 5️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
-In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and runs as a **lifecycle node**, so it must be started and then manually configured and activated.
+In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and runs as a **lifecycle node**. You must start it in one terminal, then configure and activate it in a second terminal.
 
 **Terminal 1** — Start the map server:
 
@@ -106,14 +132,24 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
 
    ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-**Terminal 2** — Configure and activate the lifecycle node:
+Wait until you see the message:
+
+.. code-block:: text
+
+   Waiting on external lifecycle transitions to activate
+
+**Terminal 2** — Configure then activate:
 
 .. code-block:: bash
 
    ros2 lifecycle set /map_server configure
    ros2 lifecycle set /map_server activate
 
-The map will then be published on the ``/map`` topic and available for localization or navigation.
+The map will then be published on the ``/map`` topic.
+
+.. note::
+
+   The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
 Common Mistakes
