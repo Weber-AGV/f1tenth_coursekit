@@ -151,6 +151,13 @@ In RViz2:
 
 You should see your saved map appear. This confirms the map server is running and publishing correctly.
 
+.. image:: img/loaded_map.png
+   :alt: Saved map loaded and displayed in RViz2
+   :width: 80%
+   :align: center
+
+|
+
 .. note::
 
    The ``Transient Local`` durability policy is required. The map server publishes the map once on activation — without this setting, RViz2 will miss that message and the map will not appear.
