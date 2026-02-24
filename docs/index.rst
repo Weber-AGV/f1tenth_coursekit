@@ -98,6 +98,15 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    :hidden:
 
    tutorials/ModuleC/slam/index
+   tutorials/ModuleC/nav2/index
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Module D - Planning & Control
+   :name: sec-module-d-tutorials
+   :hidden:
+
+   tutorials/ModuleD/index
 
 .. toctree::
    :maxdepth: 2
