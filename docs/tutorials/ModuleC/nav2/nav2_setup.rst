@@ -3,7 +3,7 @@
 Nav2 Setup
 ===========
 
-With the particle filter localizing the car, you can add the **Nav2 navigation stack** to enable point-and-click autonomous navigation using the 2D Goal Pose tool in RViz2.
+Once a localization or SLAM node is providing the robot's pose, you can add the **Nav2 navigation stack** to enable point‑and‑click autonomous navigation using the 2D Goal Pose tool in RViz2.
 
 How It Works
 ------------
@@ -25,18 +25,44 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
    * - ``lifecycle_manager``
      - Manages the lifecycle of all Nav2 nodes
 
+
+.. note::
+
+   The default global planner plugin used by ``planner_server`` is
+   ``nav2_navfn_planner``. It implements the classic **A\*** search algorithm
+   (often referred to as *NavFn* in ROS literature) on the occupancy grid
+   (a.k.a. costmap) to compute a low‑cost path from the current pose to the
+   goal pose. A\* is optimal and complete when the heuristic is admissible, and
+   it expands nodes in order of increasing ``f = g + h``. NavFn is simply the
+   A\* implementation tuned for navigation maps; you can swap in alternate
+   planners (e.g. SMAC) by changing the plugin in your Nav2 parameters.
+
+   For the purposes of the tutorial you can treat the planner as a
+   "black box" that returns a sequence of waypoints—the important part is that
+   the controller server follows whatever path it provides.
+
 Prerequisites
 -------------
 
 Before launching Nav2, the following must already be running:
 
 - **Terminal 1** — ``bringup`` (sensors + drivers)
-- **Terminal 2** — ``ros2 launch particle_filter localize_launch.py`` (map + localization)
+- **Terminal 2** — a localization or SLAM node providing a map and pose.
+  For example, you might run the coursekit particle filter launch or a SLAM
+  package such as ``slam_toolbox``
+  (``ros2 launch slam_toolbox online_async_launch.py``) to build the map on the
+  fly.  As long as the node publishes a ``map`` on ``/map`` and broadcasts
+  the robot's pose in the map frame (via TF), Nav2 will work.
 - **RViz2** — initial pose set with **2D Pose Estimate**
 
 .. note::
 
-   Do not run ``nav2_map_server`` separately — ``localize_launch.py`` already handles the map server and lifecycle transitions. Nav2 will use the map that is already published on ``/map``.
+   Some localization launches (such as the coursekit particle filter demo)
+   already handle the map server and lifecycle transitions, in which case you
+   can safely set ``map_server:=False``.  When using a separate SLAM node you
+   can either let that node provide the map (``map_server:=False``) or run
+   Nav2's map server with a previously saved map by setting
+   ``map_server:=True`` and pointing to the map file.
 
 
 Launch Nav2
