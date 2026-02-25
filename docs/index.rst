@@ -56,6 +56,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    setup/opencv
    setup/realsense_ros
    setup/slam
+   setup/nav2
 
 .. toctree::
    :maxdepth: 2
