@@ -55,7 +55,7 @@ Steps
 1️⃣ Start Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Open a terminal on the robot and launch the car's sensors and drivers:
+Make sure the PlayStation controller is connected to the car, then open a terminal on the robot and launch the car's sensors and drivers:
 
 .. code-block:: bash
 
@@ -66,6 +66,12 @@ Open a terminal on the robot and launch the car's sensors and drivers:
 .. code-block:: bash
 
    ros2 launch f1tenth_stack bringup_launch.py
+
+Or, if you have the alias configured: ``bringup``
+
+.. note::
+
+   If Nav2 later reports ``Timed out waiting for transform from base_link to odom``, the PlayStation controller is likely not connected. The VESC driver requires the joystick to fully initialize, and without it the ``odom`` frame is never published.
 
 Leave this terminal running.
 
@@ -102,7 +108,22 @@ Open a **third** terminal and check that the Nav2 lifecycle nodes are active:
 
    ros2 node list
 
-You should see nodes including ``/map_server``, ``/planner_server``, ``/controller_server``, and ``/bt_navigator``.
+You should see these Nav2 nodes:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Node
+     - Role
+   * - ``/map_server``
+     - Loads and publishes the occupancy grid map
+   * - ``/planner_server``
+     - Computes a global path from the car's pose to the goal (A*)
+   * - ``/controller_server``
+     - Follows the planned path by sending velocity commands to the car
+   * - ``/bt_navigator``
+     - Orchestrates planning and control via a behavior tree
 
 Confirm the planner is ready by checking for the ``/plan`` topic:
 

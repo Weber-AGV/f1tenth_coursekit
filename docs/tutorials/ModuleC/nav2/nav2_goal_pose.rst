@@ -15,7 +15,7 @@ Steps
 1️⃣ Start Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Open a terminal on the robot and launch the car's sensors and drivers:
+Make sure the PlayStation controller is connected to the car, then open a terminal on the robot and launch the car's sensors and drivers:
 
 .. code-block:: bash
 
@@ -26,6 +26,12 @@ Open a terminal on the robot and launch the car's sensors and drivers:
 .. code-block:: bash
 
    ros2 launch f1tenth_stack bringup_launch.py
+
+Or, if you have the alias configured: ``bringup``
+
+.. note::
+
+   If Nav2 later reports ``Timed out waiting for transform from base_link to odom``, the PlayStation controller is likely not connected. The VESC driver requires the joystick to fully initialize, and without it the ``odom`` frame is never published.
 
 Leave this terminal running.
 
