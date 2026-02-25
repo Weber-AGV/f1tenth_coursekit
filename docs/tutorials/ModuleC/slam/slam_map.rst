@@ -124,7 +124,7 @@ The ``.pgm`` file is a grayscale image of the occupancy grid. To view it directl
 
 Once installed, open your ``lab_map.pgm`` file in VS Code — it will render the map image directly in the editor. Right-click the ``.pgm`` file and select **Open With...** → **PBM/PPM/PGM Viewer** if it does not open automatically.
 
-.. image:: img/pgm_viewer_extension.png
+.. image:: img/pgm_image_viewer.png
    :alt: PBM/PPM/PGM Viewer extension displaying lab_map.pgm in VS Code
    :width: 80%
    :align: center
