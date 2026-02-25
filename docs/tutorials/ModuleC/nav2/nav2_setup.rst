@@ -44,23 +44,18 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
 Prerequisites
 -------------
 
-Before launching Nav2, the following must be ready:
+Before starting, make sure you have:
 
-- **A saved map** — you must have completed the SLAM tutorial and have ``lab_map.pgm`` and ``lab_map.yaml`` in ``~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/``
-- **Terminal 1** — ``bringup`` (sensors + drivers)
-- **RViz2** — open and ready to set the initial pose
+- **A saved map** — completed the SLAM tutorial with ``lab_map.pgm`` and ``lab_map.yaml`` in ``~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/``
+- **Nav2 installed** — completed the :ref:`doc_setup_nav2` setup (packages + parameters file)
 
-Nav2 will launch its own map server internally using the map path you provide in the launch command — you do not need to run ``nav2_map_server`` separately.
+Steps
+-----
 
-.. seealso::
+1️⃣ Start Bringup (Terminal 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   Complete the :ref:`doc_setup_nav2` setup before proceeding. This installs the Nav2 packages and creates the F1TENTH parameters file.
-
-
-Launch Nav2
------------
-
-Open a new terminal (Terminal 2):
+Open a terminal on the robot and launch the car's sensors and drivers:
 
 .. code-block:: bash
 
@@ -70,17 +65,38 @@ Open a new terminal (Terminal 2):
 
 .. code-block:: bash
 
+   ros2 launch f1tenth_stack bringup_launch.py
+
+Leave this terminal running.
+
+2️⃣ Launch Nav2 (Terminal 2)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open a **new** terminal and source the workspace:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   source /opt/ros/humble/setup.bash
+   source install/setup.bash
+
+Launch the full Nav2 stack:
+
+.. code-block:: bash
+
    ros2 launch nav2_bringup bringup_launch.py \
      use_sim_time:=False \
      map:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
      params_file:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
 
-This launches the full Nav2 stack including the map server, planner, controller, and behavior tree navigator. The ``map`` argument tells Nav2's map server which map to load.
+This launches the map server, planner, controller, and behavior tree navigator. The ``map`` argument tells Nav2's map server which map to load.
 
-Verify Nav2 is Running
------------------------
+Leave this terminal running.
 
-Check that the Nav2 lifecycle nodes are active:
+3️⃣ Verify Nav2 is Running (Terminal 3)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open a **third** terminal and check that the Nav2 lifecycle nodes are active:
 
 .. code-block:: bash
 
