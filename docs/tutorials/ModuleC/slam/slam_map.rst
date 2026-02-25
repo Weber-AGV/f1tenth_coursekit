@@ -77,7 +77,7 @@ This will generate two files:
 - ``.pgm`` — grayscale occupancy grid image
 - ``.yaml`` — metadata (resolution, origin, thresholds)
 
-.. image:: img/lab_map_yaml_pgm.png
+.. image:: img/lab_map-yaml.png
    :alt: lab_map.yaml and lab_map.pgm files saved in the maps directory
    :width: 80%
    :align: center
