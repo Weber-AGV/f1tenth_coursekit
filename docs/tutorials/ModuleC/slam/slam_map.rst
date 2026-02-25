@@ -77,6 +77,12 @@ This will generate two files:
 - ``.pgm`` — grayscale occupancy grid image
 - ``.yaml`` — metadata (resolution, origin, thresholds)
 
+.. image:: img/lab_map_yaml_pgm.png
+   :alt: lab_map.yaml and lab_map.pgm files saved in the maps directory
+   :width: 80%
+   :align: center
+
+|
 
 4️⃣ Verify the Map Was Saved
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -105,6 +111,25 @@ You should see a line like:
 .. code-block:: text
 
    image: lab_map.pgm
+
+
+Viewing ``.pgm`` Files in VS Code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``.pgm`` file is a grayscale image of the occupancy grid. To view it directly in VS Code, install the **PBM/PPM/PGM Viewer** extension:
+
+1. Open the Extensions sidebar (``Ctrl+Shift+X``)
+2. Search for **PBM/PPM/PGM Viewer**
+3. Click **Install**
+
+Once installed, open your ``lab_map.pgm`` file in VS Code — it will render the map image directly in the editor. Right-click the ``.pgm`` file and select **Open With...** → **PBM/PPM/PGM Viewer** if it does not open automatically.
+
+.. image:: img/pgm_viewer_extension.png
+   :alt: PBM/PPM/PGM Viewer extension displaying lab_map.pgm in VS Code
+   :width: 80%
+   :align: center
+
+|
 
 
 5️⃣ Load the Map
