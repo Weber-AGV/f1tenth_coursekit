@@ -45,6 +45,19 @@ After editing ``~/.bashrc``:
 
 Open a new terminal to verify the alias works.
 
+Install Nav2 (Navigation Stack)
+---------------------------------
+
+1️⃣ **Install the Nav2 packages**
+
+.. code-block:: console
+
+   sudo apt update
+   sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
+
+``ros-humble-navigation2`` provides the core Nav2 nodes (planner, controller, bt_navigator) and ``ros-humble-nav2-bringup`` provides the launch files used in the Nav2 tutorial.
+
+
 Install pip (Required for rosdep)
 ----------------------------------
 
