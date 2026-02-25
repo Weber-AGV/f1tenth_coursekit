@@ -113,6 +113,34 @@ You should see a line like:
    image: lab_map.pgm
 
 
+Understanding the YAML Thresholds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``.pgm`` file stores each pixel as a grayscale value (0–255). When the map server loads the map, it converts each pixel to an occupancy probability (0.0–1.0) and classifies it using the thresholds in the ``.yaml`` file:
+
+- **probability > occupied_thresh** → occupied (wall / obstacle)
+- **probability < free_thresh** → free (drivable space)
+- **anything in between** → unknown
+
+The pixel values in the ``.pgm`` are fixed from when SLAM created the map, but you can adjust the thresholds in the ``.yaml`` to change how those pixels get classified:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Parameter
+     - Default
+     - Effect of Changing
+   * - ``occupied_thresh``
+     - ``0.65``
+     - Raising → fewer cells marked occupied (more lenient)
+   * - ``free_thresh``
+     - ``0.25``
+     - Lowering → fewer cells marked free (more conservative)
+
+The defaults (0.65 / 0.25) work well for most maps. You might tune them if your map has noisy pixels being incorrectly classified as obstacles, or if walls are not showing up as fully occupied.
+
+
 Viewing ``.pgm`` Files in VS Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
