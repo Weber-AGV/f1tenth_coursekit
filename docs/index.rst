@@ -99,6 +99,7 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
    tutorials/ModuleC/slam/index
    tutorials/ModuleC/nav2/index
+   tutorials/ModuleC/particle_filter/index
 
 .. toctree::
    :maxdepth: 2

@@ -9,4 +9,3 @@ Tutorial 5 - SLAM
 
    slam_toolbox
    slam_map
-   particle_filter

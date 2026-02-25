@@ -1,6 +1,6 @@
 .. _doc_tutorials_pure_pursuit:
 
-Tutorial 7 - Pure Pursuit
+Tutorial 8 - Pure Pursuit
 ===========================
 
 .. toctree::
