@@ -9,3 +9,4 @@ Tutorial 6 - Nav2 Navigation
 
    nav2_setup
    nav2_goal_pose
+   nav2_waypoint_nav
