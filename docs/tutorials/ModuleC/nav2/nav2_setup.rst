@@ -44,25 +44,13 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
 Prerequisites
 -------------
 
-Before launching Nav2, the following must already be running:
+Before launching Nav2, the following must be ready:
 
+- **A saved map** — you must have completed the SLAM tutorial and have ``lab_map.pgm`` and ``lab_map.yaml`` in ``~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/``
 - **Terminal 1** — ``bringup`` (sensors + drivers)
-- **Terminal 2** — a localization or SLAM node providing a map and pose.
-  For example, you might run the coursekit particle filter launch or a SLAM
-  package such as ``slam_toolbox``
-  (``ros2 launch slam_toolbox online_async_launch.py``) to build the map on the
-  fly.  As long as the node publishes a ``map`` on ``/map`` and broadcasts
-  the robot's pose in the map frame (via TF), Nav2 will work.
-- **RViz2** — initial pose set with **2D Pose Estimate**
+- **RViz2** — open and ready to set the initial pose
 
-.. note::
-
-   Some localization launches (such as the coursekit particle filter demo)
-   already handle the map server and lifecycle transitions, in which case you
-   can safely set ``map_server:=False``.  When using a separate SLAM node you
-   can either let that node provide the map (``map_server:=False``) or run
-   Nav2's map server with a previously saved map by setting
-   ``map_server:=True`` and pointing to the map file.
+Nav2 will launch its own map server internally using the map path you provide in the launch command — you do not need to run ``nav2_map_server`` separately.
 
 
 Create the Parameters File
@@ -113,7 +101,7 @@ Key differences from the Turtlebot3 defaults:
 Launch Nav2
 -----------
 
-Open a new terminal (Terminal 3):
+Open a new terminal (Terminal 2):
 
 .. code-block:: bash
 
@@ -123,9 +111,12 @@ Open a new terminal (Terminal 3):
 
 .. code-block:: bash
 
-   ros2 launch nav2_bringup navigation_launch.py \
+   ros2 launch nav2_bringup bringup_launch.py \
      use_sim_time:=False \
+     map:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
      params_file:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+
+This launches the full Nav2 stack including the map server, planner, controller, and behavior tree navigator. The ``map`` argument tells Nav2's map server which map to load.
 
 Verify Nav2 is Running
 -----------------------
@@ -136,7 +127,7 @@ Check that the Nav2 lifecycle nodes are active:
 
    ros2 node list
 
-You should see nodes including ``/planner_server``, ``/controller_server``, and ``/bt_navigator``.
+You should see nodes including ``/map_server``, ``/planner_server``, ``/controller_server``, and ``/bt_navigator``.
 
 Confirm the planner is ready by checking for the ``/plan`` topic:
 
