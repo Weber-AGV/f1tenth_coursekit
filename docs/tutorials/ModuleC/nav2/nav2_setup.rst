@@ -109,6 +109,10 @@ Launch the full Nav2 stack (AMCL + map server + navigation):
 
 This launches AMCL (localization), the map server, planner, controller, and behavior tree navigator.
 
+.. note::
+
+   **Shutting down Nav2:** The Nav2 component container ignores repeated ``Ctrl+C`` (SIGINT). If Nav2 does not stop after pressing ``Ctrl+C``, use ``Ctrl+\`` (SIGQUIT) instead.
+
 Leave this terminal running.
 
 3️⃣ Verify Nav2 is Running (Terminal 3)
