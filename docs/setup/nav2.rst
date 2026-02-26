@@ -23,11 +23,13 @@ Nav2 requires a parameters file that configures the planner, controller, and cos
 
 2️⃣ **Create the file on the robot**
 
+Open the file in VS Code:
+
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
 
-Paste the following contents:
+Paste the following contents and save (``Ctrl+S``):
 
 .. code-block:: yaml
 
@@ -238,8 +240,6 @@ Paste the following contents:
          - behavior_server
          - bt_navigator
 
-Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
-
 Create the Velocity Converter
 ------------------------------
 
@@ -247,11 +247,13 @@ Nav2's controller publishes ``geometry_msgs/Twist`` on ``/cmd_vel``, but the F1T
 
 3️⃣ **Create the converter node**
 
+Open the file in VS Code:
+
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
+   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
 
-Paste the following contents:
+Paste the following contents and save (``Ctrl+S``):
 
 .. code-block:: python
 
@@ -294,15 +296,17 @@ Paste the following contents:
    if __name__ == '__main__':
        main()
 
-Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
-
 4️⃣ **Replace setup.py**
 
-Replace the contents of ``setup.py`` with the following (adds the maps data file and converter entry point):
+Replace the contents of ``setup.py`` with the following (adds the maps data file and converter entry point).
+
+Open the file in VS Code:
 
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+
+Replace all contents with the following and save (``Ctrl+S``):
 
 .. code-block:: python
 
@@ -340,8 +344,6 @@ Replace the contents of ``setup.py`` with the following (adds the maps data file
        },
    )
 
-Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
-
 5️⃣ **Add the Nav2 dependency to package.xml**
 
 .. code-block:: bash
@@ -356,11 +358,13 @@ The Nav2 launch file wraps ``nav2_bringup`` with the correct map, parameters, an
 
 6️⃣ **Create the launch file**
 
+Open the file in VS Code:
+
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
+   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
 
-Paste the following contents:
+Paste the following contents and save (``Ctrl+S``):
 
 .. code-block:: python
 
@@ -396,8 +400,6 @@ Paste the following contents:
        )
 
        return LaunchDescription([nav2_bringup, cmd_vel_converter])
-
-Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
 7️⃣ **Rebuild the workspace**
 
