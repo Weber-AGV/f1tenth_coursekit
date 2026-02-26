@@ -5,6 +5,8 @@
 
 Send the car to any point on the map using the 2D Goal Pose tool in RViz2.
 
+Before starting, make sure all previous terminals (SLAM, map server, old RViz2) are closed. This tutorial launches everything fresh so the map is loaded cleanly by Nav2.
+
 .. tip::
 
    If you still have ``bringup`` and Nav2 running from :ref:`doc_tutorials_nav2_setup`, you can skip steps 1️⃣ and 2️⃣ and go straight to 3️⃣.
