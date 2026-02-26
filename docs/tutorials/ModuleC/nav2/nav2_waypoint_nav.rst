@@ -7,9 +7,7 @@ Send the car through multiple waypoints in sequence using the Nav2 panel in RViz
 
 In the previous tutorial you sent a single 2D Goal Pose. Here you will queue up several waypoints on the map and have Nav2 drive the car through all of them in order.
 
-.. tip::
-
-   If you still have ``bringup`` and Nav2 running from :ref:`doc_tutorials_nav2_goal_pose`, you can skip steps 1️⃣ and 2️⃣ and go straight to 3️⃣.
+Before starting, make sure all previous terminals are closed. This tutorial launches everything fresh.
 
 Steps
 -----
