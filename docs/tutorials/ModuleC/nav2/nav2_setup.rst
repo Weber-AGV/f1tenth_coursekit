@@ -56,7 +56,7 @@ Prerequisites
 Before starting, make sure you have:
 
 - **A saved map** — completed the SLAM tutorial with ``lab_map.pgm`` and ``lab_map.yaml`` in ``~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/``
-- **Nav2 installed** — completed the :ref:`doc_setup_nav2` setup (packages + parameters file)
+- **Nav2 installed** — completed the :ref:`doc_setup_nav2` setup
 
 Steps
 -----
