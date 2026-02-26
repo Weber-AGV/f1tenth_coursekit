@@ -64,19 +64,13 @@ Steps
 1️⃣ Start Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Make sure the PlayStation controller is connected to the car, then open a terminal on the robot and launch the car's sensors and drivers:
+Make sure the PlayStation controller is connected to the car, then open a terminal on the robot and run:
 
 .. code-block:: bash
 
-   cd ~/f1tenth_ws
-   source /opt/ros/humble/setup.bash
-   source install/setup.bash
+   bringup
 
-.. code-block:: bash
-
-   ros2 launch f1tenth_stack bringup_launch.py
-
-Or, if you have the alias configured: ``bringup``
+This calls ``ros2 launch f1tenth_stack bringup_launch.py``, which starts the car's sensors and drivers.
 
 .. note::
 
