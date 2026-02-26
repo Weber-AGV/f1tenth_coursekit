@@ -19,31 +19,33 @@ This page shows how to run SLAM Toolbox on the RoboRacer and visualize the map i
 
 |
 
-⚠️ Important
-------------
+.. important::
 
-You must have the **controller powered on and connected** before starting SLAM.  
-If the controller is not connected, the vehicle will not publish drive data and SLAM will not begin building a map.
+   You must have the **controller powered on and connected** before starting SLAM.
+   If the controller is not connected, the vehicle will not publish drive data and SLAM will not begin building a map.
 
 
-.. code-block:: bash
+.. note::
 
-   slam
+   Run the ``slam`` alias to start SLAM Toolbox:
 
-What ``slam`` runs
-^^^^^^^^^^^^^^^^^^
+   .. code-block:: bash
 
-.. code-block:: bash
+      slam
 
-   ros2 launch slam_toolbox online_async_launch.py \
-     params_file:=/home/nvidia/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml
+   **What** ``slam`` **runs:**
 
-If your RoboRacer name is ``f1-wsu-1``, your path would look like:
+   .. code-block:: bash
 
-.. code-block:: bash
+      ros2 launch slam_toolbox online_async_launch.py \
+        params_file:=/home/nvidia/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml
 
-   ros2 launch slam_toolbox online_async_launch.py \
-     params_file:=/home/f1-wsu-1/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml
+   If your RoboRacer name is ``f1-wsu-1``, your path would look like:
+
+   .. code-block:: bash
+
+      ros2 launch slam_toolbox online_async_launch.py \
+        params_file:=/home/f1-wsu-1/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/f1tenth_online_async.yaml
 
 
 Run Steps
