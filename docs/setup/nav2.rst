@@ -15,6 +15,31 @@ Install Nav2 (Navigation Stack)
 
 ``ros-humble-navigation2`` provides the core Nav2 nodes (planner, controller, bt_navigator) and ``ros-humble-nav2-bringup`` provides the launch files.
 
+Ensure Map Files Exist
+-----------------------
+
+Nav2 needs a saved map to navigate. If you completed the SLAM tutorial, ``lab_map.pgm`` and ``lab_map.yaml`` should already be in the maps directory.
+
+Verify the files exist:
+
+.. code-block:: bash
+
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
+
+If the files are missing, copy them from a robot that has already mapped the lab:
+
+.. code-block:: bash
+
+   mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps
+
+   # Replace <SOURCE_ROBOT_IP> with the IP of a robot that has the map
+   scp f1tenth@<SOURCE_ROBOT_IP>:~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm \
+       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+
+   scp f1tenth@<SOURCE_ROBOT_IP>:~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
+       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+
 
 Create the Parameters File
 ---------------------------
@@ -43,6 +68,41 @@ Paste the following contents:
      ros__parameters:
        use_sim_time: False
        yaml_filename: ""
+
+   amcl:
+     ros__parameters:
+       use_sim_time: False
+       alpha1: 0.2
+       alpha2: 0.2
+       alpha3: 0.2
+       alpha4: 0.2
+       alpha5: 0.2
+       base_frame_id: "base_link"
+       global_frame_id: "map"
+       odom_frame_id: "odom"
+       robot_model_type: "nav2_amcl::DifferentialMotionModel"
+       scan_topic: /scan
+       max_particles: 2000
+       min_particles: 500
+       laser_model_type: "likelihood_field"
+       laser_max_range: 10.0
+       laser_min_range: -1.0
+       max_beams: 60
+       z_hit: 0.5
+       z_rand: 0.5
+       z_short: 0.05
+       z_max: 0.05
+       sigma_hit: 0.2
+       lambda_short: 0.1
+       laser_likelihood_max_dist: 2.0
+       update_min_d: 0.25
+       update_min_a: 0.2
+       resample_interval: 1
+       transform_tolerance: 1.0
+       recovery_alpha_fast: 0.0
+       recovery_alpha_slow: 0.0
+       tf_broadcast: true
+       set_initial_pose: false
 
    bt_navigator:
      ros__parameters:
@@ -197,6 +257,7 @@ Paste the following contents:
        autostart: True
        node_names:
          - map_server
+         - amcl
          - controller_server
          - planner_server
          - behavior_server
@@ -260,21 +321,70 @@ Paste the following contents:
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
-4️⃣ **Add the entry point to setup.py**
+4️⃣ **Update setup.py**
 
-Run the following command to insert the entry point automatically:
+Edit ``setup.py``:
 
 .. code-block:: bash
 
-   sed -i "/console_scripts/a\\        'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main'," \
-       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+
+Make **two** additions:
+
+**a)** Add the maps directory to ``data_files`` (alongside existing config and launch lines):
+
+.. code-block:: python
+
+   (os.path.join('share', package_name, 'maps'), glob('maps/*')),
+
+**b)** Add the converter entry point to ``console_scripts``:
+
+.. code-block:: python
+
+   'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
+
+The final ``data_files`` and ``entry_points`` sections should look like:
+
+.. code-block:: python
+
+   data_files=[
+       ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+       ('share/' + package_name, ['package.xml']),
+       (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+       (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+       (os.path.join('share', package_name, 'maps'), glob('maps/*')),
+   ],
+   ...
+   entry_points={
+       'console_scripts': [
+           'throttle_interpolator = f1tenth_stack.throttle_interpolator:main',
+           'tf_publisher = f1tenth_stack.tf_publisher:main',
+           'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
+       ],
+   },
+
+Save the file.
+
+5️⃣ **Add the Nav2 dependency to package.xml**
+
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/package.xml
+
+Add the following line with the other ``<depend>`` entries:
+
+.. code-block:: xml
+
+   <depend>nav2_bringup</depend>
+
+Save the file.
 
 Create the Launch File
 -----------------------
 
 The Nav2 launch file wraps ``nav2_bringup`` with the correct map, parameters, and the velocity converter for the F1TENTH.
 
-5️⃣ **Create the launch file**
+6️⃣ **Create the launch file**
 
 .. code-block:: bash
 
@@ -303,6 +413,7 @@ Paste the following contents:
                'map': os.path.join(f1tenth_dir, 'maps', 'lab_map.yaml'),
                'params_file': os.path.join(f1tenth_dir, 'config', 'nav2_params.yaml'),
                'use_sim_time': 'False',
+               'slam': 'False',
                'autostart': 'True',
            }.items()
        )
@@ -318,7 +429,7 @@ Paste the following contents:
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
-6️⃣ **Rebuild the workspace**
+7️⃣ **Rebuild the workspace**
 
 .. code-block:: bash
 
@@ -326,7 +437,7 @@ Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
    colcon build --packages-select f1tenth_stack
    source install/setup.bash
 
-7️⃣ **Verify the files exist**
+8️⃣ **Verify the files exist**
 
 .. code-block:: bash
 
