@@ -16,15 +16,26 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
 
    * - Nav2 Component
      - Role
+   * - ``amcl``
+     - Localizes the car on the map (Monte Carlo localization)
    * - ``planner_server``
      - Global path planning (A* / NavFn)
    * - ``controller_server``
-     - Local path following (drives the car along the planned path)
+     - Local path following — publishes ``/cmd_vel`` (Twist)
    * - ``bt_navigator``
      - Subscribes to ``/goal_pose`` and orchestrates planning + control
+   * - ``cmd_vel_to_ackermann``
+     - Converts ``/cmd_vel`` (Twist) → ``/drive`` (AckermannDriveStamped)
    * - ``lifecycle_manager``
      - Manages the lifecycle of all Nav2 nodes
 
+**Command pipeline:** Nav2's controller publishes ``Twist`` on ``/cmd_vel``. The ``cmd_vel_to_ackermann`` node converts this to ``AckermannDriveStamped`` on ``/drive``. The ackermann mux forwards ``/drive`` to the VESC, which drives the wheels.
+
+.. code-block:: text
+
+   controller_server → /cmd_vel (Twist)
+     → cmd_vel_to_ackermann → /drive (AckermannDriveStamped)
+       → ackermann_mux (priority 10) → VESC
 
 .. note::
 

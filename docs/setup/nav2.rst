@@ -204,12 +204,84 @@ Paste the following contents:
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
+Create the Velocity Converter
+------------------------------
+
+Nav2's controller publishes ``geometry_msgs/Twist`` on ``/cmd_vel``, but the F1TENTH's ackermann mux expects ``AckermannDriveStamped`` on the ``/drive`` topic. A converter node bridges this gap.
+
+3️⃣ **Create the converter node**
+
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
+
+Paste the following contents:
+
+.. code-block:: python
+
+   import rclpy
+   from rclpy.node import Node
+   from geometry_msgs.msg import Twist
+   from ackermann_msgs.msg import AckermannDriveStamped
+   import math
+
+   class CmdVelToAckermann(Node):
+       def __init__(self):
+           super().__init__('cmd_vel_to_ackermann')
+           self.declare_parameter('wheelbase', 0.25)
+           self.wheelbase = self.get_parameter('wheelbase').value
+
+           self.sub = self.create_subscription(Twist, '/cmd_vel', self.callback, 10)
+           self.pub = self.create_publisher(AckermannDriveStamped, '/drive', 10)
+
+       def callback(self, msg):
+           ack = AckermannDriveStamped()
+           ack.header.stamp = self.get_clock().now().to_msg()
+           ack.drive.speed = msg.linear.x
+
+           if abs(msg.linear.x) > 0.01:
+               ack.drive.steering_angle = math.atan(
+                   self.wheelbase * msg.angular.z / msg.linear.x
+               )
+           else:
+               ack.drive.steering_angle = 0.0
+
+           self.pub.publish(ack)
+
+   def main():
+       rclpy.init()
+       node = CmdVelToAckermann()
+       rclpy.spin(node)
+       node.destroy_node()
+       rclpy.shutdown()
+
+   if __name__ == '__main__':
+       main()
+
+Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
+
+4️⃣ **Add the entry point to setup.py**
+
+Open ``setup.py``:
+
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+
+Find the ``console_scripts`` list inside ``entry_points`` and add a new line:
+
+.. code-block:: python
+
+   'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
+
+Save the file.
+
 Create the Launch File
 -----------------------
 
-The Nav2 launch file wraps ``nav2_bringup`` with the correct map and parameters paths for the F1TENTH.
+The Nav2 launch file wraps ``nav2_bringup`` with the correct map, parameters, and the velocity converter for the F1TENTH.
 
-3️⃣ **Create the file on the robot**
+5️⃣ **Create the launch file**
 
 .. code-block:: bash
 
@@ -222,6 +294,7 @@ Paste the following contents:
    from launch import LaunchDescription
    from launch.actions import IncludeLaunchDescription
    from launch.launch_description_sources import PythonLaunchDescriptionSource
+   from launch_ros.actions import Node
    from ament_index_python.packages import get_package_share_directory
    import os
 
@@ -229,23 +302,30 @@ Paste the following contents:
        f1tenth_dir = get_package_share_directory('f1tenth_stack')
        nav2_bringup_dir = get_package_share_directory('nav2_bringup')
 
-       return LaunchDescription([
-           IncludeLaunchDescription(
-               PythonLaunchDescriptionSource(
-                   os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')
-               ),
-               launch_arguments={
-                   'map': os.path.join(f1tenth_dir, 'maps', 'lab_map.yaml'),
-                   'params_file': os.path.join(f1tenth_dir, 'config', 'nav2_params.yaml'),
-                   'use_sim_time': 'False',
-                   'autostart': 'True',
-               }.items()
-           )
-       ])
+       nav2_bringup = IncludeLaunchDescription(
+           PythonLaunchDescriptionSource(
+               os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')
+           ),
+           launch_arguments={
+               'map': os.path.join(f1tenth_dir, 'maps', 'lab_map.yaml'),
+               'params_file': os.path.join(f1tenth_dir, 'config', 'nav2_params.yaml'),
+               'use_sim_time': 'False',
+               'autostart': 'True',
+           }.items()
+       )
+
+       cmd_vel_converter = Node(
+           package='f1tenth_stack',
+           executable='cmd_vel_to_ackermann',
+           name='cmd_vel_to_ackermann',
+           parameters=[{'wheelbase': 0.25}]
+       )
+
+       return LaunchDescription([nav2_bringup, cmd_vel_converter])
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
-4️⃣ **Rebuild the workspace**
+6️⃣ **Rebuild the workspace**
 
 .. code-block:: bash
 
@@ -253,9 +333,10 @@ Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
    colcon build --packages-select f1tenth_stack
    source install/setup.bash
 
-5️⃣ **Verify both files exist**
+7️⃣ **Verify the files exist**
 
 .. code-block:: bash
 
    ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
    ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
