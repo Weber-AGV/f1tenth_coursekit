@@ -15,31 +15,6 @@ Install Nav2 (Navigation Stack)
 
 ``ros-humble-navigation2`` provides the core Nav2 nodes (planner, controller, bt_navigator) and ``ros-humble-nav2-bringup`` provides the launch files.
 
-Ensure Map Files Exist
------------------------
-
-Nav2 needs a saved map to navigate. If you completed the SLAM tutorial, ``lab_map.pgm`` and ``lab_map.yaml`` should already be in the maps directory.
-
-Verify the files exist:
-
-.. code-block:: bash
-
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
-
-If the files are missing, copy them from a robot that has already mapped the lab:
-
-.. code-block:: bash
-
-   mkdir -p ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps
-
-   # Replace <SOURCE_ROBOT_IP> with the IP of a robot that has the map
-   scp f1tenth@<SOURCE_ROBOT_IP>:~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm \
-       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-
-   scp f1tenth@<SOURCE_ROBOT_IP>:~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
-       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
-
 
 Create the Parameters File
 ---------------------------
