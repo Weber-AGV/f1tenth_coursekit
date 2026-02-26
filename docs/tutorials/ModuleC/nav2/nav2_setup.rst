@@ -29,13 +29,11 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
    * - ``lifecycle_manager``
      - Manages the lifecycle of all Nav2 nodes
 
-**Command pipeline:** Nav2's controller publishes ``Twist`` on ``/cmd_vel``. The ``cmd_vel_to_ackermann`` node converts this to ``AckermannDriveStamped`` on ``/drive``. The ackermann mux forwards ``/drive`` to the VESC, which drives the wheels.
+.. note::
 
-.. code-block:: text
+   **Command pipeline:** Nav2's controller publishes ``Twist`` on ``/cmd_vel``. The ``cmd_vel_to_ackermann`` node converts this to ``AckermannDriveStamped`` on ``/drive``. The ackermann mux forwards ``/drive`` to the VESC, which drives the wheels.
 
-   controller_server → /cmd_vel (Twist)
-     → cmd_vel_to_ackermann → /drive (AckermannDriveStamped)
-       → ackermann_mux (priority 10) → VESC
+   ``controller_server`` → ``/cmd_vel`` (Twist) → ``cmd_vel_to_ackermann`` → ``/drive`` (AckermannDriveStamped) → ``ackermann_mux`` (priority 10) → VESC
 
 .. note::
 
