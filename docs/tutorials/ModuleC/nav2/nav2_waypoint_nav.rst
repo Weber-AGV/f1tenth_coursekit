@@ -35,9 +35,9 @@ Or, if you have the alias configured: ``bringup``
 
    If Nav2 later reports ``Timed out waiting for transform from base_link to odom``, the PlayStation controller is likely not connected. The VESC driver requires the joystick to fully initialize, and without it the ``odom`` frame is never published.
 
-.. warning::
+.. tip::
 
-   **Joystick safety override:** The ackermann mux gives the joystick priority over Nav2. Holding the deadman button (L1 / button 4) on the PlayStation controller overrides autonomous navigation. Release the deadman button to let Nav2 drive the car.
+   **No deadman button needed.** Unlike teleop, you do not need to hold the deadman button for Nav2 autonomous navigation — the car will drive itself. If you need to take manual control at any time, hold the deadman button (L1) on the PlayStation controller to override Nav2.
 
 Leave this terminal running.
 
@@ -135,7 +135,7 @@ The car will begin driving through each waypoint in the order you placed them. T
    If the car does not move after clicking Start Nav Through Poses, confirm that:
 
    - You set the initial pose with **2D Pose Estimate** (step 4️⃣)
-   - The deadman button on the PlayStation controller is **released** (holding it overrides Nav2)
+   - The deadman button (L1) is **not held** — holding it overrides Nav2 with manual control
    - Nav2 lifecycle nodes are all active (check ``ros2 node list``)
    - You placed at least one waypoint before clicking start
    - The map is visible in RViz2 (set Durability Policy to ``Transient Local``)
