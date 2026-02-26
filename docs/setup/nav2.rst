@@ -346,15 +346,8 @@ Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/package.xml
-
-Add the following line with the other ``<depend>`` entries:
-
-.. code-block:: xml
-
-   <depend>nav2_bringup</depend>
-
-Save the file.
+   cd ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack
+   sed -i '/<depend>std_msgs<\/depend>/a\  <depend>nav2_bringup<\/depend>' package.xml
 
 Create the Launch File
 -----------------------
