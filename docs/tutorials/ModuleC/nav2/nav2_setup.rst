@@ -73,6 +73,10 @@ Or, if you have the alias configured: ``bringup``
 
    If Nav2 later reports ``Timed out waiting for transform from base_link to odom``, the PlayStation controller is likely not connected. The VESC driver requires the joystick to fully initialize, and without it the ``odom`` frame is never published.
 
+.. warning::
+
+   **Joystick safety override:** The ackermann mux gives the joystick priority over Nav2. Holding the deadman button (L1 / button 4) on the PlayStation controller overrides autonomous navigation. Release the deadman button to let Nav2 drive the car.
+
 Leave this terminal running.
 
 2️⃣ Launch Nav2 (Terminal 2)
@@ -86,16 +90,13 @@ Open a **new** terminal and source the workspace:
    source /opt/ros/humble/setup.bash
    source install/setup.bash
 
-Launch the full Nav2 stack:
+Launch the full Nav2 stack (AMCL + map server + navigation):
 
 .. code-block:: bash
 
-   ros2 launch nav2_bringup bringup_launch.py \
-     use_sim_time:=False \
-     map:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
-     params_file:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   ros2 launch f1tenth_stack nav2_launch.py
 
-This launches the map server, planner, controller, and behavior tree navigator. The ``map`` argument tells Nav2's map server which map to load.
+This launches AMCL (localization), the map server, planner, controller, and behavior tree navigator.
 
 Leave this terminal running.
 
@@ -118,6 +119,8 @@ You should see these Nav2 nodes:
      - Role
    * - ``/map_server``
      - Loads and publishes the occupancy grid map
+   * - ``/amcl``
+     - Localizes the car on the map (Monte Carlo localization)
    * - ``/planner_server``
      - Computes a global path from the car's pose to the goal (A*)
    * - ``/controller_server``

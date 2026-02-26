@@ -204,8 +204,58 @@ Paste the following contents:
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
-3️⃣ **Verify the file exists**
+Create the Launch File
+-----------------------
+
+The Nav2 launch file wraps ``nav2_bringup`` with the correct map and parameters paths for the F1TENTH.
+
+3️⃣ **Create the file on the robot**
+
+.. code-block:: bash
+
+   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
+
+Paste the following contents:
+
+.. code-block:: python
+
+   from launch import LaunchDescription
+   from launch.actions import IncludeLaunchDescription
+   from launch.launch_description_sources import PythonLaunchDescriptionSource
+   from ament_index_python.packages import get_package_share_directory
+   import os
+
+   def generate_launch_description():
+       f1tenth_dir = get_package_share_directory('f1tenth_stack')
+       nav2_bringup_dir = get_package_share_directory('nav2_bringup')
+
+       return LaunchDescription([
+           IncludeLaunchDescription(
+               PythonLaunchDescriptionSource(
+                   os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')
+               ),
+               launch_arguments={
+                   'map': os.path.join(f1tenth_dir, 'maps', 'lab_map.yaml'),
+                   'params_file': os.path.join(f1tenth_dir, 'config', 'nav2_params.yaml'),
+                   'use_sim_time': 'False',
+                   'autostart': 'True',
+               }.items()
+           )
+       ])
+
+Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
+
+4️⃣ **Rebuild the workspace**
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select f1tenth_stack
+   source install/setup.bash
+
+5️⃣ **Verify both files exist**
 
 .. code-block:: bash
 
    ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py

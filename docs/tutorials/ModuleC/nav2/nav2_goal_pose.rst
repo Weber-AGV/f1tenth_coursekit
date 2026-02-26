@@ -33,6 +33,10 @@ Or, if you have the alias configured: ``bringup``
 
    If Nav2 later reports ``Timed out waiting for transform from base_link to odom``, the PlayStation controller is likely not connected. The VESC driver requires the joystick to fully initialize, and without it the ``odom`` frame is never published.
 
+.. warning::
+
+   **Joystick safety override:** The ackermann mux gives the joystick priority over Nav2. Holding the deadman button (L1 / button 4) on the PlayStation controller overrides autonomous navigation. Release the deadman button to let Nav2 drive the car.
+
 Leave this terminal running.
 
 2️⃣ Launch Nav2 (Terminal 2)
@@ -50,10 +54,7 @@ Launch the full Nav2 stack:
 
 .. code-block:: bash
 
-   ros2 launch nav2_bringup bringup_launch.py \
-     use_sim_time:=False \
-     map:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
-     params_file:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   ros2 launch f1tenth_stack nav2_launch.py
 
 Leave this terminal running.
 
@@ -120,6 +121,7 @@ The planned path will appear on the map and the car will begin driving toward th
    If the car does not move after setting a goal, confirm that:
 
    - You set the initial pose with **2D Pose Estimate** (step 4️⃣)
+   - The deadman button on the PlayStation controller is **released** (holding it overrides Nav2)
    - Nav2 lifecycle nodes are all active (check ``ros2 node list``)
    - The ``/goal_pose`` topic is being published (check ``ros2 topic echo /goal_pose``)
    - The map is visible in RViz2 (set Durability Policy to ``Transient Local``)
