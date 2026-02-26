@@ -11,7 +11,11 @@
       "Bash(git pull)",
       "Bash(xargs grep -l \"middleware\\\\|rmw\\\\|RMW\\\\|DDS\\\\|dds\")",
       "Bash(xargs grep -l \"nav2\\\\|Nav2\\\\|navigation_launch\\\\|bringup_launch\")",
-      "Bash(xargs grep -l \"navigate_through_poses\\\\|NavigateThroughPoses\\\\|multiple.*goal\\\\|multiple.*waypoint\")"
+      "Bash(xargs grep -l \"navigate_through_poses\\\\|NavigateThroughPoses\\\\|multiple.*goal\\\\|multiple.*waypoint\")",
+      "Bash(ffmpeg -i docs/tutorials/ModuleC/nav2/img/2d_pose_estimate.gif -vf \"fps=10,scale=800:-1:flags=lanczos\" -gifflags +transdiff docs/tutorials/ModuleC/nav2/img/2d_pose_estimate_small.gif)",
+      "Bash(\"/c/Users/Scott/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/ffmpeg.exe\" -i docs/tutorials/ModuleC/nav2/img/2d_pose_estimate.gif -vf \"fps=10,scale=800:-1:flags=lanczos\" -gifflags +transdiff docs/tutorials/ModuleC/nav2/img/2d_pose_estimate_small.gif -y)",
+      "Bash(git reset --soft origin/master)",
+      "Bash(git reset HEAD docs/tutorials/ModuleC/nav2/img/2d_pose_estimate_original.gif .claude/settings.local.json)"
     ]
   }
 }

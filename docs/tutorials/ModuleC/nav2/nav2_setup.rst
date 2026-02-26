@@ -105,6 +105,16 @@ This launches AMCL (localization), the map server, planner, controller, and beha
 
    **Shutting down Nav2:** The Nav2 component container ignores repeated ``Ctrl+C`` (SIGINT). If Nav2 does not stop after pressing ``Ctrl+C``, use ``Ctrl+\`` (SIGQUIT) instead.
 
+.. note::
+
+   If map_server fails with ``Failed processing YAML file ... for reason: bad file``, the map file in the install directory is empty or corrupted. Check the source file:
+
+   .. code-block:: bash
+
+      cat ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
+
+   If the file has valid content, rebuild with ``colcon build --packages-select f1tenth_stack`` and relaunch. If the file is empty or missing, go back to the SLAM tutorial and save the map again, then rebuild.
+
 Leave this terminal running.
 
 3️⃣ Verify Nav2 is Running (Terminal 3)

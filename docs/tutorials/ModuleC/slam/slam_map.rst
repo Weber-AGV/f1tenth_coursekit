@@ -117,6 +117,22 @@ You should see a line like:
    image: lab_map.pgm
 
 
+5️⃣ Rebuild the Workspace
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Nav2 launch file reads map files from the **install** directory, not the source directory. Run ``colcon build`` so the newly saved map files get copied there:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select f1tenth_stack
+   source install/setup.bash
+
+.. note::
+
+   If you re-save the map later (new environment, better scan), you must rebuild again for Nav2 to pick up the updated files.
+
+
 Understanding the YAML Thresholds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -164,7 +180,7 @@ Once installed, open your ``lab_map.pgm`` file in VS Code — it will render the
 |
 
 
-5️⃣ Stop SLAM and Bringup
+6️⃣ Stop SLAM and Bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Before loading the saved map, stop the running SLAM and bringup processes to avoid conflicts (both SLAM Toolbox and the map server publish on ``/map``).
@@ -173,7 +189,7 @@ Before loading the saved map, stop the running SLAM and bringup processes to avo
 - Press ``Ctrl+C`` in the **bringup terminal** to stop the car's drivers (sensors are no longer needed for this step)
 - RViz2 can stay open
 
-6️⃣ Load the Map
+7️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
 Now verify the saved map can be loaded and displayed. The map server reads the ``.yaml`` and ``.pgm`` files and publishes the occupancy grid on the ``/map`` topic so other nodes (like Nav2 or RViz2) can use it.
@@ -219,7 +235,7 @@ The map is now being published on the ``/map`` topic.
    If ``configure`` fails (e.g. due to a bad ``image:`` path in the yaml), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
-7️⃣ Verify the Map in RViz2
+8️⃣ Verify the Map in RViz2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a new terminal and launch RViz2:
@@ -248,7 +264,7 @@ You should see your saved map appear. This confirms the map server is running an
 
    The ``Transient Local`` durability policy is required. The map server publishes the map once on activation — without this setting, RViz2 will miss that message and the map will not appear.
 
-8️⃣ Close Everything
+9️⃣ Close Everything
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Once you've confirmed the map looks correct, close all running processes:
