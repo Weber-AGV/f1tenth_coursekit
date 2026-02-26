@@ -262,19 +262,12 @@ Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
 4️⃣ **Add the entry point to setup.py**
 
-Open ``setup.py``:
+Run the following command to insert the entry point automatically:
 
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
-
-Find the ``console_scripts`` list inside ``entry_points`` and add a new line:
-
-.. code-block:: python
-
-   'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
-
-Save the file.
+   sed -i "/console_scripts/a\\        'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main'," \
+       ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
 
 Create the Launch File
 -----------------------
