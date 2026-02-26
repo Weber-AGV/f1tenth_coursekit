@@ -248,6 +248,10 @@ You should see your saved map appear. This confirms the map server is running an
 
    The ``Transient Local`` durability policy is required. The map server publishes the map once on activation — without this setting, RViz2 will miss that message and the map will not appear.
 
+.. tip::
+
+   This step is just to **verify** the saved map is valid. Once you've confirmed it looks correct, you can close the map server (``Ctrl+C`` in Terminal 1) and RViz2. The map files are saved to disk and Nav2 will launch its own map server automatically when you get to the navigation tutorials.
+
 
 Common Mistakes
 ---------------
