@@ -192,6 +192,13 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
    ros2 lifecycle set /map_server configure
    ros2 lifecycle set /map_server activate
 
+Expected output:
+
+.. code-block:: text
+
+   Transitioning successful
+   Transitioning successful
+
 The map will then be published on the ``/map`` topic.
 
 .. note::
