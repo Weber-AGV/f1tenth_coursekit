@@ -69,7 +69,7 @@ Then run the map saver command, saving directly into that folder:
 
 .. note::
 
-   If you see ``Failed to spin map subscription``, the map saver could not find the ``/map`` topic. This usually means SLAM Toolbox is not running or was closed before saving. Make sure the SLAM terminal is still active and then try the command again.
+   If you see ``Failed to spin map subscription``, the map saver could not find the ``/map`` topic. If SLAM Toolbox is still running, try the save command again — it sometimes fails on the first attempt. If SLAM Toolbox was closed, you will need to restart it and rebuild the map before saving.
 
 This will generate two files:
 
