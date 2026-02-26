@@ -70,7 +70,18 @@ On your laptop, open RViz2:
 
 Add a **Map** display (Topic: ``/map``, Durability Policy: ``Transient Local``) to confirm the map is visible.
 
-4️⃣ Add Path Visualization
+4️⃣ Set Initial Pose
+^^^^^^^^^^^^^^^^^^^^^^
+
+Before Nav2 can navigate, AMCL needs to know where the car is on the map.
+
+- In the RViz2 toolbar, click **2D Pose Estimate**
+- Click on the map at the car's approximate location
+- Drag to set the car's heading, then release
+
+You should see the robot's position update on the map. AMCL will refine the estimate as the car moves.
+
+5️⃣ Add Path Visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In RViz2, add the following displays:
@@ -79,21 +90,21 @@ In RViz2, add the following displays:
 - Click **Add** → select **Path** → set Topic to ``/local_plan``
 - Click **Add** → select **MarkerArray** → set Topic to ``/waypoints``
 
-5️⃣ Add the Nav2 Panel
+6️⃣ Add the Nav2 Panel
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 In RViz2, open **Panels** → **Add New Panel** → select **Nav2** (from ``nav2_rviz_plugins``).
 
 A new panel will appear at the bottom of RViz2 with navigation controls.
 
-6️⃣ Enable Waypoint Mode
+7️⃣ Enable Waypoint Mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the Nav2 panel, check the box labeled **Waypoint / Nav Through Poses Mode**.
 
 This changes the behavior of the 2D Goal Pose tool — instead of sending each goal immediately, it will queue waypoints for batch navigation.
 
-7️⃣ Set Waypoints
+8️⃣ Set Waypoints
 ^^^^^^^^^^^^^^^^^^^
 
 Use the **2D Goal Pose** tool in the RViz2 toolbar to place multiple waypoints on the map:
@@ -104,14 +115,14 @@ Use the **2D Goal Pose** tool in the RViz2 toolbar to place multiple waypoints o
 
 Place 3–5 waypoints around the track to start.
 
-8️⃣ Start Navigation
+9️⃣ Start Navigation
 ^^^^^^^^^^^^^^^^^^^^^^
 
 In the Nav2 panel, click **Start Nav Through Poses**.
 
 The car will begin driving through each waypoint in the order you placed them. The global planner computes a path to each waypoint in sequence, and the controller follows each path segment.
 
-9️⃣ Watch the Car Navigate
+🔟 Watch the Car Navigate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - The car drives to the first waypoint, then replans to the next
@@ -122,6 +133,7 @@ The car will begin driving through each waypoint in the order you placed them. T
 
    If the car does not move after clicking Start Nav Through Poses, confirm that:
 
+   - You set the initial pose with **2D Pose Estimate** (step 4️⃣)
    - Nav2 lifecycle nodes are all active (check ``ros2 node list``)
    - You placed at least one waypoint before clicking start
    - The map is visible in RViz2 (set Durability Policy to ``Transient Local``)

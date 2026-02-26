@@ -68,7 +68,18 @@ On your laptop, open RViz2:
 
 Add a **Map** display (Topic: ``/map``, Durability Policy: ``Transient Local``) to confirm the map is visible.
 
-4️⃣ Add Path Visualization
+4️⃣ Set Initial Pose
+^^^^^^^^^^^^^^^^^^^^^^
+
+Before Nav2 can navigate, AMCL needs to know where the car is on the map.
+
+- In the RViz2 toolbar, click **2D Pose Estimate**
+- Click on the map at the car's approximate location
+- Drag to set the car's heading, then release
+
+You should see the robot's position update on the map. AMCL will refine the estimate as the car moves.
+
+5️⃣ Add Path Visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In RViz2, add the following displays to visualize Nav2's planning and control:
@@ -88,7 +99,7 @@ In RViz2, add the following displays to visualize Nav2's planning and control:
 - Click **Add** → select **MarkerArray**
 - Set Topic to ``/waypoints``
 
-5️⃣ Send a 2D Goal Pose
+6️⃣ Send a 2D Goal Pose
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - In the RViz2 toolbar, click **2D Goal Pose**
@@ -97,7 +108,7 @@ In RViz2, add the following displays to visualize Nav2's planning and control:
 
 The planned path will appear on the map and the car will begin driving toward the goal.
 
-6️⃣ Watch the Car Navigate
+7️⃣ Watch the Car Navigate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - The global planner computes a path from the car's current pose to the goal
@@ -108,6 +119,7 @@ The planned path will appear on the map and the car will begin driving toward th
 
    If the car does not move after setting a goal, confirm that:
 
+   - You set the initial pose with **2D Pose Estimate** (step 4️⃣)
    - Nav2 lifecycle nodes are all active (check ``ros2 node list``)
    - The ``/goal_pose`` topic is being published (check ``ros2 topic echo /goal_pose``)
    - The map is visible in RViz2 (set Durability Policy to ``Transient Local``)
