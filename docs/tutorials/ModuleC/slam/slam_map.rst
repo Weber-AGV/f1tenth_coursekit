@@ -185,7 +185,7 @@ In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and r
    ros2 run nav2_map_server map_server --ros-args \
      -p yaml_filename:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-**Terminal 2** — Configure then activate:
+**Terminal 2** — Wait a few seconds for the map server to start, then configure and activate:
 
 .. code-block:: bash
 
@@ -196,7 +196,9 @@ The map will then be published on the ``/map`` topic.
 
 .. note::
 
-   The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
+   If ``configure`` returns **"Node not found"**, the map server has not finished starting. Wait a few seconds and try again.
+
+   The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. You must run ``configure`` first, then ``activate``. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
 7️⃣ Verify the Map in RViz2
