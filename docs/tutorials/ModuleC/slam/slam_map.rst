@@ -176,21 +176,32 @@ Before loading the saved map, stop the running SLAM and bringup processes to avo
 6️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
-In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and runs as a **lifecycle node**. You must start it in one terminal, then configure and activate it in a second terminal.
+Now verify the saved map can be loaded and displayed. The map server reads the ``.yaml`` and ``.pgm`` files and publishes the occupancy grid on the ``/map`` topic so other nodes (like Nav2 or RViz2) can use it.
 
-**Terminal 1** — Start the map server:
+In ROS 2 Humble, the map server is a **lifecycle node**. Unlike a regular node that starts working immediately, a lifecycle node starts in an *unconfigured* state and must be explicitly transitioned through its states before it does anything:
+
+.. code-block:: text
+
+   Unconfigured → configure → Inactive → activate → Active
+
+This two-step process gives you control over when the node loads its resources (``configure``) and when it starts publishing (``activate``).
+
+**Terminal 1** — Start the map server node (it will start in the *unconfigured* state and wait):
 
 .. code-block:: bash
 
    ros2 run nav2_map_server map_server --ros-args \
      -p yaml_filename:=$HOME/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml
 
-**Terminal 2** — Wait a few seconds for the map server to start, then configure and activate:
+**Terminal 2** — Wait a few seconds for the node to start, then transition it to active:
 
 .. code-block:: bash
 
    ros2 lifecycle set /map_server configure
    ros2 lifecycle set /map_server activate
+
+- ``configure`` — the map server reads ``lab_map.yaml`` and loads ``lab_map.pgm`` into memory
+- ``activate`` — the map server begins publishing the occupancy grid on ``/map``
 
 Expected output:
 
@@ -199,13 +210,13 @@ Expected output:
    Transitioning successful
    Transitioning successful
 
-The map will then be published on the ``/map`` topic.
+The map is now being published on the ``/map`` topic.
 
 .. note::
 
    If ``configure`` returns **"Node not found"**, the map server has not finished starting. Wait a few seconds and try again.
 
-   The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. You must run ``configure`` first, then ``activate``. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
+   If ``configure`` fails (e.g. due to a bad ``image:`` path in the yaml), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
 7️⃣ Verify the Map in RViz2
