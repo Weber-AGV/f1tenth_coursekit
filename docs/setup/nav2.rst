@@ -296,49 +296,51 @@ Paste the following contents:
 
 Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
-4️⃣ **Update setup.py**
+4️⃣ **Replace setup.py**
 
-Edit ``setup.py``:
+Replace the contents of ``setup.py`` with the following (adds the maps data file and converter entry point):
 
 .. code-block:: bash
 
    nano ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
 
-Make **two** additions:
-
-**a)** Add the maps directory to ``data_files`` (alongside existing config and launch lines):
-
 .. code-block:: python
 
-   (os.path.join('share', package_name, 'maps'), glob('maps/*')),
+   from setuptools import setup
+   import os
+   from glob import glob
 
-**b)** Add the converter entry point to ``console_scripts``:
+   package_name = 'f1tenth_stack'
 
-.. code-block:: python
-
-   'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
-
-The final ``data_files`` and ``entry_points`` sections should look like:
-
-.. code-block:: python
-
-   data_files=[
-       ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
-       ('share/' + package_name, ['package.xml']),
-       (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
-       (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
-       (os.path.join('share', package_name, 'maps'), glob('maps/*')),
-   ],
-   ...
-   entry_points={
-       'console_scripts': [
-           'throttle_interpolator = f1tenth_stack.throttle_interpolator:main',
-           'tf_publisher = f1tenth_stack.tf_publisher:main',
-           'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
+   setup(
+       name=package_name,
+       version='0.0.1',
+       packages=[package_name],
+       data_files=[
+           ('share/ament_index/resource_index/packages',
+               ['resource/' + package_name]),
+           ('share/' + package_name, ['package.xml']),
+           (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+           (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+           (os.path.join('share', package_name, 'maps'), glob('maps/*')),
        ],
-   },
+       install_requires=['setuptools'],
+       zip_safe=True,
+       maintainer='Hongrui Zheng',
+       maintainer_email='billyzheng.bz@gmail.com',
+       description='Onboard drivers for vesc and sensors for F1TENTH vehicles.',
+       license='MIT',
+       tests_require=['pytest'],
+       entry_points={
+           'console_scripts': [
+               'throttle_interpolator = f1tenth_stack.throttle_interpolator:main',
+               'tf_publisher = f1tenth_stack.tf_publisher:main',
+               'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
+           ],
+       },
+   )
 
-Save the file.
+Save the file (``Ctrl+O``, Enter, ``Ctrl+X``).
 
 5️⃣ **Add the Nav2 dependency to package.xml**
 
