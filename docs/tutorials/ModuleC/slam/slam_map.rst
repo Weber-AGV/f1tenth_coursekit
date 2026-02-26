@@ -67,6 +67,10 @@ Then run the map saver command, saving directly into that folder:
 
    ros2 run nav2_map_server map_saver_cli -f ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map
 
+.. note::
+
+   If you see ``Failed to spin map subscription``, the map saver could not find the ``/map`` topic. This usually means SLAM Toolbox is not running or was closed before saving. Make sure the SLAM terminal is still active and then try the command again.
+
 This will generate two files:
 
 .. code-block:: text
