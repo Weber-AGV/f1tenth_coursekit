@@ -164,7 +164,16 @@ Once installed, open your ``lab_map.pgm`` file in VS Code — it will render the
 |
 
 
-5️⃣ Load the Map
+5️⃣ Stop SLAM and Bringup
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before loading the saved map, stop the running SLAM and bringup processes to avoid conflicts (both SLAM Toolbox and the map server publish on ``/map``).
+
+- Press ``Ctrl+C`` in the **SLAM terminal** to stop SLAM Toolbox
+- Press ``Ctrl+C`` in the **bringup terminal** to stop the car's drivers (sensors are no longer needed for this step)
+- RViz2 can stay open
+
+6️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
 In ROS 2 Humble, the map server is part of the ``nav2_map_server`` package and runs as a **lifecycle node**. You must start it in one terminal, then configure and activate it in a second terminal.
@@ -190,7 +199,7 @@ The map will then be published on the ``/map`` topic.
    The lifecycle transitions are required — the map server will not publish until it is both configured **and** activated. If ``configure`` fails (e.g. due to a bad yaml ``image:`` path), the node enters an error state and ``activate`` will not be available. Fix the yaml and restart Terminal 1 before trying again.
 
 
-6️⃣ Verify the Map in RViz2
+7️⃣ Verify the Map in RViz2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a new terminal and launch RViz2:
