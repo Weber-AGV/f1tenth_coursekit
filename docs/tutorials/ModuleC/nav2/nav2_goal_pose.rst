@@ -116,6 +116,9 @@ The planned path will appear on the map and the car will begin driving toward th
 - The controller follows that path in real time — watch the ``/local_plan`` display to see the controller's tracking path
 - The car will stop when it reaches the goal
 
+.. image:: img/2d_pose_estimate.gif
+   :alt: Setting the initial pose and sending a 2D Goal Pose in RViz2
+
 .. note::
 
    If the car does not move after setting a goal, confirm that:

@@ -8,7 +8,10 @@
       "Bash(git push:*)",
       "Bash(ls -la \"c:\\\\DEV\\\\CS6300\\\\f1tenth_coursekit\\\\docs\"\" 2>/dev/null || ls -la \"/c/DEV/CS6300/f1tenth_coursekit/docs/\" 2>/dev/null || echo \"Trying PowerShell path... \")",
       "Bash(git ls-tree:*)",
-      "Bash(git pull)"
+      "Bash(git pull)",
+      "Bash(xargs grep -l \"middleware\\\\|rmw\\\\|RMW\\\\|DDS\\\\|dds\")",
+      "Bash(xargs grep -l \"nav2\\\\|Nav2\\\\|navigation_launch\\\\|bringup_launch\")",
+      "Bash(xargs grep -l \"navigate_through_poses\\\\|NavigateThroughPoses\\\\|multiple.*goal\\\\|multiple.*waypoint\")"
     ]
   }
 }
