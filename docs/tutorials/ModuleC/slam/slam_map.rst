@@ -264,6 +264,15 @@ You should see your saved map appear. This confirms the map server is running an
 
    The ``Transient Local`` durability policy is required. The map server publishes the map once on activation — without this setting, RViz2 will miss that message and the map will not appear.
 
+.. note::
+
+   RViz2 will show **Global Status: Error — Frame [map] does not exist**. This is expected. The standalone map server does not publish TF frames — the ``map`` frame only appears when AMCL is running (during Nav2 navigation). As long as the Map display shows **Status: Ok** and you can see your map, the verification passed.
+
+   .. image:: img/map_frame_error.png
+      :alt: Expected Frame [map] does not exist error in RViz2 during map verification
+      :width: 80%
+      :align: center
+
 9️⃣ Close Everything
 ^^^^^^^^^^^^^^^^^^^^^^
 

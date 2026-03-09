@@ -222,11 +222,13 @@ Paste the following contents and save (``Ctrl+S``):
        costmap_topic: local_costmap/costmap_raw
        footprint_topic: local_costmap/published_footprint
        cycle_frequency: 10.0
-       behavior_plugins: ["wait", "backup"]
-       wait:
-         plugin: "nav2_behaviors/Wait"
+       behavior_plugins: ["spin", "backup", "wait"]
+       spin:
+         plugin: "nav2_behaviors/Spin"
        backup:
          plugin: "nav2_behaviors/BackUp"
+       wait:
+         plugin: "nav2_behaviors/Wait"
 
    lifecycle_manager:
      ros__parameters:
