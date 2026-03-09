@@ -130,6 +130,13 @@ The Nav2 launch file reads map files from the **install** directory, not the sou
 
 .. note::
 
+   **Why rebuild?** The ROS 2 workspace has two copies of your files:
+
+   - ``src/`` — your source files (where ``map_saver_cli`` saves the map)
+   - ``install/.../share/`` — the installed copy (where ``nav2_launch.py`` reads from via ``get_package_share_directory()``)
+
+   The verification step below (step 7) reads directly from ``src/``, so it works without rebuilding. But Nav2 reads from the ``install/`` directory, so ``colcon build`` is required to copy the map files there.
+
    If you re-save the map later (new environment, better scan), you must rebuild again for Nav2 to pick up the updated files.
 
 
