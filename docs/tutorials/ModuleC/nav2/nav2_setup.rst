@@ -29,6 +29,21 @@ The 2D Goal Pose button in RViz2 publishes a ``geometry_msgs/PoseStamped`` messa
    * - ``lifecycle_manager``
      - Manages the lifecycle of all Nav2 nodes
 
+What is AMCL?
+^^^^^^^^^^^^^
+
+**AMCL** (Adaptive Monte Carlo Localization) is a particle filter that answers the question: *"Where am I on this map?"*
+
+It works by maintaining a cloud of **particles** — hundreds of guesses of where the robot might be on the map. Each particle represents a possible pose (x, y, heading). On every laser scan, AMCL compares what the LiDAR actually sees against what it *would* see from each particle's position on the saved map. Particles that match well survive; particles that don't are discarded and replaced. Over time, the cloud converges around the robot's true position.
+
+AMCL publishes the ``map`` → ``odom`` TF transform, which is how the rest of Nav2 knows the robot's position on the map. Without AMCL, the ``map`` frame does not exist and navigation cannot work.
+
+**Why do I need to set a 2D Pose Estimate?** AMCL needs a starting guess. When Nav2 first launches, the particles are not initialized — AMCL doesn't know where to start looking. Clicking **2D Pose Estimate** in RViz2 gives AMCL an approximate starting position, and it spreads the initial particle cloud around that point. As the robot moves, the cloud narrows and localization becomes accurate.
+
+.. note::
+
+   You can visualize the particle cloud in RViz2 by adding a **PoseArray** display on the ``/particle_cloud`` topic. A tight cluster means AMCL is confident in its localization. A spread-out cloud means it is still converging.
+
 .. note::
 
    **Command pipeline:** Nav2's controller publishes ``Twist`` on ``/cmd_vel``. The ``cmd_vel_to_ackermann`` node converts this to ``AckermannDriveStamped`` on ``/drive``. The ackermann mux forwards ``/drive`` to the VESC, which drives the wheels.
