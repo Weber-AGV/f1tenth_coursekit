@@ -80,8 +80,13 @@ In RViz2, add the following displays to visualize Nav2's planning, localization,
 
 **AMCL Particle Cloud** (localization confidence):
 
-- Click **Add** → select **PoseArray**
-- Set Topic to ``/particle_cloud``
+- Click **Add** → **By topic** → expand ``/particle_cloud`` → select **ParticleCloud** (under ``nav2_rviz_plugins``)
+- The topic is set automatically
+
+.. image:: img/particle_cloud_setup.png
+   :alt: Adding ParticleCloud display from nav2_rviz_plugins in RViz2
+   :width: 50%
+   :align: center
 
 A tight cluster of arrows means AMCL is confident in its localization. A spread-out cloud means it is still converging.
 
@@ -97,6 +102,28 @@ A tight cluster of arrows means AMCL is confident in its localization. A spread-
    :align: center
 
 The costmap is Nav2's view of the world for planning purposes. It takes your saved map and **inflates obstacles outward** — creating purple/blue "danger zones" around walls and objects. The planner avoids these zones so the car never plans a path too close to a wall. The local costmap (``/local_costmap/costmap``) also incorporates **live LiDAR data**, allowing Nav2 to detect and avoid obstacles that weren't in the original map (e.g., a person standing in the hallway).
+
+.. image:: img/cost_map_image.png
+   :alt: RViz2 showing the global costmap overlaid on the map with purple inflation zones around walls
+   :width: 80%
+   :align: center
+
+**Global Costmap Polygon** (robot footprint):
+
+- Click **Add** → **By topic** → expand ``/global_costmap`` → expand ``/global_costmap/published_footprint`` → select **Polygon**
+- The topic is set automatically
+
+.. image:: img/global_costmap_polygon_setup.png
+   :alt: Adding Global Costmap Polygon display in RViz2
+   :width: 50%
+   :align: center
+
+The polygon shows the robot's footprint on the costmap — this is the outline Nav2 uses to determine whether the car fits through a gap or will collide with an inflated obstacle.
+
+.. image:: img/global_costmap_polygon.png
+   :alt: Robot footprint polygon displayed on the global costmap in RViz2
+   :width: 80%
+   :align: center
 
 **Global Plan** (the planned route from start to goal):
 
