@@ -89,6 +89,12 @@ A tight cluster of arrows means AMCL is confident in its localization. A spread-
 
 - Click **Add** → select **Map**
 - Set Topic to ``/global_costmap/costmap``
+- Change **Color Scheme** to ``costmap`` (this uses a gradient that highlights inflation zones)
+
+.. image:: img/cost_map.png
+   :alt: Global costmap display settings in RViz2 with Color Scheme set to costmap
+   :width: 50%
+   :align: center
 
 The costmap is Nav2's view of the world for planning purposes. It takes your saved map and **inflates obstacles outward** — creating purple/blue "danger zones" around walls and objects. The planner avoids these zones so the car never plans a path too close to a wall. The local costmap (``/local_costmap/costmap``) also incorporates **live LiDAR data**, allowing Nav2 to detect and avoid obstacles that weren't in the original map (e.g., a person standing in the hallway).
 
