@@ -28,8 +28,8 @@ master_doc = 'index'
 
 # General information about the project
 project = 'RoboRacer - Learn'
-copyright = '2018-2020, RoboRacer community (CC-BY-NC-SA 4.0)'
-author = 'RoboRacer community'
+copyright = '2025, Weber State University. Based on RoboRacer (CC-BY-NC-SA 4.0)'
+author = 'Weber State University'
 
 # Version info for the project, acts as replacement for |version| and |release|
 # The short X.Y version
