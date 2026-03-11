@@ -57,6 +57,7 @@ Open a new terminal on the RoboRacer and launch RViz2:
 
 .. code-block:: bash
 
+   source /opt/ros/humble/setup.bash
    rviz2
 
 Add a **Map** display (Topic: ``/map``, Durability Policy: ``Transient Local``) to confirm the map is visible.
@@ -72,10 +73,24 @@ Before Nav2 can navigate, AMCL needs to know where the car is on the map.
 
 You should see the robot's position update on the map. AMCL will refine the estimate as the car moves.
 
-5️⃣ Add Path Visualization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5️⃣ Add Visualization Displays
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In RViz2, add the following displays to visualize Nav2's planning and control:
+In RViz2, add the following displays to visualize Nav2's planning, localization, and obstacle avoidance.
+
+**AMCL Particle Cloud** (localization confidence):
+
+- Click **Add** → select **PoseArray**
+- Set Topic to ``/particle_cloud``
+
+A tight cluster of arrows means AMCL is confident in its localization. A spread-out cloud means it is still converging.
+
+**Global Costmap** (obstacle avoidance zones):
+
+- Click **Add** → select **Map**
+- Set Topic to ``/global_costmap/costmap``
+
+The costmap is Nav2's view of the world for planning purposes. It takes your saved map and **inflates obstacles outward** — creating purple/blue "danger zones" around walls and objects. The planner avoids these zones so the car never plans a path too close to a wall. The local costmap (``/local_costmap/costmap``) also incorporates **live LiDAR data**, allowing Nav2 to detect and avoid obstacles that weren't in the original map (e.g., a person standing in the hallway).
 
 **Global Plan** (the planned route from start to goal):
 
