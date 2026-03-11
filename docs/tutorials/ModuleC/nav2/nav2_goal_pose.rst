@@ -53,7 +53,7 @@ Leave this terminal running.
 3️⃣ Open RViz2
 ^^^^^^^^^^^^^^^^
 
-On your laptop, open RViz2:
+Open a new terminal on the RoboRacer and launch RViz2:
 
 .. code-block:: bash
 
