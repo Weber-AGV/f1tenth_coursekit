@@ -199,7 +199,11 @@ Before loading the saved map, stop the running SLAM and bringup processes to avo
 7️⃣ Load the Map
 ^^^^^^^^^^^^^^^^^
 
-Now verify the saved map can be loaded and displayed. The map server reads the ``.yaml`` and ``.pgm`` files and publishes the occupancy grid on the ``/map`` topic so other nodes (like Nav2 or RViz2) can use it.
+.. important::
+
+   This step is **verification only** — we are confirming that the saved map files load correctly. You will **not** be able to drive the robot, set a 2D Goal Pose, or use navigation here. Autonomous navigation requires the full Nav2 stack (AMCL for localization, planner, controller) which is covered in the :ref:`Nav2 tutorials <doc_tutorials_nav2_setup>`.
+
+The map server reads the ``.yaml`` and ``.pgm`` files and publishes the occupancy grid on the ``/map`` topic so other nodes (like Nav2 or RViz2) can use it.
 
 In ROS 2 Humble, the map server is a **lifecycle node**. Unlike a regular node that starts working immediately, a lifecycle node starts in an *unconfigured* state and must be explicitly transitioned through its states before it does anything:
 
