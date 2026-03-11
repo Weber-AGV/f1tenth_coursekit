@@ -114,7 +114,15 @@ Launch the full Nav2 stack (AMCL + map server + navigation):
 
    ros2 launch f1tenth_stack nav2_launch.py
 
-This launches AMCL (localization), the map server, planner, controller, and behavior tree navigator.
+This launches the full Nav2 stack:
+
+- **map_server** — loads your saved map and publishes the occupancy grid
+- **AMCL** — localizes the car on the map using a particle filter (publishes the ``map`` → ``odom`` TF)
+- **planner_server** — computes a global path from the car to the goal (A*)
+- **controller_server** — follows the planned path by publishing velocity commands
+- **behavior_server** — handles recovery behaviors (spin, backup, wait) when the car gets stuck
+- **bt_navigator** — the behavior tree that orchestrates planning, control, and recovery into a complete navigation loop
+- **cmd_vel_to_ackermann** — converts Nav2's ``/cmd_vel`` (Twist) to ``/drive`` (AckermannDriveStamped) for the F1TENTH
 
 .. note::
 

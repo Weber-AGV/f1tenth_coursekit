@@ -135,18 +135,7 @@ Use Nav2's Navigate Through Poses to send the car through multiple waypoints in 
 
    Refer to the :ref:`Navigate Through Poses <doc_tutorials_nav2_waypoint_nav>` tutorial for the full walkthrough.
 
-VII. Questions
---------------
-
-Answer the following in your lab report:
-
-1. **SLAM**: What happens if you save the map before closing the loop? How does an incomplete map affect Nav2 navigation?
-2. **AMCL**: What is the purpose of the 2D Pose Estimate? What happens if you skip it or place it in the wrong location?
-3. **Nav2 Pipeline**: Trace the command flow from clicking 2D Goal Pose in RViz2 to the wheels turning. Name each node and topic in the chain.
-4. **Costmaps**: What is the difference between the local costmap and the global costmap? What role does the inflation layer play?
-5. **Recovery Behaviors**: What happens when Nav2 cannot find a path to the goal? What recovery behaviors are configured in your parameters file?
-
-VIII. Deliverables
+VII. Deliverables
 ------------------
 
 .. list-table::
@@ -161,7 +150,7 @@ VIII. Deliverables
      - 20
    * - 2
      - Screenshot of RViz2 showing the loaded map with AMCL particle cloud after setting the initial pose
-     - 10
+     - 20
    * - 3
      - Video: 2D Goal Pose — car navigating to a goal on the map (screen recording of RViz2 showing path + car movement)
      - 20
@@ -169,7 +158,7 @@ VIII. Deliverables
      - Video: Waypoint Navigation — car following a 5+ waypoint route through the hallway (screen recording of RViz2)
      - 20
    * - 5
-     - Lab report answering the questions in Section VII
-     - 30
+     - In-class demonstration to the instructor
+     - 20
 
 **Total: 100 Points**
