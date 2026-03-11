@@ -93,13 +93,14 @@ Use Nav2's Navigate Through Poses to send the car through multiple waypoints in 
 
 1. With bringup and Nav2 still running, open the **Nav2 panel** in RViz2 (Panels → Add New Panel → `nav2_rviz_plugins/Nav2 Panel`).
 2. Set the **2D Pose Estimate** if not already set.
-3. Switch to **Waypoint / Nav Through Poses Mode** in the Nav2 panel.
-4. Click multiple points on the map to queue up waypoints.
-5. Click **Start Nav Through Poses** in the Nav2 panel.
+3. Add the **Nav2 Goal** tool — click the **+** button in the RViz2 toolbar (next to 2D Goal Pose), select **GoalTool** under `nav2_rviz_plugins`, click OK.
+4. Click the **Waypoint / Nav Through Poses Mode** button in the Nav2 panel.
+5. Use the **Nav2 Goal** tool to click multiple points on the map to queue up waypoints.
+6. Click **Start Nav Through Poses** in the Nav2 panel.
 
 > **⚠️ Hold R1** throughout the entire waypoint sequence. If you release R1 mid-run, the car stops and Nav2 may report a controller failure.
 
-6. Create a route of at least **5 waypoints** that makes the car drive a loop through the hallway.
+7. Create a route of at least **5 waypoints** that makes the car drive a loop through the hallway.
 
 > **Tip:** Refer to the Navigate Through Poses tutorial in the course documentation for the full walkthrough.
 
