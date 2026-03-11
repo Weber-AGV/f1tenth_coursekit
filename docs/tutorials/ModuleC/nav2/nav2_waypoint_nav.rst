@@ -61,10 +61,11 @@ Leave this terminal running.
 3️⃣ Open RViz2
 ^^^^^^^^^^^^^^^^
 
-On your laptop, open RViz2:
+Open a new terminal on the RoboRacer and launch RViz2:
 
 .. code-block:: bash
 
+   source /opt/ros/humble/setup.bash
    rviz2
 
 Add a **Map** display (Topic: ``/map``, Durability Policy: ``Transient Local``) to confirm the map is visible.
@@ -96,33 +97,72 @@ In RViz2, open **Panels** → **Add New Panel** → select **Nav2** (from ``nav2
 
 A new panel will appear at the bottom of RViz2 with navigation controls.
 
-7️⃣ Enable Waypoint Mode
+.. image:: img/nav2_panel.png
+   :alt: Nav2 panel in RViz2 showing Navigation active, Localization active, and Waypoint / Nav Through Poses Mode button
+   :width: 50%
+   :align: center
+
+7️⃣ Add the Nav2 Goal Tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The default **2D Goal Pose** button sends goals immediately. To queue waypoints, you need the **Nav2 Goal** tool instead.
+
+In the RViz2 toolbar, click the **+** button (next to the 2D Goal Pose button) to add a new tool. Select **GoalTool** under ``nav2_rviz_plugins``, then click **OK**.
+
+.. image:: img/goal_tool.png
+   :alt: RViz2 tool type dialog showing nav2_rviz_plugins GoalTool
+   :width: 50%
+   :align: center
+
+A new **Nav2 Goal** button will appear in the toolbar.
+
+.. image:: img/nav2_goal.png
+   :alt: RViz2 toolbar showing the Nav2 Goal button added next to 2D Goal Pose
+   :width: 80%
+   :align: center
+
+8️⃣ Enable Waypoint Mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the Nav2 panel, check the box labeled **Waypoint / Nav Through Poses Mode**.
+In the Nav2 panel at the bottom of RViz2, click the **Waypoint / Nav Through Poses Mode** button.
 
-This changes the behavior of the 2D Goal Pose tool — instead of sending each goal immediately, it will queue waypoints for batch navigation.
+.. image:: img/waypoint_btn.png
+   :alt: Waypoint / Nav Through Poses Mode button in the Nav2 panel
+   :width: 50%
+   :align: center
 
-8️⃣ Set Waypoints
+This changes the behavior of the **Nav2 Goal** tool — instead of sending each goal immediately, it will queue waypoints for batch navigation.
+
+9️⃣ Set Waypoints
 ^^^^^^^^^^^^^^^^^^^
 
-Use the **2D Goal Pose** tool in the RViz2 toolbar to place multiple waypoints on the map:
+Use the **Nav2 Goal** tool in the RViz2 toolbar to place multiple waypoints on the map:
 
 - Click on the map at the first waypoint location, drag to set heading, release
 - Repeat for each additional waypoint
 - Each waypoint appears as a numbered marker on the map
 
-Place 3–5 waypoints around the track to start.
+Place 3–5 waypoints around the track to start. Each waypoint is labeled (wp_1, wp_2, etc.) on the map.
 
-9️⃣ Start Navigation
+.. image:: img/waypoints.png
+   :alt: Numbered waypoints (wp_1, wp_2) placed on the map in RViz2
+   :width: 80%
+   :align: center
+
+🔟 Start Navigation
 ^^^^^^^^^^^^^^^^^^^^^^
 
 In the Nav2 panel, click **Start Nav Through Poses**.
 
+.. image:: img/start_waypoint.png
+   :alt: Nav2 panel showing Start Nav Through Poses, Cancel Accumulation, and Start Waypoint Following buttons
+   :width: 50%
+   :align: center
+
 The car will begin driving through each waypoint in the order you placed them. The global planner computes a path to each waypoint in sequence, and the controller follows each path segment.
 
-🔟 Watch the Car Navigate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1️⃣1️⃣ Watch the Car Navigate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - The car drives to the first waypoint, then replans to the next
 - Watch the ``/plan`` and ``/local_plan`` displays update as the car progresses
