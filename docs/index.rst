@@ -121,6 +121,14 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
 
 .. toctree::
    :maxdepth: 1
+   :caption: Weber Assignments
+   :name: sec-weber-assignments
+   :hidden:
+
+   weber_assignments/labs/index
+
+.. toctree::
+   :maxdepth: 1
    :caption: Assignments
    :name: sec-assignments
    :hidden:
