@@ -107,10 +107,9 @@ Use Nav2's Navigate Through Poses to send the car through multiple waypoints in 
 
 | # | Deliverable | Points |
 |---|-------------|--------|
-| 1 | Map files (`lab_map.pgm` and `lab_map.yaml`) submitted to Canvas | 20 |
-| 2 | Screenshot of RViz2 showing the loaded map with AMCL particle cloud after setting the initial pose | 20 |
-| 3 | Video: 2D Goal Pose — car navigating to a goal on the map (screen recording of RViz2 showing path + car movement) | 20 |
-| 4 | Video: Waypoint Navigation — car following a 5+ waypoint route through the hallway (screen recording of RViz2) | 20 |
-| 5 | In-class demonstration to the instructor | 20 |
+| 1 | Map files (`lab_map.pgm` and `lab_map.yaml`) submitted to Canvas | 25 |
+| 2 | Screenshot of RViz2 showing the loaded map with AMCL particle cloud after setting the initial pose | 25 |
+| 3 | Video: 2D Goal Pose — car navigating to a goal on the map (screen recording of RViz2 showing path + car movement) | 25 |
+| 4 | Video: Waypoint Navigation — car following a 5+ waypoint route through the hallway (screen recording of RViz2) | 25 |
 
 **Total: 100 Points**
