@@ -86,14 +86,26 @@ Before writing the node, you need map coordinates for your waypoints. The easies
 Steps
 -----
 
-1️⃣ Create the Python Node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1️⃣ Create the Package
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-On the robot, create the waypoint navigation client:
+On the robot, navigate to your workspace and create a new package:
 
 .. code-block:: bash
 
-   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/waypoint_nav_client.py
+   cd ~/f1tenth_ws/src
+   ros2 pkg create waypoint_nav --build-type ament_python --dependencies rclpy nav2_msgs geometry_msgs
+
+This creates a ``waypoint_nav`` package with the necessary Nav2 and geometry message dependencies.
+
+2️⃣ Create the Python Node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open the node file:
+
+.. code-block:: bash
+
+   code ~/f1tenth_ws/src/waypoint_nav/waypoint_nav/waypoint_nav_client.py
 
 Paste the following code:
 
@@ -180,38 +192,35 @@ Paste the following code:
 
    The example coordinates above are placeholders. You **must** replace them with coordinates from your own map using the echo method described above.
 
-2️⃣ Update setup.py
+3️⃣ Update setup.py
 ^^^^^^^^^^^^^^^^^^^^^
 
-On the robot, open the package's ``setup.py``:
+Open the package's ``setup.py``:
 
 .. code-block:: bash
 
-   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/setup.py
+   code ~/f1tenth_ws/src/waypoint_nav/setup.py
 
-Add the new entry point to the ``console_scripts`` list:
+Add the node to the ``console_scripts`` entry point:
 
 .. code-block:: python
 
    entry_points={
        'console_scripts': [
-           'throttle_interpolator = f1tenth_stack.throttle_interpolator:main',
-           'tf_publisher = f1tenth_stack.tf_publisher:main',
-           'cmd_vel_to_ackermann = f1tenth_stack.cmd_vel_to_ackermann:main',
-           'waypoint_nav_client = f1tenth_stack.waypoint_nav_client:main',
+           'waypoint_nav_client = waypoint_nav.waypoint_nav_client:main',
        ],
    },
 
-3️⃣ Build and Source
+4️⃣ Build and Source
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
    cd ~/f1tenth_ws
-   colcon build --packages-select f1tenth_stack
+   colcon build --packages-select waypoint_nav
    source install/setup.bash
 
-4️⃣ Start Bringup (Terminal 1)
+5️⃣ Start Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Make sure the PlayStation controller is connected to the car, then open a terminal on the robot and run:
@@ -232,7 +241,7 @@ This calls ``ros2 launch f1tenth_stack bringup_launch.py``, which starts the car
 
 Leave this terminal running.
 
-5️⃣ Launch Nav2 (Terminal 2)
+6️⃣ Launch Nav2 (Terminal 2)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a **new** terminal and source the workspace:
@@ -251,7 +260,7 @@ Launch the full Nav2 stack:
 
 Leave this terminal running.
 
-6️⃣ Open RViz2 and Set Initial Pose (Terminal 3)
+7️⃣ Open RViz2 and Set Initial Pose (Terminal 3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a new terminal on the robot and launch RViz2:
@@ -265,7 +274,7 @@ Open a new terminal on the robot and launch RViz2:
 - Add **Path** displays for ``/plan`` and ``/local_plan`` to visualize the planned route
 - Click **2D Pose Estimate** in the toolbar and set the car's position and heading on the map
 
-7️⃣ Run the Waypoint Navigation Client (Terminal 4)
+8️⃣ Run the Waypoint Navigation Client (Terminal 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a **new** terminal, source the workspace, and run the node:
@@ -275,7 +284,7 @@ Open a **new** terminal, source the workspace, and run the node:
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
-   ros2 run f1tenth_stack waypoint_nav_client
+   ros2 run waypoint_nav waypoint_nav_client
 
 You should see output like:
 
@@ -293,7 +302,7 @@ You should see output like:
 
    **Hold R1** on the PlayStation controller throughout the entire navigation run. Releasing R1 stops Nav2's commands from reaching the wheels.
 
-8️⃣ Watch the Car Navigate
+9️⃣ Watch the Car Navigate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - The global planner computes a path through all waypoints
@@ -305,7 +314,7 @@ You should see output like:
 
    If the car does not move after running the node, confirm that:
 
-   - You set the initial pose with **2D Pose Estimate** (step 6️⃣)
+   - You set the initial pose with **2D Pose Estimate** (step 7️⃣)
    - You are holding **R1** on the PlayStation controller
    - Nav2 lifecycle nodes are all active (check ``ros2 node list``)
    - The action server is available (check ``ros2 action list`` — you should see ``/navigate_through_poses``)
