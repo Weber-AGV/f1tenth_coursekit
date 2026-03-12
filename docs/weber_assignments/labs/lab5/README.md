@@ -6,6 +6,7 @@
 - Understand occupancy grid maps (`.pgm` / `.yaml`)
 - Localize the car on a saved map using AMCL
 - Navigate autonomously using the Nav2 stack (2D Goal Pose and Waypoint Navigation)
+- Send waypoints programmatically using a Python ROS 2 action client
 - Understand the Nav2 command pipeline: planner → controller → cmd_vel → ackermann → drive
 
 ## II. Overview
@@ -17,6 +18,7 @@ In this lab you will use the RoboRacer to map the CAE hallway loop, save the map
 | 1 | Map the hallway with SLAM Toolbox | Occupancy grids, SLAM, map saving |
 | 2 | Send a 2D Goal Pose | AMCL localization, Nav2 path planning, autonomous driving |
 | 3 | Navigate through multiple waypoints | Waypoint sequencing, behavior trees, Nav2 panel |
+| 4 | Send waypoints programmatically | ROS 2 action clients, NavigateThroughPoses, Python nodes |
 
 ## III. Prerequisites
 
@@ -104,13 +106,46 @@ Use Nav2's Navigate Through Poses to send the car through multiple waypoints in 
 
 > **Tip:** Refer to the Navigate Through Poses tutorial in the course documentation for the full walkthrough.
 
-## VII. Deliverables
+## VII. Part 4 — Programmatic Waypoint Navigation
+
+Send waypoints to Nav2 from a Python node instead of clicking in RViz2.
+
+1. Create a new package on the robot:
+
+   ```bash
+   cd ~/f1tenth_ws/src
+   ros2 pkg create waypoint_nav --build-type ament_python --dependencies rclpy nav2_msgs geometry_msgs
+   ```
+
+2. Create the waypoint navigation client node at `waypoint_nav/waypoint_nav/waypoint_nav_client.py` using the code from the Programmatic Waypoint Navigation tutorial.
+3. Update `setup.py` to add the `waypoint_nav_client` entry point.
+4. Build the package:
+
+   ```bash
+   cd ~/f1tenth_ws
+   colcon build --packages-select waypoint_nav
+   source install/setup.bash
+   ```
+
+5. Get waypoint coordinates for your map — run `ros2 topic echo /goal_pose` and click **2D Goal Pose** in RViz2 at each desired location. Copy the x, y, orientation.z, and orientation.w values into your node.
+6. With bringup, Nav2, and RViz2 running (and initial pose set), run your node:
+
+   ```bash
+   ros2 run waypoint_nav waypoint_nav_client
+   ```
+
+7. Hold **R1** and watch the car navigate through your waypoints.
+
+> **Tip:** Refer to the Programmatic Waypoint Navigation tutorial in the course documentation for the full walkthrough.
+
+## VIII. Deliverables
 
 | # | Deliverable | Points |
 |---|-------------|--------|
-| 1 | Map files (`lab_map.pgm` and `lab_map.yaml`) submitted to Canvas | 25 |
-| 2 | Screenshot of RViz2 showing the loaded map with AMCL particle cloud after setting the initial pose | 25 |
-| 3 | Video: 2D Goal Pose — car navigating to a goal on the map (screen recording of RViz2 showing path + car movement) | 25 |
-| 4 | Video: Waypoint Navigation — car following a 5+ waypoint route through the hallway (screen recording of RViz2) | 25 |
+| 1 | Map files (`lab_map.pgm` and `lab_map.yaml`) submitted to Canvas | 20 |
+| 2 | Screenshot of RViz2 showing the loaded map with AMCL particle cloud after setting the initial pose | 20 |
+| 3 | Video: 2D Goal Pose — car navigating to a goal on the map (screen recording of RViz2 showing path + car movement) | 20 |
+| 4 | Video: Waypoint Navigation — car following a 5+ waypoint route through the hallway (screen recording of RViz2) | 20 |
+| 5 | Video: Programmatic Waypoints — car navigating through waypoints sent by your Python node (screen recording of RViz2 + terminal output) | 20 |
 
 **Total: 100 Points**
