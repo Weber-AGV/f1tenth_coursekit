@@ -42,7 +42,17 @@ AMCL publishes the ``map`` → ``odom`` TF transform, which is how the rest of N
 
 .. note::
 
-   You can visualize the particle cloud in RViz2 by adding a **PoseArray** display on the ``/particle_cloud`` topic. A tight cluster means AMCL is confident in its localization. A spread-out cloud means it is still converging.
+   You can visualize the particle cloud in RViz2 by adding a **ParticleCloud** display (under ``nav2_rviz_plugins``) on the ``/particle_cloud`` topic. A spread-out cloud means AMCL is still converging; a tight cluster means it is confident.
+
+   .. image:: img/particle_cloud.png
+      :alt: AMCL particle cloud spread out after initial 2D Pose Estimate
+      :width: 80%
+      :align: center
+
+   .. image:: img/particle_cloud_tighter.png
+      :alt: AMCL particle cloud converged after the car has moved
+      :width: 80%
+      :align: center
 
 .. note::
 
