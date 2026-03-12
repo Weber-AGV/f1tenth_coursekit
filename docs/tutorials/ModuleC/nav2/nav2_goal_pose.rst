@@ -81,14 +81,27 @@ In RViz2, add the following displays to visualize Nav2's planning, localization,
 **AMCL Particle Cloud** (localization confidence):
 
 - Click **Add** → **By topic** → expand ``/particle_cloud`` → select **ParticleCloud** (under ``nav2_rviz_plugins``)
-- The topic is set automatically
+- Set **Reliability Policy** to ``Best Effort``
+- Set Topic to ``/particle_cloud``
 
 .. image:: img/particle_cloud_setup.png
-   :alt: Adding ParticleCloud display from nav2_rviz_plugins in RViz2
+   :alt: ParticleCloud display settings in RViz2 showing topic and Reliability Policy set to Best Effort
    :width: 50%
    :align: center
 
-A tight cluster of arrows means AMCL is confident in its localization. A spread-out cloud means it is still converging.
+The particle cloud only appears after you set the **2D Pose Estimate** (step 4️⃣). Initially the arrows will be spread out across the map — this means AMCL is still uncertain about the car's position.
+
+.. image:: img/particle_cloud.png
+   :alt: AMCL particle cloud spread out after initial 2D Pose Estimate before the car has moved
+   :width: 80%
+   :align: center
+
+As the car moves, AMCL refines its estimate and the arrows converge into a tight cluster around the car's true position.
+
+.. image:: img/particle_cloud_tighter.png
+   :alt: AMCL particle cloud converging to a tight cluster after the car has moved
+   :width: 80%
+   :align: center
 
 **Global Costmap** (obstacle avoidance zones):
 
