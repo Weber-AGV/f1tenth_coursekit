@@ -370,72 +370,6 @@ Paste the following contents and save (``Ctrl+S``):
 
 .. code-block:: python
 
-   from launch import LaunchDescription
-   from launch.actions import IncludeLaunchDescription
-   from launch.launch_description_sources import PythonLaunchDescriptionSource
-   from launch_ros.actions import Node
-   from ament_index_python.packages import get_package_share_directory
-   import os
-
-   def generate_launch_description():
-       f1tenth_dir = get_package_share_directory('f1tenth_stack')
-       nav2_bringup_dir = get_package_share_directory('nav2_bringup')
-
-       nav2_bringup = IncludeLaunchDescription(
-           PythonLaunchDescriptionSource(
-               os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')
-           ),
-           launch_arguments={
-               'map': os.path.join(f1tenth_dir, 'maps', 'lab_map.yaml'),
-               'params_file': os.path.join(f1tenth_dir, 'config', 'nav2_params.yaml'),
-               'use_sim_time': 'False',
-               'slam': 'False',
-               'autostart': 'True',
-           }.items()
-       )
-
-       cmd_vel_converter = Node(
-           package='f1tenth_stack',
-           executable='cmd_vel_to_ackermann',
-           name='cmd_vel_to_ackermann',
-           parameters=[{'wheelbase': 0.25}]
-       )
-
-       return LaunchDescription([nav2_bringup, cmd_vel_converter])
-
-7️⃣ **Rebuild the workspace**
-
-.. code-block:: bash
-
-   cd ~/f1tenth_ws
-   colcon build --packages-select f1tenth_stack
-   source install/setup.bash
-
-8️⃣ **Verify the files exist**
-
-.. code-block:: bash
-
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
-   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
-
-Applying These Changes to Other Robots
----------------------------------------
-
-The Nav2 setup lives in two files within the git-tracked workspace. The fastest way to set up additional robots is to copy and paste the file contents directly.
-
-**nav2_launch.py**
-
-On the other robot, open the launch file:
-
-.. code-block:: bash
-
-   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
-
-Replace the entire contents with:
-
-.. code-block:: python
-
    # MIT License
 
    # Copyright (c) 2025 WSU F1TENTH
@@ -505,6 +439,35 @@ Replace the entire contents with:
        )
 
        return LaunchDescription([map_name_arg, nav2_bringup, cmd_vel_to_ackermann_node])
+
+7️⃣ **Rebuild the workspace**
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select f1tenth_stack
+   source install/setup.bash
+
+8️⃣ **Verify the files exist**
+
+.. code-block:: bash
+
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/config/nav2_params.yaml
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/f1tenth_stack/cmd_vel_to_ackermann.py
+   ls ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
+
+Applying These Changes to Other Robots
+---------------------------------------
+
+The Nav2 setup lives in two files within the git-tracked workspace. The fastest way to set up additional robots is to copy and paste the file contents directly.
+
+**nav2_launch.py**
+
+On the other robot, open the launch file and paste the code from Step 6️⃣ above:
+
+.. code-block:: bash
+
+   code ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/launch/nav2_launch.py
 
 **localize_launch.py** (particle filter fix)
 
