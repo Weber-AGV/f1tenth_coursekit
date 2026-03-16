@@ -125,13 +125,19 @@ Open a **new** terminal and source the workspace:
    source /opt/ros/humble/setup.bash
    source install/setup.bash
 
-Launch the full Nav2 stack (AMCL + map server + navigation):
+Launch the full Nav2 stack (AMCL + map server + navigation). If you saved your map as ``lab_map``, you can use the default:
+
+.. code-block:: bash
+
+   ros2 launch f1tenth_stack nav2_launch.py
+
+To load a different map, pass the ``map_name`` argument:
 
 .. code-block:: bash
 
    ros2 launch f1tenth_stack nav2_launch.py map_name:=hallway_map
 
-The ``map_name`` argument tells Nav2 which map file to load from ``f1tenth_stack/maps/``. Change ``hallway_map`` to match the name you used when saving your map (without the file extension).
+Change ``hallway_map`` to match the name you used when saving your map (without the file extension).
 
 This launches the full Nav2 stack:
 
