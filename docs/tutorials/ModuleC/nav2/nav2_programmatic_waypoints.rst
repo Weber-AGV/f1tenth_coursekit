@@ -256,7 +256,7 @@ Launch the full Nav2 stack:
 
 .. code-block:: bash
 
-   ros2 launch f1tenth_stack nav2_launch.py
+   ros2 launch f1tenth_stack nav2_launch.py map_name:=hallway_map
 
 Leave this terminal running.
 

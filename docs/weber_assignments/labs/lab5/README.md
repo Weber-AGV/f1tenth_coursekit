@@ -71,7 +71,7 @@ Use Nav2 to send the car to a single goal on the map.
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
-   ros2 launch f1tenth_stack nav2_launch.py
+   ros2 launch f1tenth_stack nav2_launch.py map_name:=hallway_map
    ```
 
 4. Open **RViz2** (Terminal 3) and add the following displays:
