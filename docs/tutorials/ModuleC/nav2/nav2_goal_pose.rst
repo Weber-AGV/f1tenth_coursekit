@@ -42,7 +42,13 @@ Open a **new** terminal and source the workspace:
    source /opt/ros/humble/setup.bash
    source install/setup.bash
 
-Launch the full Nav2 stack:
+Launch the full Nav2 stack. If you saved your map as ``lab_map``, you can use the default:
+
+.. code-block:: bash
+
+   ros2 launch f1tenth_stack nav2_launch.py
+
+To load a different map, pass the ``map_name`` argument:
 
 .. code-block:: bash
 
