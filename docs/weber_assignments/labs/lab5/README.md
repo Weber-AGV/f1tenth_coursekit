@@ -76,8 +76,11 @@ Use Nav2 to send the car to a single goal on the map.
 
 4. Open **RViz2** (Terminal 3) and add the following displays:
    - **Map** — Topic: `/map`, Durability Policy: `Transient Local`
-   - **LaserScan** — Topic: `/scan`
-   - **PoseArray** — Topic: `/particle_cloud` (shows AMCL particle spread)
+   - **ParticleCloud** — Add By topic → expand `/particle_cloud` → select **ParticleCloud** (under `nav2_rviz_plugins`), set Reliability Policy to `Best Effort`
+   - **Map** (costmap) — Topic: `/global_costmap/costmap`, Color Scheme: `costmap`
+   - **Path** — Topic: `/plan` (global plan)
+   - **Path** — Topic: `/local_plan` (controller's tracking path)
+   - **MarkerArray** — Topic: `/waypoints`
 
 5. Set the **2D Pose Estimate** — click the button in RViz2 and place the arrow at the car's actual position and orientation on the map. Watch the AMCL particle cloud converge around the car.
 6. Set a **2D Goal Pose** — click the button and place a goal on the map.
