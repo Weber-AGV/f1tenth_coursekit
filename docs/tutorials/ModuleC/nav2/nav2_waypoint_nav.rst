@@ -178,7 +178,11 @@ The car will begin driving through each waypoint in the order you placed them. T
    - You placed at least one waypoint before clicking start
    - The map is visible in RViz2 (set Durability Policy to ``Transient Local``)
 
-   To clear all waypoints and start over, click **Cancel** in the Nav2 panel, then place new waypoints.
+   To clear all waypoints and start over, click **Cancel** in the Nav2 panel, then place new waypoints. You can also cancel from the command line:
+
+   .. code-block:: bash
+
+      ros2 action send_goal /follow_waypoints nav2_msgs/action/FollowWaypoints "{}" --cancel
 
 Topics
 ------
