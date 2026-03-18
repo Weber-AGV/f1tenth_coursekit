@@ -71,13 +71,25 @@ Use Nav2 to send the car to a single goal on the map.
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
+   ```
+
+   If your map is saved as `lab_map` (the default):
+
+   ```bash
+   ros2 launch f1tenth_stack nav2_launch.py
+   ```
+
+   To load a different map:
+
+   ```bash
    ros2 launch f1tenth_stack nav2_launch.py map_name:=hallway_map
    ```
 
 4. Open **RViz2** (Terminal 3) and add the following displays:
    - **Map** — Topic: `/map`, Durability Policy: `Transient Local`
-   - **ParticleCloud** — Add By topic → expand `/particle_cloud` → select **ParticleCloud** (under `nav2_rviz_plugins`), set Reliability Policy to `Best Effort`
+   - **ParticleCloud** — Click **Add** → **By display type** → expand `nav2_rviz_plugins` → select **ParticleCloud**. Set Topic to `/particle_cloud` and Reliability Policy to `Best Effort`
    - **Map** (costmap) — Topic: `/global_costmap/costmap`, Color Scheme: `costmap`
+   - **Polygon** (robot footprint) — Topic: `/global_costmap/published_footprint`
    - **Path** — Topic: `/plan` (global plan)
    - **Path** — Topic: `/local_plan` (controller's tracking path)
    - **MarkerArray** — Topic: `/waypoints`
