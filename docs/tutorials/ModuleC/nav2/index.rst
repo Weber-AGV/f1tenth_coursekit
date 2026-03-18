@@ -8,6 +8,7 @@ Tutorial 6 - Nav2 Navigation
    :name: sec-nav2
 
    nav2_setup
+   nav2_particle_filter_setup
    nav2_goal_pose
    nav2_waypoint_nav
    nav2_programmatic_waypoints
