@@ -97,15 +97,32 @@ Run Steps
 1️⃣ Point to Your Map
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The particle filter launch file expects map files to live inside the package's own ``maps/`` directory. Copy your saved map there:
+The particle filter ships with a default map (``lab_map_clean``) already configured. If this is your map, **no action is needed** — skip to Step 2.
+
+To use a different map, copy your map files into the package's ``maps/`` directory:
 
 .. code-block:: bash
 
-   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.pgm \
+   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.pgm \
       ~/f1tenth_ws/src/particle_filter/maps/
 
-   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/lab_map.yaml \
-      ~/f1tenth_ws/src/particle_filter/maps/
+You also need a YAML metadata file for the map. Create one based on the existing template:
+
+.. code-block:: bash
+
+   cp ~/f1tenth_ws/src/particle_filter/maps/lab_map_clean.yaml \
+      ~/f1tenth_ws/src/particle_filter/maps/my_map.yaml
+
+Edit ``my_map.yaml`` to match your map:
+
+.. code-block:: yaml
+
+   image: my_map.pgm
+   resolution: 0.05
+   origin: [-19.8, -36.1, 0]
+   negate: 0
+   occupied_thresh: 0.65
+   free_thresh: 0.25
 
 Then update ``localize.yaml`` to use your map name:
 
@@ -119,7 +136,7 @@ Find the ``map_server`` section and change the map name:
 
    map_server:
      ros__parameters:
-       map: 'lab_map'
+       map: 'my_map'
 
 Finally, rebuild the package so the map files are installed to the share directory:
 
