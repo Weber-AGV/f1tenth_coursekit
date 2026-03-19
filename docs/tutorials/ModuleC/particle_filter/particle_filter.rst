@@ -99,52 +99,56 @@ Run Steps
 
 The particle filter ships with a default map (``lab_map_clean``) already configured. If this is your map, **no action is needed** — skip to Step 2.
 
-To use a different map, copy your map files into the package's ``maps/`` directory:
+.. note::
 
-.. code-block:: bash
+   **Using a different map?** If you need to point the particle filter at a different map, expand the steps below.
 
-   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.pgm \
-      ~/f1tenth_ws/src/particle_filter/maps/
+   1. Copy your map file into the package's ``maps/`` directory:
 
-You also need a YAML metadata file for the map. Create one based on the existing template:
+      .. code-block:: bash
 
-.. code-block:: bash
+         cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.pgm \
+            ~/f1tenth_ws/src/particle_filter/maps/
 
-   cp ~/f1tenth_ws/src/particle_filter/maps/lab_map_clean.yaml \
-      ~/f1tenth_ws/src/particle_filter/maps/my_map.yaml
+   2. Create a YAML metadata file based on the existing template:
 
-Edit ``my_map.yaml`` to match your map:
+      .. code-block:: bash
 
-.. code-block:: yaml
+         cp ~/f1tenth_ws/src/particle_filter/maps/lab_map_clean.yaml \
+            ~/f1tenth_ws/src/particle_filter/maps/my_map.yaml
 
-   image: my_map.pgm
-   resolution: 0.05
-   origin: [-19.8, -36.1, 0]
-   negate: 0
-   occupied_thresh: 0.65
-   free_thresh: 0.25
+   3. Edit ``my_map.yaml`` to match your map:
 
-Then update ``localize.yaml`` to use your map name:
+      .. code-block:: yaml
 
-.. code-block:: bash
+         image: my_map.pgm
+         resolution: 0.05
+         origin: [-19.8, -36.1, 0]
+         negate: 0
+         occupied_thresh: 0.65
+         free_thresh: 0.25
 
-   nano ~/f1tenth_ws/src/particle_filter/config/localize.yaml
+   4. Update ``localize.yaml`` to use your map name:
 
-Find the ``map_server`` section and change the map name:
+      .. code-block:: bash
 
-.. code-block:: yaml
+         code ~/f1tenth_ws/src/particle_filter/config/localize.yaml
 
-   map_server:
-     ros__parameters:
-       map: 'my_map'
+      Find the ``map_server`` section and change the map name:
 
-Finally, rebuild the package so the map files are installed to the share directory:
+      .. code-block:: yaml
 
-.. code-block:: bash
+         map_server:
+           ros__parameters:
+             map: 'my_map'
 
-   cd ~/f1tenth_ws
-   colcon build --packages-select particle_filter
-   source install/setup.bash
+   5. Rebuild the package so the map files are installed to the share directory:
+
+      .. code-block:: bash
+
+         cd ~/f1tenth_ws
+         colcon build --packages-select particle_filter
+         source install/setup.bash
 
 2️⃣ Bringup (Terminal 1)
 ^^^^^^^^^^^^^^^^^^^^^^^^^
