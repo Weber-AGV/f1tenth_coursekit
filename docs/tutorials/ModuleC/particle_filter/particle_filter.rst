@@ -99,6 +99,11 @@ Run Steps
 
 The particle filter ships with a default map (``lab_map_clean``) already configured. If this is your map, **no action is needed** — skip to Step 2.
 
+.. image:: img/lab_map_clean.png
+   :alt: Default lab_map_clean occupancy grid map
+   :width: 80%
+   :align: center
+
 .. note::
 
    **Using a different map?** If you need to point the particle filter at a different map, expand the steps below.
