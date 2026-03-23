@@ -25,12 +25,16 @@ Steps
 1️⃣ Start the Waypoint Logger (Terminal 3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+
+   The ``pure_pursuit`` package and ``waypoint_logger`` node do not come pre-installed. You must build them yourself first — see **Lab 6 - Waypoint Logger for Pure Pursuit** in the Weber Assignments for step-by-step instructions on creating the package and writing the node.
+
 .. code-block:: bash
 
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
-   ros2 run pure_pursuit waypoint_logger.py
+   ros2 run pure_pursuit waypoint_logger
 
 The logger will begin recording poses as the car moves.
 
