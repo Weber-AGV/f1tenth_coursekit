@@ -17,6 +17,8 @@ Prerequisites
 - ``ros2 launch particle_filter localize_launch.py`` running (Terminal 2)
 - Initial pose set in RViz2 — car must be localized before recording
 
+The particle filter is what gives the robot its position on the map. Without it, the robot has no way to know where it is relative to the map, and the recorded waypoints would be meaningless. Make sure the particle filter is running and the car is localized (2D Pose Estimate set in RViz2) **before** you start recording.
+
 Steps
 -----
 
