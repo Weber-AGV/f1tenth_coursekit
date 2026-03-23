@@ -16,3 +16,4 @@ Weber-specific lab assignments customized for the RoboRacer course. These labs b
    lab4
    lab5
    lab6
+   lab6b
