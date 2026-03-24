@@ -84,22 +84,15 @@ def generate_launch_description():
 
 You need to tell the build system to install the config and launch files. Edit `setup.py` in the `pure_pursuit` package:
 
-1. Add this import at the top:
+Add these lines inside the `data_files` list (before the closing bracket):
 
-   ```python
-   import os
-   from glob import glob
-   ```
+```python
+(os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+(os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+(os.path.join('share', package_name, 'maps'), glob('maps/*.csv')),
+```
 
-2. Add these lines inside the `data_files` list (before the closing bracket):
-
-   ```python
-   (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
-   (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
-   (os.path.join('share', package_name, 'maps'), glob('maps/*.csv')),
-   ```
-
-3. Add the pure pursuit node to `console_scripts` (alongside the existing waypoint_logger):
+Add the pure pursuit node to `console_scripts` (alongside the existing waypoint_logger):
 
    ```python
    entry_points={
