@@ -1,40 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 340" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="Segoe UI, Arial, sans-serif">
   <!-- Particle Filter box (top-left) -->
-  <rect x="20" y="20" width="220" height="80" rx="10" fill="#4A90D9" stroke="#2C5F8A" stroke-width="2"/>
-  <text x="130" y="52" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Particle Filter</text>
-  <text x="130" y="78" text-anchor="middle" fill="#D4E6F9" font-size="13">/pf/pose/odom</text>
+  <rect x="20" y="20" width="230" height="90" rx="10" fill="#4A90D9" stroke="#2C5F8A" stroke-width="2"/>
+  <text x="135" y="48" text-anchor="middle" fill="white" font-size="15" font-weight="bold">Particle Filter</text>
+  <text x="135" y="70" text-anchor="middle" fill="#D4E6F9" font-size="12">publishes nav_msgs/Odometry</text>
+  <text x="135" y="90" text-anchor="middle" fill="#D4E6F9" font-size="12">on /pf/pose/odom</text>
 
   <!-- Arrow 1: top-left to top-right -->
-  <line x1="240" y1="60" x2="320" y2="60" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
-  <text x="280" y="48" text-anchor="middle" fill="#888" font-size="12">poses</text>
+  <line x1="250" y1="65" x2="350" y2="65" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="256" y="35" width="88" height="24" rx="5" fill="#E8E8E8" stroke="#CCC" stroke-width="1"/>
+  <text x="300" y="52" text-anchor="middle" fill="#555" font-size="11" font-weight="bold">subscribes</text>
 
   <!-- Waypoint Logger box (top-right) -->
-  <rect x="320" y="20" width="220" height="80" rx="10" fill="#5CB85C" stroke="#3D8B3D" stroke-width="2"/>
-  <text x="430" y="52" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Waypoint Logger</text>
-  <text x="430" y="78" text-anchor="middle" fill="#D4F0D4" font-size="13">waypoint_logger.py</text>
+  <rect x="350" y="20" width="230" height="90" rx="10" fill="#5CB85C" stroke="#3D8B3D" stroke-width="2"/>
+  <text x="465" y="48" text-anchor="middle" fill="white" font-size="15" font-weight="bold">Waypoint Logger</text>
+  <text x="465" y="70" text-anchor="middle" fill="#D4F0D4" font-size="12">waypoint_logger.py</text>
+  <text x="465" y="90" text-anchor="middle" fill="#D4F0D4" font-size="12">subscriber node</text>
 
   <!-- Arrow 2: top-right down to bottom-right -->
-  <line x1="430" y1="100" x2="430" y2="220" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
-  <text x="450" y="165" fill="#888" font-size="12">writes</text>
+  <line x1="465" y1="110" x2="465" y2="260" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="472" y="169" width="82" height="24" rx="5" fill="#E8E8E8" stroke="#CCC" stroke-width="1"/>
+  <text x="513" y="186" text-anchor="middle" fill="#555" font-size="11" font-weight="bold">writes CSV</text>
 
   <!-- CSV file box (bottom-right) -->
-  <rect x="320" y="220" width="220" height="80" rx="10" fill="#F0AD4E" stroke="#C78D3E" stroke-width="2"/>
-  <text x="430" y="252" text-anchor="middle" fill="white" font-size="16" font-weight="bold">waypoints.csv</text>
-  <text x="430" y="278" text-anchor="middle" fill="#FDE8C8" font-size="13">x, y, z, w per row</text>
+  <rect x="350" y="260" width="230" height="90" rx="10" fill="#F0AD4E" stroke="#C78D3E" stroke-width="2"/>
+  <text x="465" y="290" text-anchor="middle" fill="white" font-size="15" font-weight="bold">waypoints.csv</text>
+  <text x="465" y="312" text-anchor="middle" fill="#FDE8C8" font-size="12">x, y, z, w per row</text>
+  <text x="465" y="332" text-anchor="middle" fill="#FDE8C8" font-size="12">offline data file</text>
 
   <!-- Arrow 3: bottom-right to bottom-left -->
-  <line x1="320" y1="260" x2="240" y2="260" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
-  <text x="280" y="250" text-anchor="middle" fill="#888" font-size="12">reads</text>
+  <line x1="350" y1="305" x2="250" y2="305" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="258" y="277" width="82" height="24" rx="5" fill="#E8E8E8" stroke="#CCC" stroke-width="1"/>
+  <text x="299" y="294" text-anchor="middle" fill="#555" font-size="11" font-weight="bold">reads CSV</text>
 
   <!-- Pure Pursuit box (bottom-left) -->
-  <rect x="20" y="220" width="220" height="80" rx="10" fill="#D9534F" stroke="#A94442" stroke-width="2"/>
-  <text x="130" y="252" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Pure Pursuit</text>
-  <text x="130" y="278" text-anchor="middle" fill="#F2DEDE" font-size="13">autonomous drive</text>
+  <rect x="20" y="260" width="230" height="90" rx="10" fill="#D9534F" stroke="#A94442" stroke-width="2"/>
+  <text x="135" y="288" text-anchor="middle" fill="white" font-size="15" font-weight="bold">Pure Pursuit</text>
+  <text x="135" y="310" text-anchor="middle" fill="#F2DEDE" font-size="12">publishes AckermannDriveStamped</text>
+  <text x="135" y="330" text-anchor="middle" fill="#F2DEDE" font-size="12">on /drive</text>
 
-  <!-- Arrow marker definition -->
+  <!-- Arrow 4: bottom-left back up to top-left (feedback loop) -->
+  <line x1="20" y1="260" x2="20" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="20" y1="175" x2="8" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="8" y1="175" x2="8" y2="65" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="8" y1="65" x2="20" y2="65" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrow-light)"/>
+  <text x="3" y="163" fill="#999" font-size="9" text-anchor="middle" transform="rotate(-90, 3, 163)">also subscribes to /pf/pose/odom</text>
+
+  <!-- Arrow marker definitions -->
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
       <polygon points="0 0, 12 4, 0 8" fill="#666"/>
+    </marker>
+    <marker id="arrow-light" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
     </marker>
   </defs>
 </svg>
