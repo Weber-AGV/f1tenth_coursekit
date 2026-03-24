@@ -17,9 +17,14 @@ Pure Pursuit is a geometric path tracking algorithm. On each update:
 
 The lookahead distance controls the trade-off between tracking accuracy and smoothness. A shorter lookahead follows the path more tightly; a longer lookahead produces smoother but wider turns.
 
+.. note::
+
+   The ``pure_pursuit`` package, launch file, config file, and ``pure_pursuit_node`` do not come pre-installed. You must build them yourself first --- see **Lab 6b - Pure Pursuit** in the Weber Assignments for step-by-step instructions on creating the launch file, config, and writing the node.
+
 Prerequisites
 -------------
 
+- Pure Pursuit node built (see :ref:`doc_tutorials_building_pure_pursuit_node`)
 - Waypoints recorded (see :ref:`doc_tutorials_waypoint_recording`)
 - ``bringup`` running (Terminal 1)
 - ``ros2 launch particle_filter localize_launch.py`` running (Terminal 2)
