@@ -97,10 +97,34 @@ This prints a single Odometry message showing all the fields:
 
 Most of this message is not needed. Your logger only extracts four values from the ``pose.pose`` section:
 
-- ``position.x`` and ``position.y`` --- the car's location on the map
-- ``orientation.z`` and ``orientation.w`` --- the quaternion components that encode the car's heading
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 15 45
 
-The quaternion ``(z, w)`` pair encodes the car's heading on the map. You don't need to convert it to an angle for storage --- just save the raw values. The Pure Pursuit node will use them later.
+   * - Field
+     - Message Path
+     - Units
+     - Description
+   * - ``x``
+     - ``pose.pose.position.x``
+     - meters
+     - Car's horizontal position on the map, relative to the map origin
+   * - ``y``
+     - ``pose.pose.position.y``
+     - meters
+     - Car's vertical position on the map, relative to the map origin
+   * - ``z``
+     - ``pose.pose.orientation.z``
+     - unitless
+     - Quaternion z component --- encodes the car's heading (rotation around the vertical axis). Ranges from -1.0 to 1.0.
+   * - ``w``
+     - ``pose.pose.orientation.w``
+     - unitless
+     - Quaternion w component --- the scalar part of the rotation. Together with ``z``, fully defines the 2D heading: ``heading = 2 * atan2(z, w)``
+
+.. note::
+
+   **Why quaternions instead of an angle?** ROS 2 uses quaternions to represent orientation because they avoid gimbal lock and singularities. For a car driving on a flat surface, only ``z`` and ``w`` matter (``x`` and ``y`` are zero). You don't need to convert to an angle for storage --- just save the raw ``z`` and ``w`` values. The Pure Pursuit node will convert them when it needs the heading.
 
 Step 3 --- Write the Node
 --------------------------
