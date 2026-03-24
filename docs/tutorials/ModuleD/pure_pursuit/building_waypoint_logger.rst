@@ -18,7 +18,7 @@ The pipeline looks like this:
 
 .. image:: img/waypoint_pipeline.svg
    :alt: Pipeline: Particle Filter publishes poses to the Waypoint Logger, which writes waypoints.csv, which Pure Pursuit reads
-   :width: 100%
+   :width: 80%
    :align: center
 
 The particle filter publishes the car's estimated map-relative position at ~30-40 Hz. Your logger captures those poses so the Pure Pursuit node can replay the path later.
