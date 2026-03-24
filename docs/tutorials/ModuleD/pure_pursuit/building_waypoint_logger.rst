@@ -69,6 +69,37 @@ The particle filter publishes on ``/pf/pose/odom`` using the ``nav_msgs/msg/Odom
                    z       <-- quaternion z (encodes heading)
                    w       <-- quaternion w (encodes heading)
 
+You can inspect a live message yourself to see exactly what the particle filter publishes. You need bringup and the particle filter running first:
+
+1. Start **bringup** (Terminal 1)
+2. Launch the **particle filter** (Terminal 2):
+
+   .. code-block:: bash
+
+      cd ~/f1tenth_ws
+      source /opt/ros/humble/setup.bash
+      source install/setup.bash
+      ros2 launch particle_filter localize_launch.py
+
+3. Open **RViz2** and set the **2D Pose Estimate** so the particle filter is localized
+4. Echo the topic (Terminal 3):
+
+   .. code-block:: bash
+
+      ros2 topic echo /pf/pose/odom --once
+
+This prints a single Odometry message showing all the fields:
+
+.. image:: img/particle_filter_odom.png
+   :alt: Terminal output of ros2 topic echo /pf/pose/odom showing the full Odometry message
+   :width: 80%
+   :align: center
+
+Most of this message is not needed. Your logger only extracts four values from the ``pose.pose`` section:
+
+- ``position.x`` and ``position.y`` --- the car's location on the map
+- ``orientation.z`` and ``orientation.w`` --- the quaternion components that encode the car's heading
+
 The quaternion ``(z, w)`` pair encodes the car's heading on the map. You don't need to convert it to an angle for storage --- just save the raw values. The Pure Pursuit node will use them later.
 
 Step 3 --- Write the Node
