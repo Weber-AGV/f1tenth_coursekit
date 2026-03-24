@@ -99,7 +99,7 @@ Most of this message is not needed. Your logger only extracts four values from t
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 20 15 45
+   :widths: 8 30 10 52
 
    * - Field
      - Message Path
@@ -108,19 +108,22 @@ Most of this message is not needed. Your logger only extracts four values from t
    * - ``x``
      - ``pose.pose.position.x``
      - meters
-     - Car's horizontal position on the map, relative to the map origin
+     - Car's horizontal position on the map, relative to the map origin.
    * - ``y``
      - ``pose.pose.position.y``
      - meters
-     - Car's vertical position on the map, relative to the map origin
+     - Car's vertical position on the map, relative to the map origin.
    * - ``z``
      - ``pose.pose.orientation.z``
      - unitless
-     - Quaternion z component --- encodes the car's heading (rotation around the vertical axis). Ranges from -1.0 to 1.0.
+     - Quaternion z component. Encodes the car's heading
+       (rotation around the vertical axis). Ranges from -1.0 to 1.0.
    * - ``w``
      - ``pose.pose.orientation.w``
      - unitless
-     - Quaternion w component --- the scalar part of the rotation. Together with ``z``, fully defines the 2D heading: ``heading = 2 * atan2(z, w)``
+     - Quaternion w component (scalar part of the rotation).
+       Together with ``z``, defines the 2D heading:
+       ``heading = 2 * atan2(z, w)``
 
 .. note::
 
