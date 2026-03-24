@@ -38,20 +38,10 @@
   <text x="135" y="310" text-anchor="middle" fill="#F2DEDE" font-size="12">publishes AckermannDriveStamped</text>
   <text x="135" y="330" text-anchor="middle" fill="#F2DEDE" font-size="12">on /drive</text>
 
-  <!-- Arrow 4: bottom-left back up to top-left (feedback loop) -->
-  <line x1="20" y1="260" x2="20" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <line x1="20" y1="175" x2="8" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <line x1="8" y1="175" x2="8" y2="65" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <line x1="8" y1="65" x2="20" y2="65" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrow-light)"/>
-  <text x="3" y="163" fill="#999" font-size="9" text-anchor="middle" transform="rotate(-90, 3, 163)">also subscribes to /pf/pose/odom</text>
-
-  <!-- Arrow marker definitions -->
+  <!-- Arrow marker definition -->
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
       <polygon points="0 0, 12 4, 0 8" fill="#666"/>
-    </marker>
-    <marker id="arrow-light" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
     </marker>
   </defs>
 </svg>
