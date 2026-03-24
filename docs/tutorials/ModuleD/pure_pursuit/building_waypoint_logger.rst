@@ -16,9 +16,10 @@ Pure Pursuit needs a pre-recorded path to follow. That path is a CSV file of pos
 
 The pipeline looks like this:
 
-.. code-block:: text
-
-   Particle Filter (/pf/pose/odom)  -->  Waypoint Logger  -->  waypoints.csv  -->  Pure Pursuit Node
+.. image:: img/waypoint_pipeline.svg
+   :alt: Pipeline: Particle Filter publishes poses to the Waypoint Logger, which writes waypoints.csv, which Pure Pursuit reads
+   :width: 100%
+   :align: center
 
 The particle filter publishes the car's estimated map-relative position at ~30-40 Hz. Your logger captures those poses so the Pure Pursuit node can replay the path later.
 
