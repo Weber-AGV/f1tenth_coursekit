@@ -45,6 +45,8 @@ pure_pursuit_node:
     waypoint_file: "waypoints.csv"
 ```
 
+> **Note:** The top-level key `pure_pursuit_node:` in this YAML must match the node's name in two other places: `super().__init__('pure_pursuit_node')` in your Python class, and `name='pure_pursuit_node'` in the launch file. If any of these three don't match, ROS 2 won't load the parameters and your node will silently use the default values.
+
 | Parameter | Description |
 |-----------|-------------|
 | `lookahead_distance` | How far ahead on the path to steer toward (meters). Larger = smoother but wider turns. Smaller = tighter tracking but more oscillation. |
