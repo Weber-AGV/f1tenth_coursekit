@@ -24,6 +24,31 @@ This is the ``MCL()`` method at the heart of the node.
    :width: 100%
    :align: center
 
+Outputs
+~~~~~~~~
+
+The particle filter publishes four outputs. The first two are **data outputs** used by other nodes (pure pursuit, waypoint logger). The last two are **visualization outputs** for RViz2.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 50
+
+   * - Output
+     - Topic / Type
+     - What It Provides
+   * - **Localized Pose**
+     - ``/pf/pose/odom`` (Odometry)
+     - The filter's best estimate of where the car is on the map. This is what your pure pursuit node or waypoint logger subscribes to. Includes position (x, y), heading, speed, and a covariance matrix indicating confidence.
+   * - **TF Transform**
+     - ``map`` → ``laser`` (TF)
+     - Tells ROS the relationship between the map coordinate frame and the car's laser frame. This is what allows RViz2 to display the car's position on the map. Without this transform, the map and LiDAR scans would not align.
+   * - **Particle Cloud**
+     - ``/pf/viz/particles`` (PoseArray)
+     - The current set of particle hypotheses, displayed as arrows in RViz2. A tight cluster means the filter is confident. A spread-out cloud means it is still searching. Useful for diagnosing localization issues.
+   * - **Best Pose**
+     - ``/pf/viz/inferred_pose`` (PoseStamped)
+     - A single arrow in RViz2 showing the weighted average pose. This is the same value published on ``/pf/pose/odom`` but as a simpler message type for easy visualization.
+
 Initialization
 --------------
 
