@@ -9,4 +9,5 @@ Tutorial 7 - Particle Filter Localization
 
    particle_filter
    particle_filter_code
+   particle_filter_config
    particle_filter_launch
