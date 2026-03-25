@@ -3,6 +3,16 @@
 Running Pure Pursuit
 =====================
 
+Where This Fits
+----------------
+
+Pure Pursuit is a **Path Follower** — it takes the recorded waypoints and the real-time localized pose from the particle filter, and steers the car along the path. In the future, other algorithms like RRT will also fill this role.
+
+.. image:: ../particle_filter/img/localization_pipeline.svg
+   :alt: Pipeline showing localization feeding into path planning — path follower highlighted
+   :width: 100%
+   :align: center
+
 Once waypoints are recorded, the pure pursuit node can drive the car autonomously around the track using the particle filter for localization.
 
 How It Works

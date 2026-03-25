@@ -3,6 +3,16 @@
 Recording Waypoints
 ====================
 
+Where This Fits
+----------------
+
+Recording waypoints is the first step in the **Path Planning & Control** side of the pipeline. The particle filter provides localization — now you use that localized pose to record a path for the car to follow.
+
+.. image:: ../particle_filter/img/localization_pipeline.svg
+   :alt: Pipeline showing localization feeding into path planning — waypoint recording highlighted
+   :width: 100%
+   :align: center
+
 Pure Pursuit follows a pre-recorded path. Before the car can drive autonomously, you must drive it around the track manually once to record the waypoints.
 
 How It Works
