@@ -152,8 +152,10 @@
   <path d="M 660,315 L 660,292 L 727,292" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
 
   <!-- Particle Cloud — comes from the MCL cycle (all particles, not just expected pose) -->
-  <!-- Route from right side of Normalize box, along bottom of cycle, up to output -->
-  <path d="M 410,255 L 410,360 L 670,360 L 670,232 L 727,232" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <!-- Route right from Normalize, pass between Weight (bottom y=255) and Expected Pose (top y=290), then up to output -->
+  <path d="M 410,270 L 630,270 L 630,232 L 727,232" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <!-- Short stub down from Normalize box -->
+  <line x1="410" y1="255" x2="410" y2="270" stroke="#16a34a" stroke-width="1.5"/>
 
   <!-- Small dots on the trunk to show branching -->
   <circle cx="660" cy="315" r="3" fill="#16a34a"/>
