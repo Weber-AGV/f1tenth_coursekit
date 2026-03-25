@@ -8,3 +8,4 @@ Tutorial 7 - Particle Filter Localization
    :name: sec-particle-filter
 
    particle_filter
+   particle_filter_code
