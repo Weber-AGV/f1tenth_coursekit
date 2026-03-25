@@ -19,6 +19,11 @@ Each update cycle follows four steps:
 
 This is the ``MCL()`` method at the heart of the node.
 
+.. image:: img/mcl_overview.svg
+   :alt: Monte Carlo Localization overview diagram showing inputs, the 4-step MCL cycle, and outputs
+   :width: 100%
+   :align: center
+
 Initialization
 --------------
 
