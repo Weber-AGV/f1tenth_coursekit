@@ -17,7 +17,7 @@ Each update cycle follows four steps:
 3. **Weight** — score each particle by comparing its simulated LiDAR to the real scan
 4. **Estimate** — compute the weighted average of all particles as the best pose
 
-This is the ``MCL()`` method at the heart of the node.
+This is the ``MCL()`` method at the heart of the node. The diagram below expands on the simplified cycle from the previous page, showing the full data flow including inputs, outputs, and where RangeLibc fits in.
 
 .. image:: img/mcl_overview.svg
    :alt: Monte Carlo Localization overview diagram showing inputs, the 4-step MCL cycle, and outputs

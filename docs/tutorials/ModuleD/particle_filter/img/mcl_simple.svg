@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="280" rx="8" fill="#fafafa" stroke="#ddd" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">How the Particle Filter Works</text>
+  <text x="350" y="50" text-anchor="middle" font-size="11" fill="#64748b">Each cycle updates all particles and publishes the best estimated pose</text>
+
+  <!-- Step 1: Predict -->
+  <rect x="30" y="80" width="140" height="70" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="100" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#6d28d9">1. Predict</text>
+  <text x="100" y="123" text-anchor="middle" font-size="10" fill="#78716c">Move particles using</text>
+  <text x="100" y="136" text-anchor="middle" font-size="10" fill="#78716c">wheel odometry</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="170" y1="115" x2="198" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Weight -->
+  <rect x="200" y="80" width="140" height="70" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
+  <text x="270" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#dc2626">2. Weight</text>
+  <text x="270" y="123" text-anchor="middle" font-size="10" fill="#78716c">Score each particle</text>
+  <text x="270" y="136" text-anchor="middle" font-size="10" fill="#78716c">vs real LiDAR scan</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="340" y1="115" x2="368" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Resample -->
+  <rect x="370" y="80" width="140" height="70" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+  <text x="440" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309">3. Resample</text>
+  <text x="440" y="123" text-anchor="middle" font-size="10" fill="#78716c">Keep good particles</text>
+  <text x="440" y="136" text-anchor="middle" font-size="10" fill="#78716c">discard bad ones</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="510" y1="115" x2="538" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Publish -->
+  <rect x="540" y="80" width="140" height="70" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="610" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">4. Publish</text>
+  <text x="610" y="123" text-anchor="middle" font-size="10" fill="#78716c">Weighted average</text>
+  <text x="610" y="136" text-anchor="middle" font-size="10" fill="#78716c">= best estimated pose</text>
+
+  <!-- Loop arrow back from Publish to Predict -->
+  <path d="M 610,150 L 610,200 L 100,200 L 100,152" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="350" y="218" text-anchor="middle" font-size="10" fill="#64748b">repeat every odometry message (~30-40 Hz)</text>
+
+  <!-- Output arrow from Publish -->
+  <line x1="680" y1="115" x2="700" y2="115" stroke="#16a34a" stroke-width="2"/>
+  <text x="610" y="250" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">/pf/pose/odom</text>
+  <path d="M 610,150 L 610,155" fill="none" stroke="#16a34a" stroke-width="0"/>
+
+  <!-- Output labels on right edge -->
+  <text x="640" y="255" text-anchor="middle" font-size="9" fill="#64748b">+ TF (map → laser)</text>
+</svg>

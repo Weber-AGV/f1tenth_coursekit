@@ -62,6 +62,13 @@ The particle filter maintains a set of hypotheses (particles) about where the ca
 
 Over time the particles converge on the vehicle's true location.
 
+.. image:: img/mcl_simple.svg
+   :alt: Simplified particle filter cycle: Predict, Weight, Resample, Publish
+   :width: 100%
+   :align: center
+
+For a deeper look at each step with code examples, see :ref:`doc_tutorials_particle_filter_code`.
+
 Topics
 ------
 
