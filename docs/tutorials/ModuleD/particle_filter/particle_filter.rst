@@ -113,14 +113,14 @@ The particle filter ships with a default map (``lab_map_clean``) already configu
       .. code-block:: bash
 
          cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/my_map.pgm \
-            ~/f1tenth_ws/src/particle_filter/maps/
+            ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/
 
    2. Create a YAML metadata file based on the existing template:
 
       .. code-block:: bash
 
-         cp ~/f1tenth_ws/src/particle_filter/maps/lab_map_clean.yaml \
-            ~/f1tenth_ws/src/particle_filter/maps/my_map.yaml
+         cp ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/lab_map_clean.yaml \
+            ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/my_map.yaml
 
    3. Edit ``my_map.yaml`` to match your map:
 
@@ -137,7 +137,7 @@ The particle filter ships with a default map (``lab_map_clean``) already configu
 
       .. code-block:: bash
 
-         code ~/f1tenth_ws/src/particle_filter/config/localize.yaml
+         code ~/f1tenth_ws/src/f1tenth_system/particle_filter/config/localize.yaml
 
       Find the ``map_server`` section and change the map name:
 
@@ -187,6 +187,7 @@ Start the car stack as usual:
 .. code-block:: bash
 
    source /opt/ros/humble/setup.bash
+   source install/setup.bash
    rviz2
 
 In RViz2:
@@ -223,7 +224,7 @@ Tune the particle filter by editing:
 
 .. code-block:: bash
 
-   nano ~/f1tenth_ws/src/particle_filter/config/localize.yaml
+   code ~/f1tenth_ws/src/f1tenth_system/particle_filter/config/localize.yaml
 
 The key parameters are:
 
@@ -275,7 +276,7 @@ The key parameters are:
 
 .. note::
 
-   If you built RangeLibc using the ``fix_range_libc.sh`` script on the Jetson Orin, ``rmgpu`` should work. If you see CUDA errors at runtime, fall back to ``cddt`` by editing ``range_method`` in ``~/f1tenth_ws/src/particle_filter/config/localize.yaml`` and setting ``rangelib_variant`` to ``4``.
+   If you built RangeLibc using the ``fix_range_libc.sh`` script on the Jetson Orin, ``rmgpu`` should work. If you see CUDA errors at runtime, fall back to ``cddt`` by editing ``range_method`` in ``~/f1tenth_ws/src/f1tenth_system/particle_filter/config/localize.yaml`` and setting ``rangelib_variant`` to ``4``.
 
 Troubleshooting
 ---------------

@@ -1,7 +1,7 @@
 .. _doc_weber_lab6:
 
 
-Lab 6 - Waypoint Logger for Pure Pursuit
+Lab 6a - Waypoint Logger for Pure Pursuit
 ==========================================
 
 | **Source:** `README.md <https://github.com/Weber-AGV/f1tenth_coursekit/blob/master/docs/weber_assignments/labs/lab6/README.md>`_

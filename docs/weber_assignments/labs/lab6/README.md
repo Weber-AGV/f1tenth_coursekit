@@ -1,4 +1,4 @@
-# Lab 6 - Waypoint Logger for Pure Pursuit
+# Lab 6a - Waypoint Logger for Pure Pursuit
 
 ## I. Learning Goals
 
@@ -100,7 +100,7 @@ source install/setup.bash
    ros2 launch particle_filter localize_launch.py
    ```
 
-3. Open **RViz2** (Terminal 3) and set the **2D Pose Estimate** so the particle filter is localized
+3. Open **RViz2** (Terminal 3) and set the **2D Pose Estimate** so the particle filter is localized. **The particle filter must be localized before you start recording** — if it is not, your waypoints will be meaningless
 4. Run your **waypoint logger** (Terminal 4):
 
    ```bash
