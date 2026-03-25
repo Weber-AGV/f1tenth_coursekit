@@ -252,15 +252,45 @@ Map Server Section
      ros__parameters:
        map: 'lab_map_clean'
 
-This tells the launch file which map to load. The value is the map name **without the file extension** — it looks for ``<map_name>.yaml`` and ``<map_name>.pgm`` in the ``particle_filter/maps/`` directory.
+This tells the launch file which map to load. The value is the map name **without the file extension** — it looks for ``<map_name>.yaml`` and ``<map_name>.pgm`` in the particle filter's own ``maps/`` directory:
 
-Change this to match your saved map name:
+.. code-block:: bash
+
+   ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/
+
+The default map ``lab_map_clean`` is a pre-made map of the CAE lab that is ready to use. If this matches your environment, no changes are needed.
+
+**Using your own map:** If you created a map with SLAM (see the SLAM tutorial), that map is stored in the **f1tenth_stack** maps directory:
+
+.. code-block:: bash
+
+   ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/
+
+The particle filter cannot access maps from ``f1tenth_stack`` — you need to copy both the ``.pgm`` and ``.yaml`` files into the particle filter's ``maps/`` directory:
+
+.. code-block:: bash
+
+   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/hallway_map.pgm \
+      ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/
+
+   cp ~/f1tenth_ws/src/f1tenth_system/f1tenth_stack/maps/hallway_map.yaml \
+      ~/f1tenth_ws/src/f1tenth_system/particle_filter/maps/
+
+Then update ``localize.yaml`` to point to your map:
 
 .. code-block:: yaml
 
    map_server:
      ros__parameters:
        map: 'hallway_map'
+
+After changing the map, rebuild so the new files are installed:
+
+.. code-block:: bash
+
+   cd ~/f1tenth_ws
+   colcon build --packages-select particle_filter
+   source install/setup.bash
 
 Recommended Starting Points for Tuning
 ---------------------------------------
