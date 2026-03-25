@@ -3,6 +3,18 @@
 Particle Filter Localization
 =============================
 
+Where This Fits
+----------------
+
+The particle filter is the **localization** component of the autonomous driving pipeline. It answers *"Where am I on this map?"* so that other nodes can make decisions about where to go.
+
+.. image:: img/localization_pipeline.svg
+   :alt: Pipeline showing localization (particle filter) feeding into path planning (waypoint logger and path follower)
+   :width: 100%
+   :align: center
+
+The left side (**Localization**) is what this tutorial covers — taking LiDAR and odometry data, comparing it against a saved map, and producing a localized pose. The right side (**Path Planning & Control**) uses that pose to record waypoints (Lab 6a) and follow them autonomously (Lab 6b).
+
 Why a Standalone Particle Filter?
 -----------------------------------
 
