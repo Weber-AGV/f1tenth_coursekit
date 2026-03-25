@@ -41,7 +41,7 @@ Particle Count
 
    max_particles: 4000
 
-The number of pose hypotheses the filter maintains. This is the single biggest factor in both accuracy and CPU cost.
+The number of pose hypotheses the filter maintains. More particles means better accuracy but higher CPU cost.
 
 .. list-table::
    :header-rows: 1
@@ -97,9 +97,9 @@ Motion Model Dispersion
 
 These control how much random noise is added to each particle after applying odometry. They represent the standard deviation of Gaussian noise in meters (x, y) and radians (theta).
 
-**This is the most important tuning section for students.**
+.. important::
 
-``motion_dispersion_theta`` is the parameter you will adjust most often:
+   If the particle filter is not performing well, start here. ``motion_dispersion_theta`` is the parameter you will adjust most often:
 
 - **Too low** — particles stay tightly clustered but can't recover from heading errors. The filter "locks on" to a wrong heading and diverges.
 - **Too high** — particles spread too far, the cloud is always diffuse, and the pose estimate is noisy.
@@ -154,7 +154,7 @@ These four ``z_`` values control how the filter interprets differences between e
 
 ``sigma_hit`` controls the width of the Gaussian for ``z_hit``. A larger value is more tolerant of small map inaccuracies but less precise. The default of 8.0 works well for most indoor environments.
 
-**For most students, the defaults work fine.** Only adjust these if you have a specific problem like many dynamic obstacles or a very reflective environment.
+The defaults work well for most indoor environments. Only adjust these if you have a specific problem like many dynamic obstacles or a very reflective environment.
 
 Squash Factor
 -------------
