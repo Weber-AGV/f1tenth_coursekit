@@ -107,7 +107,8 @@ If you are looking for the old Code page, you can find it `here <https://f1tenth
    :name: sec-module-d-tutorials
    :hidden:
 
-   tutorials/ModuleD/index
+   tutorials/ModuleD/particle_filter/index
+   tutorials/ModuleD/pure_pursuit/index
 
 .. toctree::
    :maxdepth: 2

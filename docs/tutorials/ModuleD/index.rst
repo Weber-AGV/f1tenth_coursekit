@@ -4,7 +4,7 @@ Module D - Planning & Control
 ==============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :name: sec-module-d
 
    particle_filter/index
