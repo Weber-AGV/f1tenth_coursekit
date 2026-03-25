@@ -36,10 +36,13 @@ The particle filter publishes four outputs. The first two are **data outputs** u
    indicating confidence.
 
 **TF Transform** — ``map`` → ``laser`` (TF)
-   Tells ROS the relationship between the map coordinate frame and the
-   car's laser frame. This is what allows RViz2 to display the car's
-   position on the map. Without this transform, the map and LiDAR scans
-   would not align.
+   Tells ROS the car's position on the map by publishing a transform
+   directly from ``map`` to ``laser``. This is a shortcut — a standard
+   ROS TF tree would go ``map`` → ``odom`` → ``base_link`` → ``laser``,
+   but this particle filter skips the intermediate frames and connects
+   ``map`` to ``laser`` directly. This works because the particle filter
+   already accounts for the full pose. Without this transform, the map
+   and LiDAR scans would not align in RViz2.
 
 **Particle Cloud** — ``/pf/viz/particles`` (PoseArray)
    The current set of particle hypotheses, displayed as arrows in RViz2.
@@ -232,7 +235,11 @@ TF and Odometry Output
        t.transform.translation.x = pose[0]
        t.transform.translation.y = pose[1]
 
-The particle filter publishes a TF transform from ``map`` to ``laser``, telling ROS where the car is on the map. It also publishes the pose as an ``Odometry`` message on ``/pf/pose/odom`` — this is what your pure pursuit node subscribes to.
+The particle filter publishes a TF transform directly from ``map`` to ``laser``, skipping the usual ``map`` → ``odom`` → ``base_link`` → ``laser`` chain. This works because the particle filter computes the car's full pose on the map — there is no need for the intermediate frames. It also publishes the pose as an ``Odometry`` message on ``/pf/pose/odom`` — this is what your pure pursuit node subscribes to.
+
+.. note::
+
+   Nav2's AMCL takes the standard approach and publishes ``map`` → ``odom``, relying on the existing ``odom`` → ``base_link`` → ``laser`` chain from the robot's odometry. This is one reason you cannot run both AMCL and the standalone particle filter at the same time — they both try to define the ``map`` frame, causing a TF conflict.
 
 The odometry message includes the **covariance** computed from the particle distribution:
 
