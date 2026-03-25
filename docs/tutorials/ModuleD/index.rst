@@ -7,4 +7,5 @@ Module D - Planning & Control
    :maxdepth: 2
    :name: sec-module-d
 
+   particle_filter/index
    pure_pursuit/index
