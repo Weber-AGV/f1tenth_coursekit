@@ -27,8 +27,8 @@
   <!-- Step 2: Predict (top-right) -->
   <rect x="220" y="82" width="130" height="55" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
   <text x="285" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#6d28d9">2. Predict</text>
-  <text x="285" y="120" text-anchor="middle" font-size="9" fill="#78716c">Move particles using</text>
-  <text x="285" y="131" text-anchor="middle" font-size="9" fill="#78716c">odometry + noise</text>
+  <text x="285" y="120" text-anchor="middle" font-size="9" fill="#78716c">Apply odometry + noise</text>
+  <text x="285" y="131" text-anchor="middle" font-size="9" fill="#78716c">(motion model)</text>
 
   <!-- Arrow 1→2 -->
   <line x1="190" y1="109" x2="217" y2="109" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -36,8 +36,8 @@
   <!-- Step 3: Weight (bottom-right) -->
   <rect x="220" y="162" width="130" height="55" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
   <text x="285" y="184" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">3. Weight</text>
-  <text x="285" y="200" text-anchor="middle" font-size="9" fill="#78716c">Score each particle</text>
-  <text x="285" y="211" text-anchor="middle" font-size="9" fill="#78716c">vs real LiDAR scan</text>
+  <text x="285" y="200" text-anchor="middle" font-size="9" fill="#78716c">Score vs real LiDAR scan</text>
+  <text x="285" y="211" text-anchor="middle" font-size="9" fill="#78716c">(sensor model + RangeLibc)</text>
 
   <!-- Arrow 2→3 -->
   <line x1="285" y1="137" x2="285" y2="160" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -51,9 +51,9 @@
   <!-- Arrow 3→4 -->
   <line x1="217" y1="189" x2="193" y2="189" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Loop arrow 4→1 (matches advanced SVG style) -->
-  <path d="M 60,189 Q 45,189 45,145 Q 45,109 57,109" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="52" y="96" text-anchor="middle" font-size="9" fill="#555">loop</text>
+  <!-- Loop arrow 4→1 (exits Normalize left, curves up and over, enters Resample from top) -->
+  <path d="M 60,189 Q 45,189 45,62 Q 45,57 85,57 L 85,80" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="38" y="135" text-anchor="middle" font-size="9" fill="#555" transform="rotate(-90,38,135)">loop</text>
 
   <!-- Publish section (outside MCL loop) -->
   <rect x="50" y="285" width="300" height="55" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
