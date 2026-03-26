@@ -5,6 +5,11 @@ Tuning the Particle Filter (localize.yaml)
 
 The particle filter's behavior is controlled entirely by ``localize.yaml``. This page explains every parameter and highlights which ones you should tune to improve localization quality.
 
+.. image:: img/mcl_tuning.svg
+   :alt: MCL cycle with localize.yaml parameters mapped to each step
+   :width: 100%
+   :align: center
+
 To edit the config:
 
 .. code-block:: bash
