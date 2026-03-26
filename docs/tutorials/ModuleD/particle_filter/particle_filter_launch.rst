@@ -20,6 +20,11 @@ This single command starts:
 
 These three nodes work together: the lifecycle manager activates the map server, which provides the map that the particle filter uses for ray casting.
 
+.. image:: img/launch_nodes.svg
+   :alt: Launch file architecture showing three nodes, their relationships, and external connections
+   :width: 100%
+   :align: center
+
 Loading the Config
 ------------------
 
