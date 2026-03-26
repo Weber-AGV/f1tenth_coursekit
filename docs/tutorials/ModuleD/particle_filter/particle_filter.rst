@@ -60,9 +60,19 @@ The particle filter maintains a set of hypotheses (particles) about where the ca
 3. **Weights** each particle by how well its simulated LiDAR scan matches the real scan.
 4. **Normalizes** — adjusts weights so they sum to 1.0 (applies squash factor to prevent particle collapse).
 
-After each cycle, the filter computes the weighted average of all particles and **publishes** the best estimated pose.
-
 Over time the particles converge on the vehicle's true location.
+
+Publishing
+~~~~~~~~~~~
+
+After each MCL cycle completes, the filter computes the **weighted average** of all particles — this becomes the best estimated pose. It then publishes that pose and several visualization outputs so that other nodes and RViz2 can use the result:
+
+- **Localized Pose** (``/pf/pose/odom``) — the primary output. Your pure pursuit node, waypoint logger, or any other node that needs to know where the car is subscribes to this topic.
+- **TF Transform** (``map`` → ``laser``) — tells ROS where the car is relative to the map so that LiDAR scans and the map align in RViz2.
+- **Particle Cloud** (``/pf/viz/particles``) — all particle hypotheses displayed as arrows in RViz2 for debugging.
+- **Best Pose** (``/pf/viz/inferred_pose``) — a single arrow in RViz2 showing the estimated pose.
+
+Publishing happens every cycle (~30-40 Hz), giving downstream nodes a continuous stream of localization data.
 
 .. image:: img/mcl_simple.svg
    :alt: Simplified particle filter cycle: Predict, Weight, Resample, Publish
