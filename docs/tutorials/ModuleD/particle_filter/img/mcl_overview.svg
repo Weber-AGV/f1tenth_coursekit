@@ -85,8 +85,8 @@
   <text x="430" y="280" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">4000 particles × [x, y, θ] updated every cycle</text>
 
   <!-- ===== PUBLISH (below MCL loop, like simplified SVG) ===== -->
-  <text x="430" y="315" text-anchor="middle" font-size="10" fill="#64748b">after each cycle</text>
   <line x1="430" y1="290" x2="430" y2="322" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="500" y="310" text-anchor="start" font-size="10" fill="#64748b">after each cycle</text>
 
   <rect x="260" y="325" width="340" height="55" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
   <text x="430" y="348" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">Publish</text>
