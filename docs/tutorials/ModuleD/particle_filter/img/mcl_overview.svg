@@ -93,9 +93,10 @@
   <line x1="410" y1="315" x2="410" y2="355" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow)"/>
   <text x="455" y="340" text-anchor="start" font-size="10" fill="#64748b">after each cycle</text>
 
-  <rect x="185" y="358" width="450" height="55" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
-  <text x="410" y="381" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">Publish</text>
-  <text x="410" y="401" text-anchor="middle" font-size="10" fill="#78716c">Compute weighted average → publish best pose, TF, and particle cloud</text>
+  <rect x="185" y="355" width="450" height="65" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="410" y="376" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">Publish</text>
+  <text x="410" y="394" text-anchor="middle" font-size="10" fill="#78716c">Localized Pose · TF Transform · Particle Cloud · Best Pose</text>
+  <text x="410" y="410" text-anchor="middle" font-size="10" fill="#78716c">Weighted average of all particles → /pf/pose/odom + map → laser</text>
 
   <!-- ===== OUTPUTS (purple boxes, horizontal below Publish) ===== -->
 
