@@ -96,6 +96,13 @@ Topics
      - ``nav_msgs/OccupancyGrid``
      - Saved map loaded into RangeLibc for ray casting (via service call at startup)
 
+Each input feeds a specific step of the MCL cycle:
+
+.. image:: img/mcl_inputs.svg
+   :alt: MCL cycle with inputs showing which data feeds each step
+   :width: 100%
+   :align: center
+
 **Published**
 
 .. list-table::
@@ -107,18 +114,21 @@ Topics
      - Description
    * - ``/pf/pose/odom``
      - ``nav_msgs/Odometry``
-     - Primary localized pose output
-   * - ``/pf/viz/inferred_pose``
-     - ``geometry_msgs/PoseStamped``
-     - Best estimated pose for visualization
+     - **Localized Pose** — the filter's best estimate of position, heading, and speed on the map
+   * - TF: ``map`` → ``laser``
+     - ``tf2_msgs/TFMessage``
+     - **TF Transform** — tells ROS where the car is on the map so LiDAR and map align in RViz2
    * - ``/pf/viz/particles``
      - ``geometry_msgs/PoseArray``
-     - All particle poses for visualization
+     - **Particle Cloud** — all particle hypotheses for visualization in RViz2
+   * - ``/pf/viz/inferred_pose``
+     - ``geometry_msgs/PoseStamped``
+     - **Best Pose** — single arrow showing the weighted average pose in RViz2
 
-The diagram below shows how each input feeds into a specific step of the MCL cycle:
+The full picture — inputs feeding the MCL cycle, and outputs published after each cycle:
 
-.. image:: img/mcl_inputs.svg
-   :alt: MCL cycle with inputs showing which data feeds each step
+.. image:: img/mcl_overview.svg
+   :alt: Full MCL diagram with inputs, cycle steps, and published outputs
    :width: 100%
    :align: center
 
