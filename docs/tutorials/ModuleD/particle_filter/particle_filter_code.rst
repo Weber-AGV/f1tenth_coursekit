@@ -19,7 +19,16 @@ Each update cycle follows four steps:
 
 After each cycle, the filter computes the weighted average of all particles and publishes the best estimated pose.
 
-This is the ``MCL()`` method at the heart of the node. The diagram below expands on the simplified cycle from the previous page, showing the full data flow including inputs, outputs, and where RangeLibc fits in.
+This is the ``MCL()`` method at the heart of the node.
+
+The diagram below shows how the code is organized — what runs once at startup versus what runs every cycle, and how the methods connect to each other:
+
+.. image:: img/code_architecture.svg
+   :alt: Code architecture showing startup vs runtime methods and their connections
+   :width: 100%
+   :align: center
+
+The next diagram expands on the simplified cycle from the previous page, showing the full data flow including inputs, outputs, and where RangeLibc fits in.
 
 .. image:: img/mcl_overview.svg
    :alt: Monte Carlo Localization overview diagram showing inputs, the 4-step MCL cycle, and outputs
