@@ -84,19 +84,41 @@ For a deeper look at each step with code examples, see :ref:`doc_tutorials_parti
 Topics
 ------
 
-**Subscribed (Inputs)**
+.. raw:: html
 
-``/scan`` — ``sensor_msgs/LaserScan``
+   <h4 style="color: #2563eb;">Subscribed (Inputs)</h4>
+
+.. raw:: html
+
+   <p><strong style="color: #2563eb;">/scan</strong> — <code>sensor_msgs/LaserScan</code></p>
+
+..
+
    LiDAR scan data. Downsampled by ``angle_step`` before use in the Weight step.
 
-``/vesc/odom`` — ``nav_msgs/Odometry``
+.. raw:: html
+
+   <p><strong style="color: #2563eb;">/vesc/odom</strong> — <code>nav_msgs/Odometry</code></p>
+
+..
+
    Wheel odometry from the VESC. Used in the Predict step to move particles.
 
-``/initialpose`` — ``geometry_msgs/PoseWithCovarianceStamped``
+.. raw:: html
+
+   <p><strong style="color: #2563eb;">/initialpose</strong> — <code>geometry_msgs/PoseWithCovarianceStamped</code></p>
+
+..
+
    Initial pose set via RViz2's "2D Pose Estimate" button. A one-time action
    that scatters particles around the clicked location.
 
-``/map`` — ``nav_msgs/OccupancyGrid``
+.. raw:: html
+
+   <p><strong style="color: #2563eb;">/map</strong> — <code>nav_msgs/OccupancyGrid</code></p>
+
+..
+
    Saved map loaded into RangeLibc at startup for ray casting. Fetched via
    service call from the map server.
 
@@ -107,27 +129,49 @@ Each input feeds a specific step of the MCL cycle:
    :width: 100%
    :align: center
 
-**Published (Outputs)**
+.. raw:: html
 
-``/pf/pose/odom`` — ``nav_msgs/Odometry`` (**Localized Pose**)
+   <h4 style="color: #7c3aed;">Published (Outputs)</h4>
+
+.. raw:: html
+
+   <p><strong style="color: #7c3aed;">/pf/pose/odom</strong> — <code>nav_msgs/Odometry</code> (<strong>Localized Pose</strong>)</p>
+
+..
+
    The filter's best estimate of where the car is on the map. This is what
    your pure pursuit node or waypoint logger subscribes to. Includes
    position (x, y), heading, speed, and a covariance matrix indicating
    confidence.
 
-TF: ``map`` → ``laser`` (**TF Transform**)
+.. raw:: html
+
+   <p><strong style="color: #7c3aed;">TF: map → laser</strong> (<strong>TF Transform</strong>)</p>
+
+..
+
    Tells ROS the car's position on the map by publishing a transform
    directly from ``map`` to ``laser``. This is a shortcut — a standard
    ROS TF tree would go ``map`` → ``odom`` → ``base_link`` → ``laser``,
    but this particle filter skips the intermediate frames. Without this
    transform, the map and LiDAR scans would not align in RViz2.
 
-``/pf/viz/particles`` — ``geometry_msgs/PoseArray`` (**Particle Cloud**)
+.. raw:: html
+
+   <p><strong style="color: #7c3aed;">/pf/viz/particles</strong> — <code>geometry_msgs/PoseArray</code> (<strong>Particle Cloud</strong>)</p>
+
+..
+
    The current set of particle hypotheses, displayed as arrows in RViz2.
    A tight cluster means the filter is confident. A spread-out cloud means
    it is still searching. Useful for diagnosing localization issues.
 
-``/pf/viz/inferred_pose`` — ``geometry_msgs/PoseStamped`` (**Best Pose**)
+.. raw:: html
+
+   <p><strong style="color: #7c3aed;">/pf/viz/inferred_pose</strong> — <code>geometry_msgs/PoseStamped</code> (<strong>Best Pose</strong>)</p>
+
+..
+
    A single arrow in RViz2 showing the weighted average pose. This is the
    same value published on ``/pf/pose/odom`` but as a simpler message type
    for easy visualization.
