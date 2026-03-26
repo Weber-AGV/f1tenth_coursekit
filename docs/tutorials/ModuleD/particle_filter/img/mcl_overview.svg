@@ -75,11 +75,11 @@
   <text x="760" y="245" text-anchor="middle" font-size="9" fill="#3b82f6">/scan (downsampled)</text>
   <path d="M 707,232 L 678,232" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
-  <!-- Map → Normalize area -->
-  <rect x="10" y="210" width="100" height="45" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="60" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">Map</text>
-  <text x="60" y="245" text-anchor="middle" font-size="9" fill="#3b82f6">/map (via service)</text>
-  <path d="M 110,232 L 142,232" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <!-- Map → Weight (loaded into RangeLibc at startup for ray casting) -->
+  <rect x="710" y="280" width="100" height="45" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="760" y="300" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">Map</text>
+  <text x="760" y="315" text-anchor="middle" font-size="9" fill="#3b82f6">/map (via service)</text>
+  <path d="M 707,300 L 660,300 L 660,268" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
   <!-- Initial Pose → Publish -->
   <rect x="10" y="370" width="110" height="45" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
