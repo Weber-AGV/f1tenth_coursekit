@@ -54,9 +54,9 @@
   <!-- Arrow 3→4 -->
   <line x1="492" y1="232" x2="328" y2="232" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Loop arrow 4→1 -->
-  <path d="M 145,232 Q 128,232 128,175 Q 128,132 142,132" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="135" y="118" text-anchor="middle" font-size="9" fill="#555">loop</text>
+  <!-- Loop arrow 4→1 (exits Normalize left, curves up and over, enters Resample from top) -->
+  <path d="M 145,232 Q 128,232 128,90 Q 128,85 180,85 L 180,97" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="135" y="160" text-anchor="middle" font-size="9" fill="#555" transform="rotate(-90,135,160)">loop</text>
 
   <!-- Particles label -->
   <text x="410" y="295" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">4000 particles × [x, y, θ] updated every cycle</text>
