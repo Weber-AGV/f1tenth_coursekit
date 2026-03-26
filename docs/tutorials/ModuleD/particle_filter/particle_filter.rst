@@ -92,6 +92,9 @@ Topics
    * - ``/initialpose``
      - ``geometry_msgs/PoseWithCovarianceStamped``
      - Initial pose set via RViz2 "2D Pose Estimate"
+   * - ``/map``
+     - ``nav_msgs/OccupancyGrid``
+     - Saved map loaded into RangeLibc for ray casting (via service call at startup)
 
 **Published**
 
@@ -111,6 +114,13 @@ Topics
    * - ``/pf/viz/particles``
      - ``geometry_msgs/PoseArray``
      - All particle poses for visualization
+
+The diagram below shows how each input feeds into a specific step of the MCL cycle:
+
+.. image:: img/mcl_inputs.svg
+   :alt: MCL cycle with inputs showing which data feeds each step
+   :width: 100%
+   :align: center
 
 Run Steps
 ---------
