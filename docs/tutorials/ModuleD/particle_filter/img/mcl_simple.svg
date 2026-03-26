@@ -51,9 +51,9 @@
   <!-- Arrow 3→4 -->
   <line x1="217" y1="189" x2="193" y2="189" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Loop arrow 4→1 (exits Normalize left, curves up and over, enters Resample from top) -->
-  <path d="M 60,189 Q 45,189 45,62 Q 45,57 85,57 L 85,80" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="38" y="135" text-anchor="middle" font-size="9" fill="#555" transform="rotate(-90,38,135)">loop</text>
+  <!-- Loop arrow 4→1 (straight up from Normalize to Resample) -->
+  <line x1="125" y1="162" x2="125" y2="140" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="140" y="155" text-anchor="start" font-size="10" font-weight="bold" fill="#16a34a">loop</text>
 
   <!-- Publish section (outside MCL loop) -->
   <rect x="50" y="285" width="300" height="55" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
