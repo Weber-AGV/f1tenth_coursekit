@@ -44,35 +44,35 @@
   <rect x="210" y="70" width="430" height="370" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3"/>
   <text x="425" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">MCL Update Cycle (every odometry message)</text>
 
-  <!-- Step 1: Predict (Motion Model) — top-left -->
-  <rect x="240" y="115" width="170" height="55" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
-  <text x="325" y="138" text-anchor="middle" font-size="13" font-weight="bold" fill="#6d28d9">1. Predict</text>
-  <text x="325" y="155" text-anchor="middle" font-size="10" fill="#78716c">Apply odometry + noise</text>
-  <text x="325" y="166" text-anchor="middle" font-size="10" fill="#78716c">(motion model)</text>
+  <!-- Step 1: Resample — top-left -->
+  <rect x="240" y="115" width="170" height="55" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+  <text x="325" y="138" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">1. Resample</text>
+  <text x="325" y="155" text-anchor="middle" font-size="10" fill="#78716c">Keep good particles</text>
+  <text x="325" y="166" text-anchor="middle" font-size="10" fill="#78716c">discard bad ones</text>
 
-  <!-- Step 2: Weight (Sensor Model) — top-right -->
-  <rect x="440" y="115" width="170" height="55" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
-  <text x="525" y="138" text-anchor="middle" font-size="13" font-weight="bold" fill="#dc2626">2. Weight</text>
-  <text x="525" y="155" text-anchor="middle" font-size="10" fill="#78716c">Score vs real LiDAR scan</text>
-  <text x="525" y="166" text-anchor="middle" font-size="10" fill="#78716c">(sensor model + RangeLibc)</text>
+  <!-- Step 2: Predict (Motion Model) — top-right -->
+  <rect x="440" y="115" width="170" height="55" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="525" y="138" text-anchor="middle" font-size="13" font-weight="bold" fill="#6d28d9">2. Predict</text>
+  <text x="525" y="155" text-anchor="middle" font-size="10" fill="#78716c">Apply odometry + noise</text>
+  <text x="525" y="166" text-anchor="middle" font-size="10" fill="#78716c">(motion model)</text>
 
   <!-- Arrow 1→2 -->
   <line x1="410" y1="142" x2="437" y2="142" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Step 3: Resample — bottom-right -->
-  <rect x="440" y="200" width="170" height="55" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
-  <text x="525" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">3. Resample</text>
-  <text x="525" y="240" text-anchor="middle" font-size="10" fill="#78716c">Keep good particles</text>
-  <text x="525" y="251" text-anchor="middle" font-size="10" fill="#78716c">discard bad ones</text>
+  <!-- Step 3: Weight (Sensor Model) — bottom-right -->
+  <rect x="440" y="200" width="170" height="55" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
+  <text x="525" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#dc2626">3. Weight</text>
+  <text x="525" y="240" text-anchor="middle" font-size="10" fill="#78716c">Score vs real LiDAR scan</text>
+  <text x="525" y="251" text-anchor="middle" font-size="10" fill="#78716c">(sensor model + RangeLibc)</text>
 
   <!-- Arrow 2→3 -->
   <line x1="525" y1="170" x2="525" y2="197" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Step 4: Normalize + Publish — bottom-left -->
-  <rect x="240" y="200" width="170" height="55" rx="8" fill="#fff" stroke="#16a34a" stroke-width="2"/>
-  <text x="325" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">4. Publish</text>
-  <text x="325" y="240" text-anchor="middle" font-size="10" fill="#78716c">Normalize weights</text>
-  <text x="325" y="251" text-anchor="middle" font-size="10" fill="#78716c">+ publish best pose</text>
+  <!-- Step 4: Normalize — bottom-left -->
+  <rect x="240" y="200" width="170" height="55" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="325" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#0369a1">4. Normalize</text>
+  <text x="325" y="240" text-anchor="middle" font-size="10" fill="#78716c">Weights sum to 1.0</text>
+  <text x="325" y="251" text-anchor="middle" font-size="10" fill="#78716c">+ squash factor</text>
 
   <!-- Arrow 3→4 -->
   <line x1="437" y1="227" x2="413" y2="227" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -97,12 +97,12 @@
   <text x="425" y="415" text-anchor="middle" font-size="10" fill="#991b1b">RangeLibc (GPU): simulates LiDAR for all particles</text>
 
   <!-- ===== INPUT ARROWS ===== -->
-  <!-- Odometry → Predict (top-left) -->
-  <path d="M 140,172 Q 200,172 200,142 L 237,142" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <!-- Odometry → Predict (top-right, route above cycle) -->
+  <path d="M 140,172 Q 190,172 190,80 L 525,80 L 525,113" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
-  <!-- LiDAR → Weight (top-right, route above cycle) -->
-  <path d="M 140,112 Q 190,112 190,80 L 525,80 L 525,113" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-  <text x="360" y="74" text-anchor="middle" font-size="9" fill="#2563eb">downsampled</text>
+  <!-- LiDAR → Weight (bottom-right, route down left side) -->
+  <path d="M 140,112 Q 190,112 190,227 L 437,227" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="175" y="175" text-anchor="middle" font-size="9" fill="#2563eb" transform="rotate(-90,175,175)">downsampled</text>
 
   <!-- Map → RangeLibc -->
   <path d="M 140,232 Q 190,232 190,412 L 307,412" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>

@@ -55,10 +55,12 @@ How It Works
 
 The particle filter maintains a set of hypotheses (particles) about where the car might be on the map. Each particle represents a possible pose (x, y, heading). On each LiDAR scan, the filter:
 
-1. **Predicts** new particle positions using wheel odometry.
-2. **Weights** each particle by how well its simulated LiDAR scan matches the real scan.
-3. **Resamples** — particles that match the scan better survive; poor matches are discarded.
-4. **Publishes** the best estimated pose.
+1. **Resamples** — particles with higher weights are duplicated; poor matches are discarded.
+2. **Predicts** new particle positions using wheel odometry (with added noise).
+3. **Weights** each particle by how well its simulated LiDAR scan matches the real scan.
+4. **Normalizes** — adjusts weights so they sum to 1.0 (applies squash factor to prevent particle collapse).
+
+After each cycle, the filter computes the weighted average of all particles and **publishes** the best estimated pose.
 
 Over time the particles converge on the vehicle's true location.
 

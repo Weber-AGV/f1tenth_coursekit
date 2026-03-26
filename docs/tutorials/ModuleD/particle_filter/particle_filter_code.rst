@@ -12,10 +12,12 @@ The particle filter answers one question: **"Where am I on this map?"** It does 
 
 Each update cycle follows four steps:
 
-1. **Predict** — move every particle according to odometry (with noise)
-2. **Weight** — score each particle by comparing its simulated LiDAR to the real scan
-3. **Resample** — duplicate good particles, discard bad ones
-4. **Publish** — normalize weights and compute the weighted average as the best pose
+1. **Resample** — duplicate good particles, discard bad ones
+2. **Predict** — move every particle according to odometry (with noise)
+3. **Weight** — score each particle by comparing its simulated LiDAR to the real scan
+4. **Normalize** — divide weights by their sum so they form a proper probability distribution
+
+After each cycle, the filter computes the weighted average of all particles and publishes the best estimated pose.
 
 This is the ``MCL()`` method at the heart of the node. The diagram below expands on the simplified cycle from the previous page, showing the full data flow including inputs, outputs, and where RangeLibc fits in.
 
