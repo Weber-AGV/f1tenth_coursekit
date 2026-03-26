@@ -100,9 +100,9 @@
   <!-- Odometry → Predict (top-right) — straight across, no collision -->
   <path d="M 140,112 L 195,112 L 195,80 L 532,80 L 532,108" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
-  <!-- LiDAR → Weight (bottom-right) — route down and across below Resample -->
-  <path d="M 140,172 L 195,172 L 195,230 L 442,230" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
-  <text x="195" y="208" text-anchor="start" font-size="9" fill="#2563eb">downsampled</text>
+  <!-- LiDAR → Weight — route between Resample and Normalize, then down into Weight -->
+  <path d="M 140,172 L 195,172 L 195,185 L 500,185 L 500,198" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="340" y="182" text-anchor="middle" font-size="9" fill="#2563eb">downsampled</text>
 
   <!-- Map → RangeLibc -->
   <path d="M 140,232 L 195,232 L 195,415 L 257,415" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
