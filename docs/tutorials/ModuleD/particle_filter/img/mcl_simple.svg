@@ -65,9 +65,9 @@
   <text x="240" y="268" font-size="8" fill="#64748b">after each cycle</text>
 
   <!-- Output labels -->
-  <text x="385" y="295" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">/pf/pose/odom</text>
-  <text x="385" y="310" text-anchor="middle" font-size="9" fill="#16a34a">+ TF (map → laser)</text>
-  <path d="M 330,305 L 350,305" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <path d="M 330,305 L 355,305" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="420" y="300" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">/pf/pose/odom</text>
+  <text x="420" y="314" text-anchor="middle" font-size="9" fill="#16a34a">+ TF (map → laser)</text>
 
   <!-- Footer -->
   <text x="250" y="360" text-anchor="middle" font-size="9" fill="#94a3b8">See "Understanding the Particle Filter Code" for the full diagram</text>
