@@ -77,9 +77,9 @@
   <!-- Arrow 3→4 -->
   <line x1="442" y1="230" x2="413" y2="230" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Arrow 4→1 (loop back) -->
-  <path d="M 235,230 Q 218,230 218,175 Q 218,140 232,140" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="205" y="185" text-anchor="middle" font-size="9" fill="#555" transform="rotate(-90,205,185)">loop</text>
+  <!-- Arrow 4→1 (loop back) — runs along left edge of MCL box -->
+  <path d="M 235,230 Q 215,230 215,175 Q 215,140 232,140" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="222" y="128" text-anchor="middle" font-size="9" fill="#555">loop</text>
 
   <!-- Particles label -->
   <text x="430" y="280" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">4000 particles × [x, y, θ] updated every cycle</text>
