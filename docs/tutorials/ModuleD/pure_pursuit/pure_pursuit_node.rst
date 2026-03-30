@@ -38,7 +38,13 @@ Prerequisites
 - Waypoints recorded (see :ref:`doc_tutorials_waypoint_recording`)
 - ``bringup`` running (Terminal 1)
 - ``ros2 launch particle_filter localize_launch.py`` running (Terminal 2)
-- Initial pose set in RViz2
+- RViz2 running with the particle filter config:
+
+  .. code-block:: bash
+
+     rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+
+- Initial pose set via **2D Pose Estimate**
 
 Steps
 -----

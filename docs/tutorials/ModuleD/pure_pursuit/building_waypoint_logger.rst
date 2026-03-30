@@ -81,8 +81,17 @@ You can inspect a live message yourself to see exactly what the particle filter 
       source install/setup.bash
       ros2 launch particle_filter localize_launch.py
 
-3. Open **RViz2** and set the **2D Pose Estimate** so the particle filter is localized
-4. Echo the topic (Terminal 3):
+3. Open **RViz2** with the particle filter config (Terminal 3):
+
+   .. code-block:: bash
+
+      source /opt/ros/humble/setup.bash
+      source install/setup.bash
+      rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+
+   Set the **2D Pose Estimate** so the particle filter is localized.
+
+4. Echo the topic (Terminal 4):
 
    .. code-block:: bash
 

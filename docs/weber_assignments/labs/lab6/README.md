@@ -100,7 +100,16 @@ source install/setup.bash
    ros2 launch particle_filter localize_launch.py
    ```
 
-3. Open **RViz2** (Terminal 3) and set the **2D Pose Estimate** so the particle filter is localized. **The particle filter must be localized before you start recording** — if it is not, your waypoints will be meaningless
+3. Open **RViz2** with the particle filter config (Terminal 3):
+
+   ```bash
+   source /opt/ros/humble/setup.bash
+   source install/setup.bash
+   rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+   ```
+
+   Set the **2D Pose Estimate** so the particle filter is localized. **The particle filter must be localized before you start recording** — if it is not, your waypoints will be meaningless.
+
 4. Run your **waypoint logger** (Terminal 4):
 
    ```bash
