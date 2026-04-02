@@ -205,7 +205,7 @@ If the car doesn't track well, adjust parameters in `pure_pursuit.yaml` and rebu
 
 | # | Deliverable | Points |
 |---|-------------|--------|
-| 1 | Screenshot of your `pure_pursuit_node.py` source code | 20 |
+| 1 | `pure_pursuit_node.py` source code | 20 |
 | 2 | Screenshot of your `pure_pursuit_launch.py` and `pure_pursuit.yaml` | 10 |
 | 3 | Screenshot of your updated `setup.py` showing entry points, data_files | 10 |
 | 4 | Video: Car autonomously following the recorded waypoints for at least one full lap (screen recording of RViz2 + real car) | 40 |
