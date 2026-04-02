@@ -278,6 +278,7 @@ Start the car stack as usual:
 
 .. code-block:: bash
 
+   cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
    rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
