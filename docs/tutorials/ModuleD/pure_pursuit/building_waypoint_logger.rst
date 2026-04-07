@@ -5,6 +5,24 @@ Building the Waypoint Logger
 
 Before you can record waypoints, you need to create the ``pure_pursuit`` package and write the ``waypoint_logger`` node. This tutorial walks through the code step by step.
 
+.. important::
+
+   **Update your robot first** — the ``waypoint_viz`` package and updated ``pf.rviz`` must be installed before starting this lab:
+
+   .. code-block:: bash
+
+      cd ~/f1tenth_ws/src/f1tenth_system
+      git pull origin humble-devel
+      cd ~/f1tenth_ws
+      colcon build --packages-select waypoint_viz particle_filter
+      source install/setup.bash
+
+   Verify the package installed:
+
+   .. code-block:: bash
+
+      ros2 run waypoint_viz waypoint_viz_node --help
+
 .. note::
 
    This tutorial covers the concepts behind the code. For the graded assignment with deliverables, see **Lab 6 - Waypoint Logger for Pure Pursuit** in the Weber Assignments.
