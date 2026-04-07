@@ -26,14 +26,6 @@ Before you can record waypoints, you need to create the ``pure_pursuit`` package
       colcon build --symlink-install
       source install/setup.bash
 
-   Verify the package installed:
-
-   .. code-block:: bash
-
-      source /opt/ros/humble/setup.bash
-      source install/setup.bash
-      ros2 run waypoint_viz waypoint_viz_node --help
-
 .. note::
 
    This tutorial covers the concepts behind the code. For the graded assignment with deliverables, see **Lab 6 - Waypoint Logger for Pure Pursuit** in the Weber Assignments.
