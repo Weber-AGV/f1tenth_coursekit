@@ -179,6 +179,9 @@ source install/setup.bash
 3. Start **waypoint_viz** to see the recorded path and live lookahead target in RViz2 (Terminal 3):
 
    ```bash
+   cd ~/f1tenth_ws
+   source /opt/ros/humble/setup.bash
+   source install/setup.bash
    ros2 run waypoint_viz waypoint_viz_node --ros-args \
      -p waypoint_file:=~/f1tenth_ws/src/pure_pursuit/maps/waypoints.csv
    ```
