@@ -281,7 +281,7 @@ Start the car stack as usual:
    cd ~/f1tenth_ws
    source /opt/ros/humble/setup.bash
    source install/setup.bash
-   rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+   rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
 
 This loads a pre-configured RViz2 layout with the map, particle cloud, and inferred pose displays already set up. No manual configuration needed.
 

@@ -31,7 +31,7 @@ On the robot, create a new ROS 2 Python package:
 .. code-block:: bash
 
    cd ~/f1tenth_ws/src
-   ros2 pkg create pure_pursuit --build-type ament_python --dependencies rclpy nav_msgs geometry_msgs
+   ros2 pkg create pure_pursuit --build-type ament_python --dependencies rclpy nav_msgs geometry_msgs visualization_msgs std_msgs
 
 This generates the standard ``ament_python`` package structure:
 
@@ -87,7 +87,7 @@ You can inspect a live message yourself to see exactly what the particle filter 
 
       source /opt/ros/humble/setup.bash
       source install/setup.bash
-      rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+      rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
 
    Set the **2D Pose Estimate** so the particle filter is localized.
 
@@ -224,6 +224,36 @@ When you press Ctrl+C, ROS 2 shuts down the node. You need to make sure the CSV 
 
 Either approach works. The key is that the file gets closed so the OS flushes all buffered writes to disk.
 
+Recording Quality — Minimum Distance Filter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recording at full 30-40 Hz frequency produces problems when the car is stationary, slow, or jerky — hundreds of waypoints cluster at the same map location, and pure pursuit oscillates trying to track them. The fix is to only write a waypoint when the car has moved a minimum distance from the last recorded point:
+
+.. code-block:: python
+
+   import math
+
+   # In __init__:
+   self.last_x = None
+   self.last_y = None
+   self.min_distance = 0.1  # meters between waypoints
+
+   # In pose_callback, before writing to CSV:
+   if self.last_x is not None:
+       dist = math.hypot(x - self.last_x, y - self.last_y)
+       if dist < self.min_distance:
+           return
+   self.last_x = x
+   self.last_y = y
+
+This produces evenly-spaced waypoints regardless of how fast or slow the car moves. Tune ``min_distance`` up (0.2 m) for sparser paths on large tracks, or down (0.05 m) for tighter paths with sharp corners.
+
+If you have an existing recording without this filter, you can thin it after the fact:
+
+.. code-block:: bash
+
+   awk 'NR % 5 == 0' waypoints.csv > waypoints_clean.csv
+
 Terminal Feedback
 ^^^^^^^^^^^^^^^^^^
 
@@ -240,6 +270,76 @@ At ~30-40 Hz, printing every pose would flood the terminal. Instead, print a con
            self.get_logger().info(f'Recorded {self.count} waypoints')
 
 This gives you visual feedback that the logger is working without overwhelming the output.
+
+Live Visualization in RViz2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Your waypoint logger can publish markers to RViz2 so you can see the recorded path growing in real time as you drive. The ``pf.rviz`` layout already has these displays configured — no RViz2 setup needed.
+
+Add these imports:
+
+.. code-block:: python
+
+   from nav_msgs.msg import Path
+   from geometry_msgs.msg import PoseStamped
+   from visualization_msgs.msg import Marker, MarkerArray
+   from std_msgs.msg import ColorRGBA
+   from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy, QoSHistoryPolicy
+
+Add this to ``__init__``:
+
+.. code-block:: python
+
+   latched_qos = QoSProfile(
+       depth=1,
+       durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+       reliability=QoSReliabilityPolicy.RELIABLE,
+       history=QoSHistoryPolicy.KEEP_LAST,
+   )
+   self.marker_pub = self.create_publisher(MarkerArray, '/waypoint_viz/waypoints', latched_qos)
+   self.path_pub = self.create_publisher(Path, '/waypoint_viz/path', latched_qos)
+   self.path_msg = Path()
+   self.path_msg.header.frame_id = 'map'
+   self.marker_array = MarkerArray()
+
+Add this method to your class — call it in the callback after writing to the CSV:
+
+.. code-block:: python
+
+   def publish_waypoint_viz(self, x, y, z, w):
+       """Publishes the current list of waypoints to RViz for live visualization."""
+       m = Marker()
+       m.header.frame_id = 'map'
+       m.header.stamp = self.get_clock().now().to_msg()
+       m.ns = 'waypoints'
+       m.id = len(self.marker_array.markers)
+       m.type = Marker.SPHERE
+       m.action = Marker.ADD
+       m.pose.position.x = x
+       m.pose.position.y = y
+       m.scale.x = 0.1
+       m.scale.y = 0.1
+       m.scale.z = 0.1
+       m.color = ColorRGBA(r=1.0, g=1.0, b=0.0, a=1.0)
+       m.pose.orientation.w = 1.0
+       self.marker_array.markers.append(m)
+       self.marker_pub.publish(self.marker_array)
+
+       ps = PoseStamped()
+       ps.header.frame_id = 'map'
+       ps.pose.position.x = x
+       ps.pose.position.y = y
+       ps.pose.orientation.z = z
+       ps.pose.orientation.w = w
+       self.path_msg.poses.append(ps)
+       self.path_msg.header.stamp = self.get_clock().now().to_msg()
+       self.path_pub.publish(self.path_msg)
+
+In the callback, after writing to the CSV and updating the distance tracker, call ``self.publish_waypoint_viz(x, y, z, w)``. You should see yellow dots and an orange path building in RViz2 as you drive.
+
+.. note::
+
+   This publishes on ``/waypoint_viz/waypoints`` and ``/waypoint_viz/path`` — the same topics used by the ``waypoint_viz`` package during pure pursuit. During recording, your logger node handles the visualization directly. During pure pursuit, a separate ``waypoint_viz`` node reads the saved CSV and shows the path plus a green lookahead marker.
 
 Step 4 --- Register the Entry Point
 -------------------------------------

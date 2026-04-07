@@ -29,7 +29,7 @@ Prerequisites
 
   .. code-block:: bash
 
-     rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+     rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
 
 - Initial pose set via **2D Pose Estimate** — car must be localized before recording
 
@@ -38,7 +38,7 @@ The particle filter is what gives the robot its position on the map. Without it,
 Steps
 -----
 
-1️⃣ Start the Waypoint Logger (Terminal 3)
+1️⃣ Start the Waypoint Logger (Terminal 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::

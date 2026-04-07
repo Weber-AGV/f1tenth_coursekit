@@ -176,8 +176,25 @@ source install/setup.bash
    ros2 launch particle_filter localize_launch.py
    ```
 
-3. Open **RViz2** (Terminal 3), add Map and PoseArray displays, and set the **2D Pose Estimate**
-4. Launch **Pure Pursuit** (Terminal 4):
+3. Start **waypoint_viz** to see the recorded path and live lookahead target in RViz2 (Terminal 3):
+
+   ```bash
+   ros2 run waypoint_viz waypoint_viz_node --ros-args \
+     -p waypoint_file:=~/f1tenth_ws/src/pure_pursuit/maps/waypoints.csv
+   ```
+
+4. Open **RViz2** with the pre-configured particle filter layout (Terminal 4):
+
+   ```bash
+   cd ~/f1tenth_ws
+   source /opt/ros/humble/setup.bash
+   source install/setup.bash
+   rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
+   ```
+
+   Set the **2D Pose Estimate** so the particle filter is localized before launching pure pursuit
+
+5. Launch **Pure Pursuit** (Terminal 5):
 
    ```bash
    cd ~/f1tenth_ws
@@ -186,7 +203,7 @@ source install/setup.bash
    ros2 launch pure_pursuit pure_pursuit_launch.py
    ```
 
-5. The car should begin following the recorded waypoints
+6. The car should begin following the recorded waypoints. The green sphere in RViz2 shows the current lookahead target moving along the path in real time
 
 > **Safety:** Start with a low speed (0.5 m/s) in the config file. Be ready to kill the node (Ctrl+C) or e-stop if the car behaves unexpectedly.
 

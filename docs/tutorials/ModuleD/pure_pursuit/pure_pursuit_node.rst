@@ -38,18 +38,25 @@ Prerequisites
 - Waypoints recorded (see :ref:`doc_tutorials_waypoint_recording`)
 - ``bringup`` running (Terminal 1)
 - ``ros2 launch particle_filter localize_launch.py`` running (Terminal 2)
-- RViz2 running with the particle filter config:
+- ``waypoint_viz`` running to visualize the path and lookahead target (Terminal 3):
 
   .. code-block:: bash
 
-     rviz2 -d ~/f1tenth_ws/src/f1tenth_system/particle_filter/rviz/pf.rviz
+     ros2 run waypoint_viz waypoint_viz_node --ros-args \
+       -p waypoint_file:=~/f1tenth_ws/src/pure_pursuit/maps/waypoints.csv
+
+- RViz2 running with the particle filter config (Terminal 4):
+
+  .. code-block:: bash
+
+     rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
 
 - Initial pose set via **2D Pose Estimate**
 
 Steps
 -----
 
-1️⃣ Launch Pure Pursuit (Terminal 3)
+1️⃣ Launch Pure Pursuit (Terminal 5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
@@ -61,15 +68,10 @@ Steps
 
 The car will begin following the recorded waypoints and loop the track continuously.
 
-2️⃣ Visualize in RViz2
-^^^^^^^^^^^^^^^^^^^^^^^^
+2️⃣ Watch the Lookahead in RViz2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add a **Path** display in RViz2 to see the recorded waypoints overlaid on the map:
-
-- Click **Add** → select **Path**
-- Set Topic to ``/pure_pursuit/path``
-
-The car's progress along the path will update in real time.
+The ``pf.rviz`` layout already shows the waypoint path and lookahead displays. Once a **2D Pose Estimate** is set, a green sphere in RViz2 (``/waypoint_viz/lookahead``) shows exactly which waypoint pure pursuit is currently targeting — it moves along the orange path in real time as the car drives. This is the key debugging tool: if the lookahead dot behaves unexpectedly (jumps, stays still, or points backward), the problem is in the waypoint search logic, not the steering calculation.
 
 Key Parameters
 --------------
