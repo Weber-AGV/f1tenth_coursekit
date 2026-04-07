@@ -11,16 +11,27 @@ Before you can record waypoints, you need to create the ``pure_pursuit`` package
 
    .. code-block:: bash
 
+      # 1. Pull and update submodules
       cd ~/f1tenth_ws/src/f1tenth_system
       git pull origin humble-devel
+      git submodule update --init --recursive
+
+      # 2. Remove old standalone dirs (if they still exist)
+      rm -rf ~/f1tenth_ws/src/particle_filter
+      sudo rm -rf ~/f1tenth_ws/src/range_libc
+
+      # 3. Clean build (stale caches point to old paths)
       cd ~/f1tenth_ws
-      colcon build --packages-select waypoint_viz particle_filter
+      rm -rf build/ install/
+      colcon build --symlink-install
       source install/setup.bash
 
    Verify the package installed:
 
    .. code-block:: bash
 
+      source /opt/ros/humble/setup.bash
+      source install/setup.bash
       ros2 run waypoint_viz waypoint_viz_node --help
 
 .. note::
@@ -103,6 +114,7 @@ You can inspect a live message yourself to see exactly what the particle filter 
 
    .. code-block:: bash
 
+      cd ~/f1tenth_ws
       source /opt/ros/humble/setup.bash
       source install/setup.bash
       rviz2 -d ~/f1tenth_ws/install/particle_filter/share/particle_filter/rviz/pf.rviz
